@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "name": "Misleading Heuristic Test Map",
+    "description": "Demonstrates the failure mode of Greedy Best-First Search where a locally closer-looking node leads to a severely suboptimal path.",
+    "unit": "metres",
+    "default_start": "S",
+    "default_destinations": [
+      "G"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "S",
+      "name": "Start Node S (Dispatch)",
+      "x": 0.0,
+      "y": 0.0,
+      "type": "start_office",
+      "description": "Starting office point S at origin (0, 0)."
+    },
+    {
+      "id": "A",
+      "name": "Node A (Greedy Trap)",
+      "x": 1.0,
+      "y": 0.0,
+      "type": "junction",
+      "description": "Appears closest to goal with Euclidean distance h=1.0, but connects via an expensive path."
+    },
+    {
+      "id": "B",
+      "name": "Node B (Optimal Bypass)",
+      "x": 0.0,
+      "y": 2.0,
+      "type": "junction",
+      "description": "Appears further from goal with Euclidean distance h=2.83, but leads to the least-cost path."
+    },
+    {
+      "id": "G",
+      "name": "Delivery Goal G",
+      "x": 2.0,
+      "y": 0.0,
+      "type": "destination",
+      "description": "Target delivery destination located at (2, 0)."
+    }
+  ],
+  "edges": [
+    {
+      "source": "S",
+      "target": "A",
+      "distance": 1.0,
+      "bidirectional": true,
+      "path_type": "corridor"
+    },
+    {
+      "source": "S",
+      "target": "B",
+      "distance": 2.0,
+      "bidirectional": true,
+      "path_type": "corridor"
+    },
+    {
+      "source": "A",
+      "target": "G",
+      "distance": 100.0,
+      "bidirectional": true,
+      "path_type": "detour_lane"
+    },
+    {
+      "source": "B",
+      "target": "G",
+      "distance": 3.0,
+      "bidirectional": true,
+      "path_type": "corridor"
+    }
+  ]
+}
+

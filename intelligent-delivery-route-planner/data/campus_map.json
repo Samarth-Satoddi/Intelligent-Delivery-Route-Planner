@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "name": "Main Demonstration Campus Map",
+    "description": "Realistic college campus with academic departments, central administrative hubs, library, and examination wings.",
+    "unit": "metres",
+    "default_start": "central_office",
+    "default_destinations": [
+      "department_office",
+      "examination_section",
+      "library",
+      "accounts_section",
+      "seminar_hall"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "central_office",
+      "name": "Central Office",
+      "x": 200.0,
+      "y": 250.0,
+      "type": "start_office",
+      "description": "Central Administrative Building where delivery dispatch begins."
+    },
+    {
+      "id": "accounts_section",
+      "name": "Accounts Section",
+      "x": 80.0,
+      "y": 360.0,
+      "type": "destination",
+      "description": "Financial wing and student bursar counters."
+    },
+    {
+      "id": "library",
+      "name": "Library",
+      "x": 460.0,
+      "y": 420.0,
+      "type": "destination",
+      "description": "Central Campus Library and Digital Resource Center."
+    },
+    {
+      "id": "seminar_hall",
+      "name": "Seminar Hall",
+      "x": 280.0,
+      "y": 520.0,
+      "type": "destination",
+      "description": "Multi-tier lecture auditorium and symposium venue."
+    },
+    {
+      "id": "department_office",
+      "name": "Department Office",
+      "x": 620.0,
+      "y": 260.0,
+      "type": "destination",
+      "description": "Faculty chambers and Computer Science / Engineering Department Head."
+    },
+    {
+      "id": "examination_section",
+      "name": "Examination Section",
+      "x": 400.0,
+      "y": 90.0,
+      "type": "destination",
+      "description": "Confidential evaluation division and records archive."
+    },
+    {
+      "id": "admin_circle",
+      "name": "Administrative Circle",
+      "x": 180.0,
+      "y": 340.0,
+      "type": "junction",
+      "description": "Roundabout linking administration, accounts, and north corridor."
+    },
+    {
+      "id": "west_quad",
+      "name": "West Quad Junction",
+      "x": 90.0,
+      "y": 200.0,
+      "type": "junction",
+      "description": "Open courtyard crossing towards sports grounds and western amenities."
+    },
+    {
+      "id": "central_plaza",
+      "name": "Central Plaza",
+      "x": 340.0,
+      "y": 260.0,
+      "type": "junction",
+      "description": "Main campus pedestrian plaza with water fountain and signposts."
+    },
+    {
+      "id": "north_junction",
+      "name": "North Junction",
+      "x": 320.0,
+      "y": 390.0,
+      "type": "junction",
+      "description": "T-junction directing pedestrian traffic to library and auditorium."
+    },
+    {
+      "id": "science_arcade",
+      "name": "Science Arcade",
+      "x": 480.0,
+      "y": 270.0,
+      "type": "junction",
+      "description": "Paved corridor alongside laboratory blocks."
+    },
+    {
+      "id": "south_roundabout",
+      "name": "South Roundabout",
+      "x": 240.0,
+      "y": 110.0,
+      "type": "junction",
+      "description": "Southern exit rotary connecting to examination wing."
+    },
+    {
+      "id": "east_gate_junction",
+      "name": "East Gate Junction",
+      "x": 580.0,
+      "y": 130.0,
+      "type": "junction",
+      "description": "Eastern vehicular entry and logistics depot pathway."
+    },
+    {
+      "id": "auditorium_hub",
+      "name": "Auditorium Hub",
+      "x": 190.0,
+      "y": 480.0,
+      "type": "junction",
+      "description": "Covered foyer between accounts block and seminar complex."
+    },
+    {
+      "id": "student_center",
+      "name": "Student Center",
+      "x": 440.0,
+      "y": 180.0,
+      "type": "junction",
+      "description": "Cafeteria and student activities hub connecting central and south zones."
+    }
+  ],
+  "edges": [
+    {
+      "source": "central_office",
+      "target": "admin_circle",
+      "distance": 100.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "central_office",
+      "target": "west_quad",
+      "distance": 130.0,
+      "bidirectional": true,
+      "path_type": "garden_lane"
+    },
+    {
+      "source": "central_office",
+      "target": "central_plaza",
+      "distance": 150.0,
+      "bidirectional": true,
+      "path_type": "main_boulevard"
+    },
+    {
+      "source": "central_office",
+      "target": "south_roundabout",
+      "distance": 155.0,
+      "bidirectional": true,
+      "path_type": "covered_arcade"
+    },
+    {
+      "source": "admin_circle",
+      "target": "accounts_section",
+      "distance": 110.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "admin_circle",
+      "target": "north_junction",
+      "distance": 160.0,
+      "bidirectional": true,
+      "path_type": "pedestrian_lane"
+    },
+    {
+      "source": "admin_circle",
+      "target": "auditorium_hub",
+      "distance": 150.0,
+      "bidirectional": true,
+      "path_type": "covered_walkway"
+    },
+    {
+      "source": "accounts_section",
+      "target": "west_quad",
+      "distance": 170.0,
+      "bidirectional": true,
+      "path_type": "garden_lane"
+    },
+    {
+      "source": "accounts_section",
+      "target": "auditorium_hub",
+      "distance": 175.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "auditorium_hub",
+      "target": "seminar_hall",
+      "distance": 105.0,
+      "bidirectional": true,
+      "path_type": "foyer_path"
+    },
+    {
+      "source": "seminar_hall",
+      "target": "north_junction",
+      "distance": 145.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "seminar_hall",
+      "target": "library",
+      "distance": 220.0,
+      "bidirectional": true,
+      "path_type": "shaded_walkway"
+    },
+    {
+      "source": "north_junction",
+      "target": "central_plaza",
+      "distance": 140.0,
+      "bidirectional": true,
+      "path_type": "main_boulevard"
+    },
+    {
+      "source": "north_junction",
+      "target": "library",
+      "distance": 155.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "central_plaza",
+      "target": "science_arcade",
+      "distance": 150.0,
+      "bidirectional": true,
+      "path_type": "covered_arcade"
+    },
+    {
+      "source": "central_plaza",
+      "target": "student_center",
+      "distance": 135.0,
+      "bidirectional": true,
+      "path_type": "garden_lane"
+    },
+    {
+      "source": "library",
+      "target": "science_arcade",
+      "distance": 160.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "science_arcade",
+      "target": "department_office",
+      "distance": 145.0,
+      "bidirectional": true,
+      "path_type": "faculty_avenue"
+    },
+    {
+      "source": "science_arcade",
+      "target": "student_center",
+      "distance": 110.0,
+      "bidirectional": true,
+      "path_type": "pedestrian_lane"
+    },
+    {
+      "source": "department_office",
+      "target": "east_gate_junction",
+      "distance": 145.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "student_center",
+      "target": "examination_section",
+      "distance": 105.0,
+      "bidirectional": true,
+      "path_type": "covered_walkway"
+    },
+    {
+      "source": "student_center",
+      "target": "east_gate_junction",
+      "distance": 155.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "examination_section",
+      "target": "south_roundabout",
+      "distance": 170.0,
+      "bidirectional": true,
+      "path_type": "paved_walkway"
+    },
+    {
+      "source": "examination_section",
+      "target": "east_gate_junction",
+      "distance": 195.0,
+      "bidirectional": true,
+      "path_type": "service_road"
+    },
+    {
+      "source": "west_quad",
+      "target": "south_roundabout",
+      "distance": 185.0,
+      "bidirectional": true,
+      "path_type": "garden_lane"
+    }
+  ]
+}
+

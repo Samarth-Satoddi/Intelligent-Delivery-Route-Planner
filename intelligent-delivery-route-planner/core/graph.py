@@ -1,0 +1,247 @@
+"""Graph representation and operations for the Intelligent Campus Delivery Route Planner.
+
+Implements an adjacency-list based undirected/directed weighted graph
+specifically tailored for campus navigation.
+"""
+import json
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional, Any
+from .heuristic import HeuristicCalculator, euclidean_distance
+
+
+class CampusGraph:
+    """Represents the campus map as an adjacency-list weighted graph."""
+
+    def __init__(self, metadata: Optional[Dict[str, Any]] = None):
+        """Initialize an empty campus graph."""
+        self.metadata: Dict[str, Any] = metadata or {
+            "name": "Campus Graph",
+            "unit": "metres",
+            "default_start": "",
+            "default_destinations": [],
+        }
+        self.nodes: Dict[str, Dict[str, Any]] = {}
+        self.adjacency: Dict[str, List[Tuple[str, float]]] = {}
+        self.edges_list: List[Dict[str, Any]] = []
+        self._heuristic_calc: Optional[HeuristicCalculator] = None
+
+    @classmethod
+    def load_from_json(cls, filepath: str | Path) -> "CampusGraph":
+        """Load a graph instance from a JSON file.
+
+        Args:
+            filepath: Path to the JSON file.
+
+        Returns:
+            CampusGraph: Loaded graph instance.
+        """
+        path = Path(filepath)
+        if not path.exists():
+            raise FileNotFoundError(f"Campus map file not found: {path}")
+
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return cls.from_dict(data)
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "CampusGraph":
+        """Build a CampusGraph from a dictionary representation."""
+        graph = cls(metadata=data.get("metadata", {}))
+
+        # Add nodes
+        for node in data.get("nodes", []):
+            graph.add_node(
+                node_id=node["id"],
+                name=node.get("name", node["id"]),
+                x=float(node["x"]),
+                y=float(node["y"]),
+                node_type=node.get("type", "junction"),
+                description=node.get("description", ""),
+            )
+
+        # Add edges
+        for edge in data.get("edges", []):
+            graph.add_edge(
+                u=edge["source"],
+                v=edge["target"],
+                weight=float(edge["distance"]),
+                bidirectional=edge.get("bidirectional", True),
+                path_type=edge.get("path_type", "walkway"),
+            )
+
+        return graph
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert graph into a JSON-serializable dictionary."""
+        node_records = []
+        for node_id, info in self.nodes.items():
+            node_records.append({
+                "id": node_id,
+                "name": info["name"],
+                "x": info["x"],
+                "y": info["y"],
+                "type": info["type"],
+                "description": info.get("description", ""),
+            })
+
+        return {
+            "metadata": self.metadata,
+            "nodes": node_records,
+            "edges": self.edges_list,
+        }
+
+    def save_to_json(self, filepath: str | Path) -> None:
+        """Save graph data to a JSON file."""
+        path = Path(filepath)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(self.to_dict(), f, indent=2)
+
+    def add_node(
+        self,
+        node_id: str,
+        name: str,
+        x: float,
+        y: float,
+        node_type: str = "junction",
+        description: str = "",
+    ) -> None:
+        """Add a node representing a campus building or junction."""
+        self.nodes[node_id] = {
+            "id": node_id,
+            "name": name,
+            "x": float(x),
+            "y": float(y),
+            "type": node_type,
+            "description": description,
+        }
+        if node_id not in self.adjacency:
+            self.adjacency[node_id] = []
+        self._heuristic_calc = None  # Invalidate cached calculator
+
+    def add_edge(
+        self,
+        u: str,
+        v: str,
+        weight: float,
+        bidirectional: bool = True,
+        path_type: str = "walkway",
+    ) -> None:
+        """Add a weighted edge between two nodes."""
+        if u not in self.nodes:
+            raise KeyError(f"Source node '{u}' does not exist in graph.")
+        if v not in self.nodes:
+            raise KeyError(f"Target node '{v}' does not exist in graph.")
+        if weight <= 0:
+            raise ValueError(f"Edge weight must be strictly positive, got {weight}")
+
+        # Update adjacency list (avoiding duplicate edges)
+        self.adjacency[u] = [item for item in self.adjacency[u] if item[0] != v]
+        self.adjacency[u].append((v, weight))
+
+        if bidirectional:
+            self.adjacency[v] = [item for item in self.adjacency[v] if item[0] != u]
+            self.adjacency[v].append((u, weight))
+
+        self.edges_list.append({
+            "source": u,
+            "target": v,
+            "distance": weight,
+            "bidirectional": bidirectional,
+            "path_type": path_type,
+        })
+
+    def get_neighbors(self, node_id: str) -> List[Tuple[str, float]]:
+        """Return list of (neighbor_id, weight) pairs for the given node."""
+        return self.adjacency.get(node_id, [])
+
+    def get_edge_cost(self, u: str, v: str) -> Optional[float]:
+        """Return the transition cost from u to v, or None if unconnected."""
+        for neighbor, weight in self.adjacency.get(u, []):
+            if neighbor == v:
+                return weight
+        return None
+
+    def get_node_coords(self, node_id: str) -> Tuple[float, float]:
+        """Return (x, y) coordinates for a node in metres."""
+        node = self.nodes[node_id]
+        return float(node["x"]), float(node["y"])
+
+    def get_node_name(self, node_id: str) -> str:
+        """Return human-readable building/junction name."""
+        return self.nodes.get(node_id, {}).get("name", node_id)
+
+    def get_node_type(self, node_id: str) -> str:
+        """Return node type ('start_office', 'destination', 'junction', etc.)."""
+        return self.nodes.get(node_id, {}).get("type", "junction")
+
+    def get_start_node(self) -> str:
+        """Return the default starting node ID (typically 'central_office')."""
+        default_start = self.metadata.get("default_start")
+        if default_start and default_start in self.nodes:
+            return default_start
+        for nid, info in self.nodes.items():
+            if info.get("type") in ("start_office", "office"):
+                return nid
+        return next(iter(self.nodes.keys())) if self.nodes else ""
+
+    def get_destinations(self) -> List[str]:
+        """Return list of valid destination node IDs."""
+        destinations = [
+            nid for nid, info in self.nodes.items()
+            if info.get("type") == "destination"
+        ]
+        if destinations:
+            return destinations
+        # Fallback to configured metadata list if present
+        meta_dests = self.metadata.get("default_destinations", [])
+        return [d for d in meta_dests if d in self.nodes]
+
+    def get_heuristic_calculator(self) -> HeuristicCalculator:
+        """Return a cached HeuristicCalculator instance for this graph."""
+        if self._heuristic_calc is None:
+            coord_map = {nid: (info["x"], info["y"]) for nid, info in self.nodes.items()}
+            self._heuristic_calc = HeuristicCalculator(coord_map)
+        return self._heuristic_calc
+
+    def calculate_path_cost(self, path: List[str]) -> float:
+        """Calculate total walking distance along an ordered list of nodes."""
+        if not path or len(path) <= 1:
+            return 0.0
+
+        total = 0.0
+        for i in range(len(path) - 1):
+            cost = self.get_edge_cost(path[i], path[i + 1])
+            if cost is None:
+                raise ValueError(f"Disconnected path: No edge between '{path[i]}' and '{path[i+1]}'.")
+            total += cost
+        return round(total, 2)
+
+    def is_valid_path(self, path: List[str], start: str, goal: str) -> bool:
+        """Validate whether a path is continuous, connected, and connects start to goal."""
+        if not path:
+            return False
+        if path[0] != start or path[-1] != goal:
+            return False
+        for i in range(len(path) - 1):
+            if self.get_edge_cost(path[i], path[i + 1]) is None:
+                return False
+        return True
+
+    def validate_admissibility_warnings(self) -> List[str]:
+        """Check all edges to ensure edge_weight >= Euclidean straight-line distance."""
+        warnings = []
+        for edge in self.edges_list:
+            u, v, dist = edge["source"], edge["target"], edge["distance"]
+            if u in self.nodes and v in self.nodes:
+                straight_line = euclidean_distance(
+                    (self.nodes[u]["x"], self.nodes[u]["y"]),
+                    (self.nodes[v]["x"], self.nodes[v]["y"])
+                )
+                if dist < (straight_line - 1e-4):
+                    warnings.append(
+                        f"Edge {u} <-> {v} distance ({dist}m) is less than straight-line Euclidean distance ({straight_line:.2f}m)!"
+                    )
+        return warnings
+

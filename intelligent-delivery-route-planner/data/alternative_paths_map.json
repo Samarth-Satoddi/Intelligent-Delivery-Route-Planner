@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "name": "Alternative and Detour Campus Map",
+    "description": "Campus layout featuring winding scenic routes, multi-junction bypasses, and express corridors to evaluate detour handling.",
+    "unit": "metres",
+    "default_start": "central_office",
+    "default_destinations": [
+      "department_office",
+      "examination_section",
+      "library",
+      "accounts_section",
+      "seminar_hall"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "central_office",
+      "name": "Central Office",
+      "x": 100.0,
+      "y": 200.0,
+      "type": "start_office",
+      "description": "Central dispatch station."
+    },
+    {
+      "id": "transit_hub",
+      "name": "Transit Hub",
+      "x": 300.0,
+      "y": 180.0,
+      "type": "junction",
+      "description": "Direct central connector with high-speed pedestrian conveyor."
+    },
+    {
+      "id": "scenic_waypoint",
+      "name": "Scenic Promenade",
+      "x": 350.0,
+      "y": 230.0,
+      "type": "junction",
+      "description": "Picturesque path with gardens that looks deceptively direct."
+    },
+    {
+      "id": "north_walkway",
+      "name": "North Walkway",
+      "x": 200.0,
+      "y": 320.0,
+      "type": "junction",
+      "description": "Upper campus pedestrian lane."
+    },
+    {
+      "id": "quad_gateway",
+      "name": "Quad Gateway",
+      "x": 380.0,
+      "y": 330.0,
+      "type": "junction",
+      "description": "Arched gateway leading around the northern college quad."
+    },
+    {
+      "id": "tech_plaza",
+      "name": "Tech Plaza",
+      "x": 520.0,
+      "y": 280.0,
+      "type": "junction",
+      "description": "Concourse outside modern engineering pavilions."
+    },
+    {
+      "id": "south_expressway",
+      "name": "South Expressway",
+      "x": 250.0,
+      "y": 80.0,
+      "type": "junction",
+      "description": "Wide southern avenue skirting sports fields."
+    },
+    {
+      "id": "east_bypass",
+      "name": "East Bypass",
+      "x": 480.0,
+      "y": 90.0,
+      "type": "junction",
+      "description": "Peripheral access lane behind research labs."
+    },
+    {
+      "id": "department_office",
+      "name": "Department Office",
+      "x": 620.0,
+      "y": 200.0,
+      "type": "destination",
+      "description": "Primary faculty delivery terminal."
+    },
+    {
+      "id": "library",
+      "name": "Library",
+      "x": 480.0,
+      "y": 440.0,
+      "type": "destination",
+      "description": "Graduate research library and study carrels."
+    },
+    {
+      "id": "examination_section",
+      "name": "Examination Section",
+      "x": 450.0,
+      "y": 30.0,
+      "type": "destination",
+      "description": "Confidential testing cell."
+    },
+    {
+      "id": "accounts_section",
+      "name": "Accounts Section",
+      "x": 120.0,
+      "y": 360.0,
+      "type": "destination",
+      "description": "Student cashier and financial services office."
+    },
+    {
+      "id": "seminar_hall",
+      "name": "Seminar Hall",
+      "x": 300.0,
+      "y": 460.0,
+      "type": "destination",
+      "description": "Executive symposium hall."
+    }
+  ],
+  "edges": [
+    {
+      "source": "central_office",
+      "target": "transit_hub",
+      "distance": 210.0,
+      "bidirectional": true,
+      "path_type": "express_lane"
+    },
+    {
+      "source": "transit_hub",
+      "target": "department_office",
+      "distance": 325.0,
+      "bidirectional": true,
+      "path_type": "express_lane"
+    },
+    {
+      "source": "central_office",
+      "target": "scenic_waypoint",
+      "distance": 255.0,
+      "bidirectional": true,
+      "path_type": "scenic_walk"
+    },
+    {
+      "source": "scenic_waypoint",
+      "target": "department_office",
+      "distance": 280.0,
+      "bidirectional": true,
+      "path_type": "scenic_walk"
+    },
+    {
+      "source": "central_office",
+      "target": "north_walkway",
+      "distance": 160.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "north_walkway",
+      "target": "quad_gateway",
+      "distance": 185.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "quad_gateway",
+      "target": "tech_plaza",
+      "distance": 155.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "tech_plaza",
+      "target": "department_office",
+      "distance": 135.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "central_office",
+      "target": "south_expressway",
+      "distance": 195.0,
+      "bidirectional": true,
+      "path_type": "avenue"
+    },
+    {
+      "source": "south_expressway",
+      "target": "east_bypass",
+      "distance": 235.0,
+      "bidirectional": true,
+      "path_type": "avenue"
+    },
+    {
+      "source": "east_bypass",
+      "target": "department_office",
+      "distance": 185.0,
+      "bidirectional": true,
+      "path_type": "avenue"
+    },
+    {
+      "source": "central_office",
+      "target": "accounts_section",
+      "distance": 165.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "accounts_section",
+      "target": "north_walkway",
+      "distance": 100.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "north_walkway",
+      "target": "seminar_hall",
+      "distance": 180.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "seminar_hall",
+      "target": "library",
+      "distance": 185.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "quad_gateway",
+      "target": "library",
+      "distance": 150.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "tech_plaza",
+      "target": "library",
+      "distance": 165.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "south_expressway",
+      "target": "examination_section",
+      "distance": 210.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    },
+    {
+      "source": "east_bypass",
+      "target": "examination_section",
+      "distance": 70.0,
+      "bidirectional": true,
+      "path_type": "walkway"
+    }
+  ]
+}
+
