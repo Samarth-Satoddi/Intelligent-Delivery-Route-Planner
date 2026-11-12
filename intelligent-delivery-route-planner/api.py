@@ -95,6 +95,7 @@ class RouteRequest(BaseModel):
     start_node: str
     goal_node: str
     algorithm: str = "both"  # "gbfs", "astar", "both", "dijkstra"
+    k_alternatives: Optional[int] = 5
 
 
 class AdminAddNodeRequest(BaseModel):
@@ -185,10 +186,11 @@ def compute_route(
         response["dijkstra"] = search_results_to_dict(dijk_res)
         response["dijkstra"]["search_trace"] = dijk_res.trace_as_dicts()
 
-    # Always provide Dijkstra reference and Yen's K-Shortest Alternative Routes
+    # Always provide Dijkstra reference and Yen's K-Shortest Alternative Routes (up to K=5 loopless paths)
+    k_alt = min(max(req.k_alternatives or 5, 1), 10)
     dijk_res = dijkstra_search(graph, req.start_node, req.goal_node)
     response["dijkstra"] = search_results_to_dict(dijk_res)
-    response["alternative_routes"] = yen_k_shortest_paths(graph, req.start_node, req.goal_node, K=3)
+    response["alternative_routes"] = yen_k_shortest_paths(graph, req.start_node, req.goal_node, K=k_alt)
 
     # Comparative analytics
     gbfs_cost = gbfs_res.total_cost if (gbfs_res and gbfs_res.success) else None

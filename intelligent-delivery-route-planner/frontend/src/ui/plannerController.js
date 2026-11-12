@@ -14,6 +14,7 @@ export class PlannerController {
     this.selectedDistrict = 'ALL';
     this.searchQuery = '';
     this.activeAlternativeIndex = -1;
+    this.displayMode = 'all';
 
     this.initElements();
     this.bindEvents();
@@ -26,6 +27,7 @@ export class PlannerController {
     this.startSelect = document.getElementById('startSelect');
     this.goalSelect = document.getElementById('goalSelect');
     this.btnCalculate = document.getElementById('btnCalculateRoute');
+    this.routeDisplayModeSelect = document.getElementById('routeDisplayModeSelect');
 
     // Algorithm switcher buttons
     this.algoBtns = document.querySelectorAll('.algo-tab');
@@ -47,9 +49,17 @@ export class PlannerController {
     this.btnPlay = document.getElementById('btnRobotPlay');
     this.btnPause = document.getElementById('btnRobotPause');
     this.btnReset = document.getElementById('btnRobotReset');
+    this.btnPrev = document.getElementById('btnRobotPrev');
+    this.btnNext = document.getElementById('btnRobotNext');
     this.speedSelect = document.getElementById('robotSpeed');
     this.progressFill = document.getElementById('robotProgressFill');
     this.progressText = document.getElementById('robotProgressText');
+
+    // Robot Telemetry HUD Elements
+    this.robotCurrentLocation = document.getElementById('robotCurrentLocation');
+    this.robotNextLocation = document.getElementById('robotNextLocation');
+    this.robotRemainingDist = document.getElementById('robotRemainingDist');
+    this.robotSpeedVal = document.getElementById('robotSpeedVal');
   }
 
   bindEvents() {
@@ -75,6 +85,13 @@ export class PlannerController {
       this.btnCalculate.addEventListener('click', () => this.calculateRoute());
     }
 
+    if (this.routeDisplayModeSelect) {
+      this.routeDisplayModeSelect.addEventListener('change', (e) => {
+        this.displayMode = e.target.value;
+        this.update3DRouteVisuals();
+      });
+    }
+
     this.algoBtns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         this.algoBtns.forEach((b) => b.classList.remove('active'));
@@ -93,22 +110,36 @@ export class PlannerController {
     if (this.btnReset) {
       this.btnReset.addEventListener('click', () => this.sceneManager.courierRobot.reset());
     }
+    if (this.btnPrev) {
+      this.btnPrev.addEventListener('click', () => this.sceneManager.courierRobot.stepBackward());
+    }
+    if (this.btnNext) {
+      this.btnNext.addEventListener('click', () => this.sceneManager.courierRobot.stepForward());
+    }
     if (this.speedSelect) {
-      this.speedSelect.addEventListener('change', (e) =>
-        this.sceneManager.courierRobot.setSpeed(parseFloat(e.target.value))
-      );
+      this.speedSelect.addEventListener('change', (e) => {
+        const val = parseFloat(e.target.value);
+        this.sceneManager.courierRobot.setSpeed(val);
+      });
     }
 
-    // Robot progress callback
+    // Live Robot Telemetry callback
     this.sceneManager.courierRobot.onProgress = (info) => {
       if (this.progressFill) this.progressFill.style.width = `${info.percentage}%`;
       if (this.progressText) {
-        this.progressText.innerText = `${info.percentage}% (${info.traversedDistance}m) — Leg ${info.currentSegment}/${info.totalSegments}`;
+        this.progressText.innerText = `${info.percentage}% (${info.traversedDistance}m / ${info.totalDistance}m) — Leg ${info.currentSegment}/${info.totalSegments}`;
       }
+      if (this.robotCurrentLocation) this.robotCurrentLocation.innerText = info.currentLocationName;
+      if (this.robotNextLocation) this.robotNextLocation.innerText = info.nextLocationName;
+      if (this.robotRemainingDist) this.robotRemainingDist.innerText = `${info.remainingDistance} m`;
+      if (this.robotSpeedVal) this.robotSpeedVal.innerText = `${info.speedKmh} km/h`;
     };
 
     this.sceneManager.courierRobot.onComplete = () => {
-      if (this.progressText) this.progressText.innerText = '✅ Delivery Completed!';
+      if (this.progressText) {
+        this.progressText.innerText = '🎉 Autonomous Delivery Successfully Completed!';
+      }
+      if (this.robotRemainingDist) this.robotRemainingDist.innerText = '0 m (Delivered)';
     };
 
     // 3D Node Click sets destination and highlights
@@ -200,19 +231,13 @@ export class PlannerController {
     this.btnCalculate.disabled = true;
 
     try {
-      const result = await api.computeRoute(this.currentMapId, start, goal, this.selectedAlgo);
+      // Request route calculation and Yen's 5 alternative paths
+      const result = await api.computeRoute(this.currentMapId, start, goal, this.selectedAlgo, 5);
       this.lastResult = result;
       this.activeAlternativeIndex = -1;
 
-      // Render 3D Route Tubes
-      this.sceneManager.renderRoutes({
-        gbfsPath: result.gbfs?.path,
-        astarPath: result.astar?.path,
-        dijkstraPath: result.dijkstra?.path,
-        alternativeRoutes: result.alternative_routes || [],
-        goalNodeId: goal,
-        activeAlternativeIndex: -1,
-      });
+      // Update 3D visualization
+      this.update3DRouteVisuals();
 
       // Default Autonomous Robot Route: prefer A* optimal path
       const robotPath = result.astar?.path || result.gbfs?.path;
@@ -229,6 +254,20 @@ export class PlannerController {
       this.btnCalculate.innerText = '⚡ Calculate 3D Delivery Route';
       this.btnCalculate.disabled = false;
     }
+  }
+
+  update3DRouteVisuals() {
+    if (!this.lastResult) return;
+    const goal = this.goalSelect.value;
+    this.sceneManager.renderRoutes({
+      gbfsPath: this.lastResult.gbfs?.path,
+      astarPath: this.lastResult.astar?.path,
+      dijkstraPath: this.lastResult.dijkstra?.path,
+      alternativeRoutes: this.lastResult.alternative_routes || [],
+      goalNodeId: goal,
+      activeAlternativeIndex: this.activeAlternativeIndex,
+      displayMode: this.displayMode,
+    });
   }
 
   displayMetrics(res) {
@@ -292,6 +331,9 @@ export class PlannerController {
         <div class="alt-route-districts" title="${route.districts_crossed.join(' ➔ ')}">
           🏛️ ${route.districts_crossed.join(' ➔ ')}
         </div>
+        <div style="font-size:0.68rem; color:var(--text-dim); margin-top:4px; font-family:'JetBrains Mono',monospace; line-height:1.4;">
+          🛣️ <b>Sequence:</b> ${route.path_names.join(' ➔ ')}
+        </div>
       `;
 
       card.addEventListener('click', () => {
@@ -300,16 +342,9 @@ export class PlannerController {
         this.activeAlternativeIndex = idx;
 
         // Highlight this specific route in 3D
-        this.sceneManager.renderRoutes({
-          gbfsPath: this.lastResult?.gbfs?.path,
-          astarPath: this.lastResult?.astar?.path,
-          dijkstraPath: this.lastResult?.dijkstra?.path,
-          alternativeRoutes: routes,
-          goalNodeId: this.goalSelect.value,
-          activeAlternativeIndex: idx,
-        });
+        this.update3DRouteVisuals();
 
-        // Set the courier robot to travel along this selected route
+        // Direct courier robot along selected route
         this.sceneManager.setCourierRoute(route.path);
         if (this.robotTransport) this.robotTransport.style.display = 'flex';
       });

@@ -37,9 +37,10 @@ The smart campus city map (`data/smart_city_map.json`) features **51 uniquely id
 6. **Transport and Infrastructure District (8 Locations):**
    - Main Entrance Gate (West Gantry), North Gate, South Gate, Bus Terminal, Visitor Parking, Student Parking, Maintenance Centre, Power Station.
 
-### 🛣️ 2. 28 Strategic Junctions & 141 Interconnected Road Connections
-- **Road Types & Hierarchies:** Grand Campus Boulevards (wide with dividers), Academic Avenues (pedestrian curbs), Local Streets, River Crossing Bridges, and Roundabouts.
-- **Path Diversity:** Guaranteed at least 3 distinct feasible loopless paths between Central Office and every major building.
+### 🛣️ 2. 62 Strategic Junctions & 248 Interconnected Road Connections
+- **Road Types & Hierarchies:** Grand Campus Boulevards (wide with dividers), Academic Avenues (pedestrian curbs and markings), Local Streets, River Crossing Bridges, Roundabouts, and Perimeter Express Rings.
+- **Path Diversity:** Guaranteed at least 5 to 10 distinct feasible loopless paths between Central Office and every major building (e.g., Central Library, Computer Lab, Robotics Lab).
+- **Vehicle Navigation Attributes:** Every edge stores distance in metres, road type, speed limit (km/h), vehicle accessibility, road geometry, and surface type.
 - **Topological Integrity:** 100% connected graph (1 single connected component, 0 isolated nodes).
 - **Heuristic Admissibility:** Every road distance satisfies $w(u, v) \ge \text{Euclidean}(u, v)$.
 

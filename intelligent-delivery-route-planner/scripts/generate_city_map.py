@@ -746,6 +746,35 @@ edges_raw = [
     ("junc_ring_east", "junc_ring_southeast", "avenue", 10.0),
     ("junc_ring_northwest", "junc_ring_north", "boulevard", 12.0),
     ("junc_ring_north", "junc_academic_north", "avenue", 10.0),
+
+    # --- ORGANIC WINDING CONNECTORS, SHORTCUTS & INTER-DISTRICT LOOPS ---
+    ("central_office", "roundabout_central", "boulevard", 14.0),
+    ("junc_admin_courtyard", "junc_central_north", "avenue", 10.0),
+    ("exam_section", "roundabout_admin", "street", 8.0),
+    ("registrar_office", "junc_admin_north", "street", 8.0),
+    ("admissions_centre", "junc_admin_north", "street", 8.0),
+    ("roundabout_admin", "junc_central_north", "avenue", 10.0),
+    ("junc_central_north", "computer_lab", "avenue", 10.0),
+    ("innovation_centre", "junc_central_north", "avenue", 10.0),
+    ("robotics_lab", "roundabout_academic", "avenue", 10.0),
+    ("cs_block", "junc_computing_plaza", "avenue", 10.0),
+    ("reading_hall", "junc_library_north", "walkway", 6.0),
+    ("junc_library_south", "seminar_hall", "avenue", 10.0),
+    ("junc_digital_concourse", "junc_culture_plaza", "avenue", 10.0),
+    ("auditorium", "bridge_culture_sports", "avenue", 10.0),
+    ("junc_culture_south", "junc_central_south", "avenue", 10.0),
+    ("junc_dining_concourse", "junc_campus_mall_walk", "street", 8.0),
+    ("student_centre", "junc_food_court_terrace", "street", 8.0),
+    ("shopping_centre", "junc_central_south", "avenue", 10.0),
+    ("boys_hostel", "junc_gym_plaza", "street", 8.0),
+    ("girls_hostel", "junc_cafeteria_square", "street", 8.0),
+    ("junc_medical_corner", "junc_admin_south", "street", 8.0),
+    ("junc_security_access", "junc_admin_north", "street", 8.0),
+    ("sports_complex", "swimming_pool", "avenue", 10.0),
+    ("junc_court_nexus", "badminton_court", "street", 8.0),
+    ("basketball_court", "junc_stadium_south_gate", "street", 8.0),
+    ("junc_stadium_south_gate", "junc_court_nexus", "street", 8.0),
+    ("science_lab", "junc_east_infrastructure", "street", 8.0),
 ]
 
 # Deduplicate and build edge dictionaries
@@ -757,6 +786,8 @@ for u, v, rtype, rwidth in edges_raw:
         u_node = all_nodes[u]
         v_node = all_nodes[v]
         conn_str = f"{u_node['district']} <-> {v_node['district']}" if u_node['district'] != v_node['district'] else f"Internal {u_node['district']}"
+        speed_lim = 50 if rtype == "boulevard" else (40 if rtype == "avenue" else (30 if rtype == "street" else (60 if rtype == "bridge" else 15)))
+        is_veh = rtype in ("boulevard", "avenue", "street", "bridge")
         edge_dict[pair] = {
             "source": u,
             "target": v,
@@ -764,6 +795,9 @@ for u, v, rtype, rwidth in edges_raw:
             "distance_m": dist,
             "road_type": rtype,
             "road_width": rwidth,
+            "speed_limit_kmh": speed_lim,
+            "vehicle_accessible": is_veh,
+            "road_surface": "asphalt" if rtype in ("boulevard", "avenue") else ("paved" if rtype == "street" else "pedestrian_stone"),
             "is_walkable": True,
             "road_geometry": [
                 [u_node["x"], u_node["y"]],

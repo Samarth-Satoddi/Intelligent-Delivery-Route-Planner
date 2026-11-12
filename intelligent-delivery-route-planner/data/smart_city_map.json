@@ -29,7 +29,7 @@
     "total_nodes": 113,
     "total_locations": 51,
     "total_junctions": 62,
-    "total_edges": 227
+    "total_edges": 248
   },
   "nodes": [
     {
@@ -1623,6 +1623,9 @@
       "distance_m": 61.2,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1644,6 +1647,9 @@
       "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1665,6 +1671,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1686,6 +1695,9 @@
       "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1707,6 +1719,9 @@
       "distance_m": 306.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1728,6 +1743,9 @@
       "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1749,6 +1767,9 @@
       "distance_m": 228.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1770,6 +1791,9 @@
       "distance_m": 114.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1791,6 +1815,9 @@
       "distance_m": 158.3,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1812,6 +1839,9 @@
       "distance_m": 45.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1833,6 +1863,9 @@
       "distance_m": 119.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1854,6 +1887,9 @@
       "distance_m": 151.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1875,6 +1911,9 @@
       "distance_m": 73.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1896,6 +1935,9 @@
       "distance_m": 245.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1917,6 +1959,9 @@
       "distance_m": 81.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1938,6 +1983,9 @@
       "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1959,6 +2007,9 @@
       "distance_m": 68.4,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -1980,6 +2031,9 @@
       "distance_m": 51.0,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2001,6 +2055,9 @@
       "distance_m": 57.7,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2022,6 +2079,9 @@
       "distance_m": 73.6,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2043,6 +2103,9 @@
       "distance_m": 79.7,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2064,6 +2127,9 @@
       "distance_m": 124.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2085,6 +2151,9 @@
       "distance_m": 102.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2106,6 +2175,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2127,6 +2199,9 @@
       "distance_m": 42.1,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2148,6 +2223,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2169,6 +2247,9 @@
       "distance_m": 82.2,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2190,6 +2271,9 @@
       "distance_m": 71.4,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2211,6 +2295,9 @@
       "distance_m": 124.1,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2232,6 +2319,9 @@
       "distance_m": 61.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2253,6 +2343,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2274,6 +2367,9 @@
       "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2295,6 +2391,9 @@
       "distance_m": 102.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2316,6 +2415,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2337,6 +2439,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2358,6 +2463,9 @@
       "distance_m": 57.7,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2379,6 +2487,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2400,6 +2511,9 @@
       "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2421,6 +2535,9 @@
       "distance_m": 65.3,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2442,6 +2559,9 @@
       "distance_m": 147.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2463,6 +2583,9 @@
       "distance_m": 100.5,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2484,6 +2607,9 @@
       "distance_m": 82.2,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2505,6 +2631,9 @@
       "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2526,6 +2655,9 @@
       "distance_m": 204.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2547,6 +2679,9 @@
       "distance_m": 205.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2568,6 +2703,9 @@
       "distance_m": 310.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2589,6 +2727,9 @@
       "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2610,6 +2751,9 @@
       "distance_m": 142.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2631,6 +2775,9 @@
       "distance_m": 102.5,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2652,6 +2799,9 @@
       "distance_m": 130.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2673,6 +2823,9 @@
       "distance_m": 86.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2694,6 +2847,9 @@
       "distance_m": 219.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2715,6 +2871,9 @@
       "distance_m": 168.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2736,6 +2895,9 @@
       "distance_m": 136.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2757,6 +2919,9 @@
       "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2778,6 +2943,9 @@
       "distance_m": 104.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2799,6 +2967,9 @@
       "distance_m": 119.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2820,6 +2991,9 @@
       "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2841,6 +3015,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2862,6 +3039,9 @@
       "distance_m": 81.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2883,6 +3063,9 @@
       "distance_m": 144.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2904,6 +3087,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2925,6 +3111,9 @@
       "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2946,6 +3135,9 @@
       "distance_m": 102.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2967,6 +3159,9 @@
       "distance_m": 82.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2988,6 +3183,9 @@
       "distance_m": 81.6,
       "road_type": "walkway",
       "road_width": 6.0,
+      "speed_limit_kmh": 15,
+      "vehicle_accessible": false,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3009,6 +3207,9 @@
       "distance_m": 112.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3030,6 +3231,9 @@
       "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3051,6 +3255,9 @@
       "distance_m": 102.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3072,6 +3279,9 @@
       "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3093,6 +3303,9 @@
       "distance_m": 73.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3114,6 +3327,9 @@
       "distance_m": 100.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3135,6 +3351,9 @@
       "distance_m": 100.5,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3156,6 +3375,9 @@
       "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 10.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3177,6 +3399,9 @@
       "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3198,6 +3423,9 @@
       "distance_m": 61.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3219,6 +3447,9 @@
       "distance_m": 65.3,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3240,6 +3471,9 @@
       "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3261,6 +3495,9 @@
       "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3282,6 +3519,9 @@
       "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3303,6 +3543,9 @@
       "distance_m": 81.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3324,6 +3567,9 @@
       "distance_m": 148.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3345,6 +3591,9 @@
       "distance_m": 84.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3366,6 +3615,9 @@
       "distance_m": 102.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3387,6 +3639,9 @@
       "distance_m": 73.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3408,6 +3663,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3429,6 +3687,9 @@
       "distance_m": 81.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3450,6 +3711,9 @@
       "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3471,6 +3735,9 @@
       "distance_m": 136.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3492,6 +3759,9 @@
       "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3513,6 +3783,9 @@
       "distance_m": 64.5,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3534,6 +3807,9 @@
       "distance_m": 20.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3555,6 +3831,9 @@
       "distance_m": 205.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3576,6 +3855,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3597,6 +3879,9 @@
       "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3618,6 +3903,9 @@
       "distance_m": 267.0,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3639,6 +3927,9 @@
       "distance_m": 186.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3660,6 +3951,9 @@
       "distance_m": 86.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3681,6 +3975,9 @@
       "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3702,6 +3999,9 @@
       "distance_m": 84.1,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3723,6 +4023,9 @@
       "distance_m": 42.1,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3744,6 +4047,9 @@
       "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3765,6 +4071,9 @@
       "distance_m": 64.5,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3786,6 +4095,9 @@
       "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3807,6 +4119,9 @@
       "distance_m": 248.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3828,6 +4143,9 @@
       "distance_m": 112.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3849,6 +4167,9 @@
       "distance_m": 115.4,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3870,6 +4191,9 @@
       "distance_m": 272.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3891,6 +4215,9 @@
       "distance_m": 71.4,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3912,6 +4239,9 @@
       "distance_m": 36.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3933,6 +4263,9 @@
       "distance_m": 82.2,
       "road_type": "walkway",
       "road_width": 6.0,
+      "speed_limit_kmh": 15,
+      "vehicle_accessible": false,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3954,6 +4287,9 @@
       "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3975,6 +4311,9 @@
       "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3996,6 +4335,9 @@
       "distance_m": 40.8,
       "road_type": "walkway",
       "road_width": 6.0,
+      "speed_limit_kmh": 15,
+      "vehicle_accessible": false,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4017,6 +4359,9 @@
       "distance_m": 100.5,
       "road_type": "walkway",
       "road_width": 6.0,
+      "speed_limit_kmh": 15,
+      "vehicle_accessible": false,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4038,6 +4383,9 @@
       "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4059,6 +4407,9 @@
       "distance_m": 130.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4080,6 +4431,9 @@
       "distance_m": 81.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4101,6 +4455,9 @@
       "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4122,6 +4479,9 @@
       "distance_m": 61.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4143,6 +4503,9 @@
       "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4164,6 +4527,9 @@
       "distance_m": 43.3,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4185,6 +4551,9 @@
       "distance_m": 77.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4206,6 +4575,9 @@
       "distance_m": 104.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4227,6 +4599,9 @@
       "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4248,6 +4623,9 @@
       "distance_m": 84.1,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4269,6 +4647,9 @@
       "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4290,6 +4671,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4311,6 +4695,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4332,6 +4719,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4353,6 +4743,9 @@
       "distance_m": 30.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4374,6 +4767,9 @@
       "distance_m": 61.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4395,6 +4791,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4416,6 +4815,9 @@
       "distance_m": 146.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4437,6 +4839,9 @@
       "distance_m": 188.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4458,6 +4863,9 @@
       "distance_m": 28.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4479,6 +4887,9 @@
       "distance_m": 92.4,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4500,6 +4911,9 @@
       "distance_m": 84.1,
       "road_type": "bridge",
       "road_width": 14.0,
+      "speed_limit_kmh": 60,
+      "vehicle_accessible": true,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4521,6 +4935,9 @@
       "distance_m": 57.7,
       "road_type": "bridge",
       "road_width": 10.0,
+      "speed_limit_kmh": 60,
+      "vehicle_accessible": true,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4542,6 +4959,9 @@
       "distance_m": 91.2,
       "road_type": "bridge",
       "road_width": 10.0,
+      "speed_limit_kmh": 60,
+      "vehicle_accessible": true,
+      "road_surface": "pedestrian_stone",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4563,6 +4983,9 @@
       "distance_m": 159.3,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4584,6 +5007,9 @@
       "distance_m": 142.1,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4605,6 +5031,9 @@
       "distance_m": 138.7,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4626,6 +5055,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4647,6 +5079,9 @@
       "distance_m": 28.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4668,6 +5103,9 @@
       "distance_m": 71.4,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4689,6 +5127,9 @@
       "distance_m": 62.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4710,6 +5151,9 @@
       "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4731,6 +5175,9 @@
       "distance_m": 30.6,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4752,6 +5199,9 @@
       "distance_m": 54.9,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4773,6 +5223,9 @@
       "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4794,6 +5247,9 @@
       "distance_m": 65.3,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4815,6 +5271,9 @@
       "distance_m": 92.4,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4836,6 +5295,9 @@
       "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4857,6 +5319,9 @@
       "distance_m": 134.2,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4878,6 +5343,9 @@
       "distance_m": 54.9,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4899,6 +5367,9 @@
       "distance_m": 81.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4920,6 +5391,9 @@
       "distance_m": 36.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4941,6 +5415,9 @@
       "distance_m": 54.9,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4962,6 +5439,9 @@
       "distance_m": 74.3,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -4983,6 +5463,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5004,6 +5487,9 @@
       "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5025,6 +5511,9 @@
       "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5046,6 +5535,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5067,6 +5559,9 @@
       "distance_m": 59.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5088,6 +5583,9 @@
       "distance_m": 87.7,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5109,6 +5607,9 @@
       "distance_m": 64.5,
       "road_type": "boulevard",
       "road_width": 10.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5130,6 +5631,9 @@
       "distance_m": 79.7,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5151,6 +5655,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5172,6 +5679,9 @@
       "distance_m": 150.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5193,6 +5703,9 @@
       "distance_m": 82.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5214,6 +5727,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5235,6 +5751,9 @@
       "distance_m": 42.1,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5256,6 +5775,9 @@
       "distance_m": 36.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5277,6 +5799,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5298,6 +5823,9 @@
       "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5319,6 +5847,9 @@
       "distance_m": 168.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5340,6 +5871,9 @@
       "distance_m": 159.3,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5361,6 +5895,9 @@
       "distance_m": 277.5,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5382,6 +5919,9 @@
       "distance_m": 389.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5403,6 +5943,9 @@
       "distance_m": 328.9,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5424,6 +5967,9 @@
       "distance_m": 352.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5445,6 +5991,9 @@
       "distance_m": 28.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5466,6 +6015,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5487,6 +6039,9 @@
       "distance_m": 84.1,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5508,6 +6063,9 @@
       "distance_m": 64.5,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5529,6 +6087,9 @@
       "distance_m": 61.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5550,6 +6111,9 @@
       "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5571,6 +6135,9 @@
       "distance_m": 68.4,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5592,6 +6159,9 @@
       "distance_m": 73.6,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5613,6 +6183,9 @@
       "distance_m": 30.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5634,6 +6207,9 @@
       "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5655,6 +6231,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5676,6 +6255,9 @@
       "distance_m": 183.9,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5697,6 +6279,9 @@
       "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5718,6 +6303,9 @@
       "distance_m": 65.3,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5739,6 +6327,9 @@
       "distance_m": 102.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5760,6 +6351,9 @@
       "distance_m": 322.6,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5781,6 +6375,9 @@
       "distance_m": 124.1,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5802,6 +6399,9 @@
       "distance_m": 30.6,
       "road_type": "boulevard",
       "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5823,6 +6423,9 @@
       "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5844,6 +6447,9 @@
       "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5865,6 +6471,9 @@
       "distance_m": 147.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5886,6 +6495,9 @@
       "distance_m": 81.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5907,6 +6519,9 @@
       "distance_m": 81.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5928,6 +6543,9 @@
       "distance_m": 119.0,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5949,6 +6567,9 @@
       "distance_m": 74.3,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5970,6 +6591,9 @@
       "distance_m": 40.8,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -5991,6 +6615,9 @@
       "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6012,6 +6639,9 @@
       "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6033,6 +6663,9 @@
       "distance_m": 143.2,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6054,6 +6687,9 @@
       "distance_m": 104.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6075,6 +6711,9 @@
       "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6096,6 +6735,9 @@
       "distance_m": 155.4,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6117,6 +6759,9 @@
       "distance_m": 188.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6138,6 +6783,9 @@
       "distance_m": 224.4,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6159,6 +6807,9 @@
       "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6180,6 +6831,9 @@
       "distance_m": 96.8,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6201,6 +6855,9 @@
       "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6222,6 +6879,9 @@
       "distance_m": 30.6,
       "road_type": "street",
       "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6243,6 +6903,9 @@
       "distance_m": 59.5,
       "road_type": "avenue",
       "road_width": 8.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6264,6 +6927,9 @@
       "distance_m": 136.1,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6285,6 +6951,9 @@
       "distance_m": 219.7,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6306,6 +6975,9 @@
       "distance_m": 260.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6327,6 +6999,9 @@
       "distance_m": 266.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6348,6 +7023,9 @@
       "distance_m": 592.0,
       "road_type": "avenue",
       "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6369,6 +7047,9 @@
       "distance_m": 303.3,
       "road_type": "boulevard",
       "road_width": 12.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
       "is_walkable": true,
       "road_geometry": [
         [
@@ -6381,6 +7062,510 @@
         ]
       ],
       "district_connection": "Transport and Infrastructure District <-> Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "central_office",
+      "target": "roundabout_central",
+      "distance": 205.0,
+      "distance_m": 205.0,
+      "road_type": "boulevard",
+      "road_width": 14.0,
+      "speed_limit_kmh": 50,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          420.0
+        ],
+        [
+          500.0,
+          440.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_admin_courtyard",
+      "target": "junc_central_north",
+      "distance": 258.0,
+      "distance_m": 258.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          260.0,
+          460.0
+        ],
+        [
+          500.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "registrar_office",
+      "target": "junc_admin_north",
+      "distance": 190.6,
+      "distance_m": 190.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          250.0,
+          360.0
+        ],
+        [
+          300.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "admissions_centre",
+      "target": "junc_admin_north",
+      "distance": 188.1,
+      "distance_m": 188.1,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          420.0,
+          400.0
+        ],
+        [
+          300.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_admin",
+      "target": "junc_central_north",
+      "distance": 216.1,
+      "distance_m": 216.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          470.0
+        ],
+        [
+          500.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_central_north",
+      "target": "computer_lab",
+      "distance": 94.0,
+      "distance_m": 94.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          500.0,
+          540.0
+        ],
+        [
+          560.0,
+          610.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "innovation_centre",
+      "target": "junc_central_north",
+      "distance": 245.0,
+      "distance_m": 245.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          510.0,
+          780.0
+        ],
+        [
+          500.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "robotics_lab",
+      "target": "roundabout_academic",
+      "distance": 96.2,
+      "distance_m": 96.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          640.0,
+          610.0
+        ],
+        [
+          560.0,
+          660.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "reading_hall",
+      "target": "junc_library_north",
+      "distance": 148.5,
+      "distance_m": 148.5,
+      "road_type": "walkway",
+      "road_width": 6.0,
+      "speed_limit_kmh": 15,
+      "vehicle_accessible": false,
+      "road_surface": "pedestrian_stone",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          560.0,
+          380.0
+        ],
+        [
+          600.0,
+          520.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_library_south",
+      "target": "seminar_hall",
+      "distance": 65.3,
+      "distance_m": 65.3,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          380.0
+        ],
+        [
+          650.0,
+          340.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_digital_concourse",
+      "target": "junc_culture_plaza",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          740.0,
+          480.0
+        ],
+        [
+          700.0,
+          420.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "auditorium",
+      "target": "bridge_culture_sports",
+      "distance": 64.5,
+      "distance_m": 64.5,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
+          380.0
+        ],
+        [
+          780.0,
+          360.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_dining_concourse",
+      "target": "junc_campus_mall_walk",
+      "distance": 109.9,
+      "distance_m": 109.9,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          420.0,
+          240.0
+        ],
+        [
+          460.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "student_centre",
+      "target": "junc_food_court_terrace",
+      "distance": 119.4,
+      "distance_m": 119.4,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          310.0,
+          220.0
+        ],
+        [
+          420.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "shopping_centre",
+      "target": "junc_central_south",
+      "distance": 187.2,
+      "distance_m": 187.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "speed_limit_kmh": 40,
+      "vehicle_accessible": true,
+      "road_surface": "asphalt",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          410.0,
+          140.0
+        ],
+        [
+          500.0,
+          300.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "boys_hostel",
+      "target": "junc_gym_plaza",
+      "distance": 96.8,
+      "distance_m": 96.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          200.0,
+          180.0
+        ],
+        [
+          290.0,
+          150.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "girls_hostel",
+      "target": "junc_cafeteria_square",
+      "distance": 153.0,
+      "distance_m": 153.0,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          250.0,
+          120.0
+        ],
+        [
+          340.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_security_access",
+      "target": "junc_admin_north",
+      "distance": 84.1,
+      "distance_m": 84.1,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          220.0,
+          520.0
+        ],
+        [
+          300.0,
+          540.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "basketball_court",
+      "target": "junc_stadium_south_gate",
+      "distance": 94.0,
+      "distance_m": 94.0,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          840.0,
+          200.0
+        ],
+        [
+          930.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_stadium_south_gate",
+      "target": "junc_court_nexus",
+      "distance": 110.3,
+      "distance_m": 110.3,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          930.0,
+          180.0
+        ],
+        [
+          840.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "science_lab",
+      "target": "junc_east_infrastructure",
+      "distance": 319.5,
+      "distance_m": 319.5,
+      "road_type": "street",
+      "road_width": 8.0,
+      "speed_limit_kmh": 30,
+      "vehicle_accessible": true,
+      "road_surface": "paved",
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
+          590.0
+        ],
+        [
+          1020.0,
+          500.0
+        ]
+      ],
+      "district_connection": "Academic District <-> Transport and Infrastructure District",
       "bidirectional": true
     }
   ]

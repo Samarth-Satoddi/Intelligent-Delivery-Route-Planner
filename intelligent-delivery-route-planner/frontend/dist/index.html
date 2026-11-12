@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intelligent Delivery Route Planner — 3D Campus Navigation</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
-  <script type="module" crossorigin src="./assets/index-Ck8m3rsW.js"></script>
+  <script type="module" crossorigin src="./assets/index-GHyZZ5fI.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cv7BCIZ1.css">
 </head>
 <body>
@@ -133,24 +133,46 @@
       </div>
     </div>
 
+    <!-- 3D Route Display Visibility Toggle -->
+    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; margin-top:8px;">
+      <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">3D Route View</span>
+      <select id="routeDisplayModeSelect" class="select-custom" style="padding:4px 8px; font-size:0.75rem; border-radius:6px; background:#0f172a;">
+        <option value="all" selected>All Compared Routes</option>
+        <option value="selected">Selected Route Only</option>
+      </select>
+    </div>
+
     <!-- Multiple Alternative Routes (Yen's Algorithm) -->
     <div id="alternativeRoutesCard" style="display: none; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 12px; margin-top: 10px;">
       <div style="font-size: 0.75rem; font-weight: 700; color: var(--cyan-glow); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
         <span>🔀 MULTIPLE ROUTE OPTIONS</span>
-        <span style="font-size: 0.65rem; color: var(--text-dim);">Yen's Algorithm</span>
+        <span style="font-size: 0.65rem; color: var(--text-dim);">Yen's K-Shortest Paths</span>
       </div>
       <div id="alternativeRoutesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
     </div>
 
     <!-- 3D Autonomous Courier Robot Transport Controls -->
-    <div class="robot-transport" id="robotTransport" style="display: none;">
+    <div class="robot-transport" id="robotTransport" style="display: none; flex-direction:column; gap:10px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 0.75rem; font-weight: 700; color: #38bdf8;">3D DELIVERY ROBOT SIMULATION</span>
-        <select id="robotSpeed" style="background:#0f172a; border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:0.7rem; border-radius:4px; padding:2px 4px;">
-          <option value="1.0">1x Speed</option>
-          <option value="2.0" selected>2x Speed</option>
-          <option value="4.0">4x Speed</option>
+        <span style="font-size: 0.78rem; font-weight: 700; color: #38bdf8; display:flex; align-items:center; gap:6px;">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
+          3D COURIER VEHICLE TELEMETRY
+        </span>
+        <select id="robotSpeed" style="background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:0.72rem; border-radius:6px; padding:3px 8px;">
+          <option value="0.5">0.5x Speed</option>
+          <option value="1.0">1.0x Speed</option>
+          <option value="2.0" selected>2.0x Speed</option>
+          <option value="4.0">4.0x Speed</option>
+          <option value="8.0">8.0x Turbo</option>
         </select>
+      </div>
+
+      <!-- Telemetry Status Grid -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; background:rgba(0,0,0,0.35); border-radius:8px; padding:8px; font-size:0.72rem;">
+        <div><span style="color:var(--text-dim);">Current:</span> <b id="robotCurrentLocation" style="color:#ffffff;">--</b></div>
+        <div><span style="color:var(--text-dim);">Next:</span> <b id="robotNextLocation" style="color:#38bdf8;">--</b></div>
+        <div><span style="color:var(--text-dim);">Remaining:</span> <b id="robotRemainingDist" style="color:#facc15;">-- m</b></div>
+        <div><span style="color:var(--text-dim);">Speed:</span> <b id="robotSpeedVal" style="color:#34d399;">24 km/h</b></div>
       </div>
 
       <div class="progress-bar-container">
@@ -160,10 +182,12 @@
         Ready for autonomous dispatch
       </div>
 
-      <div class="transport-controls">
-        <button class="transport-btn" id="btnRobotPlay">▶ Start Delivery</button>
-        <button class="transport-btn" id="btnRobotPause">⏸ Pause</button>
-        <button class="transport-btn" id="btnRobotReset">↺ Reset</button>
+      <div class="transport-controls" style="display:grid; grid-template-columns:auto 1fr 1fr auto auto; gap:6px;">
+        <button class="transport-btn" id="btnRobotPrev" title="Step to Previous Junction" style="padding:8px 10px;">⏮</button>
+        <button class="transport-btn" id="btnRobotPlay" style="padding:8px 10px; font-weight:600;">▶ Play</button>
+        <button class="transport-btn" id="btnRobotPause" style="padding:8px 10px;">⏸ Pause</button>
+        <button class="transport-btn" id="btnRobotNext" title="Step to Next Junction" style="padding:8px 10px;">⏭</button>
+        <button class="transport-btn" id="btnRobotReset" style="padding:8px 10px;">↺ Reset</button>
       </div>
     </div>
   </aside>

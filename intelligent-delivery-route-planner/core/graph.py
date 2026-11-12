@@ -80,6 +80,9 @@ class CampusGraph:
                 is_walkable=edge.get("is_walkable", True),
                 road_geometry=edge.get("road_geometry"),
                 district_connection=edge.get("district_connection", ""),
+                speed_limit_kmh=float(edge.get("speed_limit_kmh", 40.0 if edge.get("road_type") in ("boulevard", "avenue") else (30.0 if edge.get("road_type") == "street" else 15.0))),
+                vehicle_accessible=bool(edge.get("vehicle_accessible", edge.get("road_type") != "walkway")),
+                road_surface=edge.get("road_surface", "asphalt"),
             )
 
         return graph
@@ -162,6 +165,9 @@ class CampusGraph:
         is_walkable: bool = True,
         road_geometry: Optional[List[List[float]]] = None,
         district_connection: str = "",
+        speed_limit_kmh: float = 30.0,
+        vehicle_accessible: bool = True,
+        road_surface: str = "asphalt",
     ) -> None:
         """Add a weighted edge between two nodes."""
         if u not in self.nodes:
@@ -197,6 +203,9 @@ class CampusGraph:
             "is_walkable": bool(is_walkable),
             "road_geometry": road_geometry,
             "district_connection": district_connection,
+            "speed_limit_kmh": float(speed_limit_kmh),
+            "vehicle_accessible": bool(vehicle_accessible),
+            "road_surface": road_surface,
         })
 
     def get_neighbors(self, node_id: str) -> List[Tuple[str, float]]:

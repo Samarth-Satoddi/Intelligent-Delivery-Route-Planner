@@ -46,7 +46,7 @@ export const api = {
     request(`/api/heuristics?map_id=${encodeURIComponent(mapId)}&goal_node=${encodeURIComponent(goalNode)}`),
 
   // Search Engine
-  computeRoute: (mapId, startNode, goalNode, algorithm = 'both') =>
+  computeRoute: (mapId, startNode, goalNode, algorithm = 'both', kAlternatives = 5) =>
     request('/api/route', {
       method: 'POST',
       body: JSON.stringify({
@@ -54,6 +54,7 @@ export const api = {
         start_node: startNode,
         goal_node: goalNode,
         algorithm: algorithm,
+        k_alternatives: kAlternatives,
       }),
     }),
 

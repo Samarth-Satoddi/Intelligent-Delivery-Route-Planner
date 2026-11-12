@@ -72,9 +72,34 @@ def test_city_benchmark_32_experiments_and_astar_optimality(city_graph):
 
 def test_cross_district_long_distance_navigation(city_graph):
     """Verify long-distance route between opposite city gates."""
-    # North Gate to South Gate spans the entire city (> 1000m)
+    # North Gate to South Gate spans the entire city (> 900m)
     astar_res = astar_search(city_graph, "north_gate", "south_gate")
     assert astar_res.success is True
     assert astar_res.total_cost >= 900.0, f"Expected cross-city distance >= 900m, got {astar_res.total_cost}m"
     assert len(astar_res.path) >= 8, "Expected at least 8 hops for cross-city travel"
+
+
+def test_central_office_to_library_at_least_5_distinct_routes(city_graph):
+    """Test requirement: Central Office to Central Library has at least 5-10 distinct feasible paths."""
+    routes = yen_k_shortest_paths(city_graph, "central_office", "central_library", K=5)
+    assert len(routes) >= 5, f"Expected at least 5 alternative routes, got {len(routes)}"
+
+    path_tuples = [tuple(r["path"]) for r in routes]
+    assert len(set(path_tuples)) == len(routes), "All alternative paths must be distinct"
+
+    for r in routes:
+        assert city_graph.is_valid_path(r["path"], "central_office", "central_library")
+        assert r["total_distance_m"] > 0
+        assert r["hops"] >= 2
+
+
+def test_edge_vehicle_navigation_properties(city_graph):
+    """Verify edge attributes for vehicle navigation (distance, road_type, speed_limit, vehicle_accessible)."""
+    assert len(city_graph.edges_list) >= 200, f"Expected >= 200 edges, got {len(city_graph.edges_list)}"
+    for edge in city_graph.edges_list:
+        assert "distance_m" in edge or "distance" in edge
+        assert "road_type" in edge
+        assert edge.get("speed_limit_kmh", 0) > 0
+        assert "vehicle_accessible" in edge
+        assert edge["distance"] > 0
 
