@@ -1,12 +1,3 @@
-"""FastAPI Backend Server for Intelligent Delivery Route Planner.
-
-Exposes RESTful endpoints connecting the frontend web interface with:
-- Classical AI Search Algorithms (GBFS, A*, Dijkstra)
-- Adjacency List Graph Engine and Euclidean Heuristics
-- Argon2 + JWT Authentication and Session Management
-- Audit Trail Persistence (Route History)
-- Administrative Map Management
-"""
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -354,7 +345,6 @@ if FRONTEND_DIST.exists():
     app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
 
     @app.get("/")
-    @app.get("/index.html")
     def serve_frontend_dist():
         return FileResponse(FRONTEND_DIST / "index.html")
 
@@ -364,3 +354,9 @@ elif FRONTEND_SRC.exists():
     @app.get("/")
     def serve_frontend_src():
         return FileResponse(FRONTEND_SRC / "index.html")
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=False)
+

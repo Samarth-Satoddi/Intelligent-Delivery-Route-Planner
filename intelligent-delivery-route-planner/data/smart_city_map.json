@@ -2,7 +2,7 @@
   "metadata": {
     "id": "smart_city_map",
     "name": "Smart Campus City Navigation Network",
-    "description": "Expanded city-scale university environment spanning 6 districts with 51 landmarks and 28 junctions.",
+    "description": "Expanded dense city-scale university environment spanning 6 districts with 51 landmarks and 61 strategic road junctions.",
     "unit": "metres",
     "scale": "1:1 physical metres",
     "default_start": "central_office",
@@ -26,10 +26,10 @@
       "Sports District",
       "Transport and Infrastructure District"
     ],
-    "total_nodes": 79,
+    "total_nodes": 113,
     "total_locations": 51,
-    "total_junctions": 28,
-    "total_edges": 141
+    "total_junctions": 62,
+    "total_edges": 227
   },
   "nodes": [
     {
@@ -1137,14 +1137,490 @@
       "navigation_category": "Junction",
       "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
       "z": 0.0
+    },
+    {
+      "id": "junc_ring_northwest",
+      "name": "Northwest Perimeter Crossroads",
+      "district": "Transport and Infrastructure District",
+      "x": 140.0,
+      "y": 720.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ring_north",
+      "name": "North Campus Ring Road",
+      "district": "Academic District",
+      "x": 420.0,
+      "y": 820.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ring_northeast",
+      "name": "Northeast Technology Ring",
+      "district": "Academic District",
+      "x": 860.0,
+      "y": 820.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ring_east",
+      "name": "East Perimeter Bypass",
+      "district": "Transport and Infrastructure District",
+      "x": 1080.0,
+      "y": 680.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ring_southeast",
+      "name": "Southeast Sports Ring Road",
+      "district": "Sports District",
+      "x": 1060.0,
+      "y": 100.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ring_southwest",
+      "name": "Southwest Transit Junction",
+      "district": "Transport and Infrastructure District",
+      "x": 140.0,
+      "y": 120.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_admin_courtyard",
+      "name": "Executive Courtyard Crossing",
+      "district": "Administration District",
+      "x": 260.0,
+      "y": 460.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Administration District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_finance_cross",
+      "name": "Finance & Bursary Crossroads",
+      "district": "Administration District",
+      "x": 380.0,
+      "y": 360.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Administration District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_transit_loop",
+      "name": "Transit Shuttle Turnaround",
+      "district": "Transport and Infrastructure District",
+      "x": 100.0,
+      "y": 500.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_security_access",
+      "name": "Emergency Security Post",
+      "district": "Administration District",
+      "x": 220.0,
+      "y": 520.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Administration District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_computing_plaza",
+      "name": "Computing Quad Hub",
+      "district": "Academic District",
+      "x": 560.0,
+      "y": 720.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_ai_robotics_walk",
+      "name": "AI & Robotics Promenade",
+      "district": "Academic District",
+      "x": 600.0,
+      "y": 660.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_electronics_cross",
+      "name": "Applied Tech Crossroads",
+      "district": "Academic District",
+      "x": 720.0,
+      "y": 680.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_science_gateway",
+      "name": "Physical Sciences Crossing",
+      "district": "Academic District",
+      "x": 760.0,
+      "y": 600.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_innovation_loop",
+      "name": "Innovation Boulevard West",
+      "district": "Academic District",
+      "x": 480.0,
+      "y": 740.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_cleanroom_alley",
+      "name": "Advanced Research Way",
+      "district": "Academic District",
+      "x": 660.0,
+      "y": 800.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Academic District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_library_north",
+      "name": "Library North Esplanade",
+      "district": "Knowledge and Culture District",
+      "x": 600.0,
+      "y": 520.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Knowledge and Culture District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_library_south",
+      "name": "Scholar Walkway Intersection",
+      "district": "Knowledge and Culture District",
+      "x": 600.0,
+      "y": 380.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Knowledge and Culture District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_digital_concourse",
+      "name": "Digital Commons Crossing",
+      "district": "Knowledge and Culture District",
+      "x": 740.0,
+      "y": 480.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Knowledge and Culture District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_auditorium_east",
+      "name": "Riverbank Gateway",
+      "district": "Knowledge and Culture District",
+      "x": 760.0,
+      "y": 380.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Knowledge and Culture District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_exhibition_lane",
+      "name": "Fine Arts Promenade",
+      "district": "Knowledge and Culture District",
+      "x": 650.0,
+      "y": 300.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Knowledge and Culture District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_cafeteria_square",
+      "name": "Cafeteria Terrace Crossing",
+      "district": "Student Life District",
+      "x": 340.0,
+      "y": 240.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_food_court_terrace",
+      "name": "Food Court Piazza",
+      "district": "Student Life District",
+      "x": 420.0,
+      "y": 180.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_hostel_alpha_cross",
+      "name": "Residential North Crossing",
+      "district": "Student Life District",
+      "x": 200.0,
+      "y": 140.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_gym_plaza",
+      "name": "Fitness & Rec Intersection",
+      "district": "Student Life District",
+      "x": 290.0,
+      "y": 150.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_medical_drive",
+      "name": "Ambulance Emergency Spur",
+      "district": "Student Life District",
+      "x": 170.0,
+      "y": 220.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_campus_mall_walk",
+      "name": "Campus Mall Promenade",
+      "district": "Student Life District",
+      "x": 460.0,
+      "y": 140.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Student Life District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_stadium_north_gate",
+      "name": "Stadium North Concourse",
+      "district": "Sports District",
+      "x": 930.0,
+      "y": 340.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_stadium_south_gate",
+      "name": "Stadium South Concourse",
+      "district": "Sports District",
+      "x": 930.0,
+      "y": 180.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_football_concourse",
+      "name": "Soccer Pitch Approach",
+      "district": "Sports District",
+      "x": 990.0,
+      "y": 320.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_court_nexus",
+      "name": "Hardcourt Central Square",
+      "district": "Sports District",
+      "x": 840.0,
+      "y": 240.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_aquatics_way",
+      "name": "Olympic Pool Esplanade",
+      "district": "Sports District",
+      "x": 820.0,
+      "y": 320.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Sports District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_fleet_depot",
+      "name": "Works Yard Turnout",
+      "district": "Transport and Infrastructure District",
+      "x": 1000.0,
+      "y": 460.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
+    },
+    {
+      "id": "junc_substation_access",
+      "name": "Power Grid Service Lane",
+      "district": "Transport and Infrastructure District",
+      "x": 1050.0,
+      "y": 550.0,
+      "type": "junction",
+      "building_width": 12.0,
+      "building_depth": 12.0,
+      "building_height": 4.0,
+      "navigation_category": "Junction",
+      "description": "Traffic Roundabout / Intersection (Transport and Infrastructure District)",
+      "z": 0.0
     }
   ],
   "edges": [
     {
       "source": "main_gate",
       "target": "junc_main_gate_concourse",
-      "distance": 61.8,
-      "distance_m": 61.8,
+      "distance": 61.2,
+      "distance_m": 61.2,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -1164,8 +1640,8 @@
     {
       "source": "junc_main_gate_concourse",
       "target": "visitor_parking",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "distance": 64.5,
+      "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1185,8 +1661,8 @@
     {
       "source": "junc_main_gate_concourse",
       "target": "bus_terminal",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1204,10 +1680,94 @@
       "bidirectional": true
     },
     {
+      "source": "junc_main_gate_concourse",
+      "target": "records_dept",
+      "distance": 45.6,
+      "distance_m": 45.6,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          180.0,
+          400.0
+        ]
+      ],
+      "district_connection": "Transport and Infrastructure District <-> Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_main_gate_concourse",
+      "target": "junc_ring_southwest",
+      "distance": 306.0,
+      "distance_m": 306.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          140.0,
+          420.0
+        ],
+        [
+          140.0,
+          120.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
+      "source": "bus_terminal",
+      "target": "junc_transit_loop",
+      "distance": 51.0,
+      "distance_m": 51.0,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          150.0,
+          500.0
+        ],
+        [
+          100.0,
+          500.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_transit_loop",
+      "target": "junc_ring_northwest",
+      "distance": 228.1,
+      "distance_m": 228.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          100.0,
+          500.0
+        ],
+        [
+          140.0,
+          720.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "bus_terminal",
       "target": "security_hq",
-      "distance": 115.2,
-      "distance_m": 115.2,
+      "distance": 114.0,
+      "distance_m": 114.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1227,8 +1787,8 @@
     {
       "source": "bus_terminal",
       "target": "junc_admin_north",
-      "distance": 159.9,
-      "distance_m": 159.9,
+      "distance": 158.3,
+      "distance_m": 158.3,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1246,31 +1806,10 @@
       "bidirectional": true
     },
     {
-      "source": "junc_main_gate_concourse",
-      "target": "records_dept",
-      "distance": 46.1,
-      "distance_m": 46.1,
-      "road_type": "avenue",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          140.0,
-          420.0
-        ],
-        [
-          180.0,
-          400.0
-        ]
-      ],
-      "district_connection": "Transport and Infrastructure District <-> Administration District",
-      "bidirectional": true
-    },
-    {
       "source": "records_dept",
       "target": "junc_admin_west",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1290,8 +1829,8 @@
     {
       "source": "visitor_parking",
       "target": "junc_admin_west",
-      "distance": 120.1,
-      "distance_m": 120.1,
+      "distance": 119.0,
+      "distance_m": 119.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1310,9 +1849,9 @@
     },
     {
       "source": "visitor_parking",
-      "target": "medical_centre",
-      "distance": 106.0,
-      "distance_m": 106.0,
+      "target": "junc_medical_drive",
+      "distance": 151.6,
+      "distance_m": 151.6,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1323,17 +1862,59 @@
         ],
         [
           170.0,
-          270.0
+          220.0
         ]
       ],
       "district_connection": "Transport and Infrastructure District <-> Student Life District",
       "bidirectional": true
     },
     {
+      "source": "junc_ring_southwest",
+      "target": "student_parking",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          140.0,
+          120.0
+        ],
+        [
+          200.0,
+          80.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ring_southwest",
+      "target": "visitor_parking",
+      "distance": 245.6,
+      "distance_m": 245.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          140.0,
+          120.0
+        ],
+        [
+          120.0,
+          360.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_admin_west",
       "target": "central_office",
-      "distance": 82.4,
-      "distance_m": 82.4,
+      "distance": 81.6,
+      "distance_m": 81.6,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1353,8 +1934,8 @@
     {
       "source": "junc_admin_west",
       "target": "exam_section",
-      "distance": 41.2,
-      "distance_m": 41.2,
+      "distance": 40.8,
+      "distance_m": 40.8,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1374,8 +1955,8 @@
     {
       "source": "junc_admin_west",
       "target": "registrar_office",
-      "distance": 69.1,
-      "distance_m": 69.1,
+      "distance": 68.4,
+      "distance_m": 68.4,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1395,8 +1976,8 @@
     {
       "source": "central_office",
       "target": "roundabout_admin",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1415,9 +1996,30 @@
     },
     {
       "source": "central_office",
+      "target": "junc_admin_courtyard",
+      "distance": 57.7,
+      "distance_m": 57.7,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          420.0
+        ],
+        [
+          260.0,
+          460.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "central_office",
       "target": "accounts_office",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "distance": 73.6,
+      "distance_m": 73.6,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1437,8 +2039,8 @@
     {
       "source": "central_office",
       "target": "registrar_office",
-      "distance": 80.4,
-      "distance_m": 80.4,
+      "distance": 79.7,
+      "distance_m": 79.7,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1458,8 +2060,8 @@
     {
       "source": "central_office",
       "target": "admissions_centre",
-      "distance": 125.3,
-      "distance_m": 125.3,
+      "distance": 124.1,
+      "distance_m": 124.1,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1477,10 +2079,73 @@
       "bidirectional": true
     },
     {
+      "source": "central_office",
+      "target": "junc_admin_south",
+      "distance": 102.0,
+      "distance_m": 102.0,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          420.0
+        ],
+        [
+          300.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_admin_courtyard",
+      "target": "exam_section",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          260.0,
+          460.0
+        ],
+        [
+          220.0,
+          460.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_admin_courtyard",
+      "target": "roundabout_admin",
+      "distance": 42.1,
+      "distance_m": 42.1,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          260.0,
+          460.0
+        ],
+        [
+          300.0,
+          470.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
       "source": "roundabout_admin",
       "target": "exam_section",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1500,8 +2165,8 @@
     {
       "source": "roundabout_admin",
       "target": "main_admin",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1521,8 +2186,8 @@
     {
       "source": "roundabout_admin",
       "target": "junc_admin_north",
-      "distance": 72.1,
-      "distance_m": 72.1,
+      "distance": 71.4,
+      "distance_m": 71.4,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1542,8 +2207,8 @@
     {
       "source": "roundabout_admin",
       "target": "junc_admin_east",
-      "distance": 125.3,
-      "distance_m": 125.3,
+      "distance": 124.1,
+      "distance_m": 124.1,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1562,9 +2227,9 @@
     },
     {
       "source": "exam_section",
-      "target": "security_hq",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "target": "junc_security_access",
+      "distance": 61.2,
+      "distance_m": 61.2,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1572,6 +2237,27 @@
         [
           220.0,
           460.0
+        ],
+        [
+          220.0,
+          520.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_security_access",
+      "target": "security_hq",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          220.0,
+          520.0
         ],
         [
           260.0,
@@ -1584,8 +2270,8 @@
     {
       "source": "security_hq",
       "target": "junc_admin_north",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1605,8 +2291,8 @@
     {
       "source": "main_admin",
       "target": "junc_admin_north",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "distance": 102.0,
+      "distance_m": 102.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1626,8 +2312,8 @@
     {
       "source": "main_admin",
       "target": "junc_admin_east",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1647,8 +2333,8 @@
     {
       "source": "admissions_centre",
       "target": "junc_admin_east",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1666,10 +2352,52 @@
       "bidirectional": true
     },
     {
+      "source": "admissions_centre",
+      "target": "junc_finance_cross",
+      "distance": 57.7,
+      "distance_m": 57.7,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          420.0,
+          400.0
+        ],
+        [
+          380.0,
+          360.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
+      "source": "accounts_office",
+      "target": "junc_finance_cross",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          340.0,
+          360.0
+        ],
+        [
+          380.0,
+          360.0
+        ]
+      ],
+      "district_connection": "Internal Administration District",
+      "bidirectional": true
+    },
+    {
       "source": "accounts_office",
       "target": "junc_admin_south",
-      "distance": 58.3,
-      "distance_m": 58.3,
+      "distance": 57.7,
+      "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1689,8 +2417,8 @@
     {
       "source": "registrar_office",
       "target": "junc_admin_south",
-      "distance": 66.0,
-      "distance_m": 66.0,
+      "distance": 65.3,
+      "distance_m": 65.3,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1708,21 +2436,42 @@
       "bidirectional": true
     },
     {
-      "source": "central_office",
-      "target": "junc_admin_south",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "source": "junc_finance_cross",
+      "target": "roundabout_central",
+      "distance": 147.1,
+      "distance_m": 147.1,
       "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          380.0,
+          360.0
+        ],
+        [
+          500.0,
+          440.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_finance_cross",
+      "target": "junc_admin_east",
+      "distance": 100.5,
+      "distance_m": 100.5,
+      "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          300.0,
-          420.0
+          380.0,
+          360.0
         ],
         [
-          300.0,
-          320.0
+          420.0,
+          450.0
         ]
       ],
       "district_connection": "Internal Administration District",
@@ -1731,8 +2480,8 @@
     {
       "source": "junc_admin_east",
       "target": "roundabout_central",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -1752,8 +2501,8 @@
     {
       "source": "admissions_centre",
       "target": "roundabout_central",
-      "distance": 92.1,
-      "distance_m": 92.1,
+      "distance": 91.2,
+      "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1773,8 +2522,8 @@
     {
       "source": "junc_admin_north",
       "target": "junc_central_north",
-      "distance": 206.0,
-      "distance_m": 206.0,
+      "distance": 204.0,
+      "distance_m": 204.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1794,8 +2543,8 @@
     {
       "source": "junc_admin_south",
       "target": "junc_central_south",
-      "distance": 207.0,
-      "distance_m": 207.0,
+      "distance": 205.0,
+      "distance_m": 205.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1813,10 +2562,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_admin_north",
+      "target": "junc_ring_north",
+      "distance": 310.7,
+      "distance_m": 310.7,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          540.0
+        ],
+        [
+          420.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "roundabout_central",
       "target": "junc_central_north",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "distance": 102.0,
+      "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1836,8 +2606,8 @@
     {
       "source": "roundabout_central",
       "target": "junc_central_south",
-      "distance": 144.2,
-      "distance_m": 144.2,
+      "distance": 142.8,
+      "distance_m": 142.8,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1857,8 +2627,8 @@
     {
       "source": "roundabout_central",
       "target": "central_library",
-      "distance": 103.5,
-      "distance_m": 103.5,
+      "distance": 102.5,
+      "distance_m": 102.5,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -1877,9 +2647,30 @@
     },
     {
       "source": "roundabout_central",
+      "target": "junc_library_north",
+      "distance": 130.6,
+      "distance_m": 130.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          500.0,
+          440.0
+        ],
+        [
+          600.0,
+          520.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_central",
       "target": "reading_hall",
-      "distance": 87.4,
-      "distance_m": 87.4,
+      "distance": 86.5,
+      "distance_m": 86.5,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1899,8 +2690,8 @@
     {
       "source": "roundabout_central",
       "target": "junc_dining_concourse",
-      "distance": 221.9,
-      "distance_m": 221.9,
+      "distance": 219.7,
+      "distance_m": 219.7,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1920,8 +2711,8 @@
     {
       "source": "roundabout_central",
       "target": "faculty_block",
-      "distance": 169.9,
-      "distance_m": 169.9,
+      "distance": 168.2,
+      "distance_m": 168.2,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -1941,8 +2732,8 @@
     {
       "source": "junc_central_north",
       "target": "roundabout_academic",
-      "distance": 138.2,
-      "distance_m": 138.2,
+      "distance": 136.8,
+      "distance_m": 136.8,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -1962,8 +2753,8 @@
     {
       "source": "junc_central_north",
       "target": "faculty_block",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "distance": 73.6,
+      "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -1981,10 +2772,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_central_north",
+      "target": "junc_library_north",
+      "distance": 104.0,
+      "distance_m": 104.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          500.0,
+          540.0
+        ],
+        [
+          600.0,
+          520.0
+        ]
+      ],
+      "district_connection": "Academic District <-> Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
       "source": "roundabout_academic",
       "target": "faculty_block",
-      "distance": 120.1,
-      "distance_m": 120.1,
+      "distance": 119.0,
+      "distance_m": 119.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2004,8 +2816,8 @@
     {
       "source": "roundabout_academic",
       "target": "cs_block",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2025,8 +2837,8 @@
     {
       "source": "roundabout_academic",
       "target": "computer_lab",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2046,8 +2858,8 @@
     {
       "source": "roundabout_academic",
       "target": "junc_academic_quad",
-      "distance": 82.4,
-      "distance_m": 82.4,
+      "distance": 81.6,
+      "distance_m": 81.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2065,10 +2877,115 @@
       "bidirectional": true
     },
     {
+      "source": "faculty_block",
+      "target": "junc_innovation_loop",
+      "distance": 144.2,
+      "distance_m": 144.2,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          460.0,
+          600.0
+        ],
+        [
+          480.0,
+          740.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_innovation_loop",
+      "target": "innovation_centre",
+      "distance": 51.0,
+      "distance_m": 51.0,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          480.0,
+          740.0
+        ],
+        [
+          510.0,
+          780.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_innovation_loop",
+      "target": "cs_block",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          480.0,
+          740.0
+        ],
+        [
+          520.0,
+          680.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_innovation_loop",
+      "target": "junc_ring_north",
+      "distance": 102.0,
+      "distance_m": 102.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          480.0,
+          740.0
+        ],
+        [
+          420.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "computer_lab",
+      "target": "cs_block",
+      "distance": 82.2,
+      "distance_m": 82.2,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          560.0,
+          610.0
+        ],
+        [
+          520.0,
+          680.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "computer_lab",
       "target": "robotics_lab",
-      "distance": 82.4,
-      "distance_m": 82.4,
+      "distance": 81.6,
+      "distance_m": 81.6,
       "road_type": "walkway",
       "road_width": 6.0,
       "is_walkable": true,
@@ -2087,9 +3004,9 @@
     },
     {
       "source": "computer_lab",
-      "target": "cs_block",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "target": "junc_computing_plaza",
+      "distance": 112.2,
+      "distance_m": 112.2,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2099,8 +3016,8 @@
           610.0
         ],
         [
-          520.0,
-          680.0
+          560.0,
+          720.0
         ]
       ],
       "district_connection": "Internal Academic District",
@@ -2108,11 +3025,11 @@
     },
     {
       "source": "cs_block",
-      "target": "ai_ds_block",
-      "distance": 92.1,
-      "distance_m": 92.1,
-      "road_type": "boulevard",
-      "road_width": 12.0,
+      "target": "junc_computing_plaza",
+      "distance": 57.7,
+      "distance_m": 57.7,
+      "road_type": "avenue",
+      "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
@@ -2120,7 +3037,7 @@
           680.0
         ],
         [
-          600.0,
+          560.0,
           720.0
         ]
       ],
@@ -2130,8 +3047,8 @@
     {
       "source": "cs_block",
       "target": "innovation_centre",
-      "distance": 103.5,
-      "distance_m": 103.5,
+      "distance": 102.5,
+      "distance_m": 102.5,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2149,10 +3066,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_computing_plaza",
+      "target": "ai_ds_block",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          560.0,
+          720.0
+        ],
+        [
+          600.0,
+          720.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_computing_plaza",
+      "target": "junc_ai_robotics_walk",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          560.0,
+          720.0
+        ],
+        [
+          600.0,
+          660.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "innovation_centre",
       "target": "research_centre",
-      "distance": 101.4,
-      "distance_m": 101.4,
+      "distance": 100.5,
+      "distance_m": 100.5,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2170,10 +3129,31 @@
       "bidirectional": true
     },
     {
+      "source": "innovation_centre",
+      "target": "junc_ring_north",
+      "distance": 100.5,
+      "distance_m": 100.5,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          510.0,
+          780.0
+        ],
+        [
+          420.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "ai_ds_block",
       "target": "research_centre",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "distance": 102.0,
+      "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2193,8 +3173,8 @@
     {
       "source": "ai_ds_block",
       "target": "junc_tech_park",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2212,10 +3192,73 @@
       "bidirectional": true
     },
     {
+      "source": "ai_ds_block",
+      "target": "junc_ai_robotics_walk",
+      "distance": 61.2,
+      "distance_m": 61.2,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          720.0
+        ],
+        [
+          600.0,
+          660.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ai_robotics_walk",
+      "target": "robotics_lab",
+      "distance": 65.3,
+      "distance_m": 65.3,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          660.0
+        ],
+        [
+          640.0,
+          610.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ai_robotics_walk",
+      "target": "junc_academic_quad",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          660.0
+        ],
+        [
+          640.0,
+          660.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_academic_quad",
       "target": "robotics_lab",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2235,8 +3278,8 @@
     {
       "source": "junc_academic_quad",
       "target": "electronics_block",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2256,8 +3299,8 @@
     {
       "source": "junc_academic_quad",
       "target": "junc_tech_park",
-      "distance": 82.4,
-      "distance_m": 82.4,
+      "distance": 81.6,
+      "distance_m": 81.6,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2276,9 +3319,9 @@
     },
     {
       "source": "junc_academic_quad",
-      "target": "central_library",
-      "distance": 220.2,
-      "distance_m": 220.2,
+      "target": "junc_library_north",
+      "distance": 148.5,
+      "distance_m": 148.5,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2289,23 +3332,107 @@
         ],
         [
           600.0,
-          450.0
+          520.0
         ]
       ],
       "district_connection": "Academic District <-> Knowledge and Culture District",
       "bidirectional": true
     },
     {
-      "source": "electronics_block",
+      "source": "junc_tech_park",
       "target": "electrical_block",
-      "distance": 92.1,
-      "distance_m": 92.1,
+      "distance": 84.1,
+      "distance_m": 84.1,
       "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          640.0,
+          740.0
+        ],
+        [
+          720.0,
+          760.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_tech_park",
+      "target": "junc_electronics_cross",
+      "distance": 102.0,
+      "distance_m": 102.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          640.0,
+          740.0
+        ],
+        [
+          720.0,
+          680.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_tech_park",
+      "target": "junc_research_loop",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          640.0,
+          740.0
+        ],
+        [
+          600.0,
+          800.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "electronics_block",
+      "target": "junc_electronics_cross",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
           680.0,
+          680.0
+        ],
+        [
+          720.0,
+          680.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_electronics_cross",
+      "target": "electrical_block",
+      "distance": 81.6,
+      "distance_m": 81.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
           680.0
         ],
         [
@@ -2317,16 +3444,16 @@
       "bidirectional": true
     },
     {
-      "source": "electronics_block",
+      "source": "junc_electronics_cross",
       "target": "mechanical_block",
-      "distance": 92.1,
-      "distance_m": 92.1,
+      "distance": 57.7,
+      "distance_m": 57.7,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          680.0,
+          720.0,
           680.0
         ],
         [
@@ -2339,30 +3466,9 @@
     },
     {
       "source": "electrical_block",
-      "target": "junc_tech_park",
-      "distance": 84.9,
-      "distance_m": 84.9,
-      "road_type": "street",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          720.0,
-          760.0
-        ],
-        [
-          640.0,
-          740.0
-        ]
-      ],
-      "district_connection": "Internal Academic District",
-      "bidirectional": true
-    },
-    {
-      "source": "electrical_block",
       "target": "research_centre",
-      "distance": 138.2,
-      "distance_m": 138.2,
+      "distance": 136.8,
+      "distance_m": 136.8,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2380,10 +3486,52 @@
       "bidirectional": true
     },
     {
+      "source": "electrical_block",
+      "target": "junc_cleanroom_alley",
+      "distance": 73.6,
+      "distance_m": 73.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
+          760.0
+        ],
+        [
+          660.0,
+          800.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "research_centre",
+      "target": "junc_cleanroom_alley",
+      "distance": 64.5,
+      "distance_m": 64.5,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          820.0
+        ],
+        [
+          660.0,
+          800.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "research_centre",
       "target": "junc_research_loop",
-      "distance": 21.0,
-      "distance_m": 21.0,
+      "distance": 20.5,
+      "distance_m": 20.5,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2401,10 +3549,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_cleanroom_alley",
+      "target": "junc_ring_northeast",
+      "distance": 205.0,
+      "distance_m": 205.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          660.0,
+          800.0
+        ],
+        [
+          860.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_research_loop",
       "target": "junc_academic_north",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2424,8 +3593,8 @@
     {
       "source": "junc_academic_north",
       "target": "north_gate",
-      "distance": 41.2,
-      "distance_m": 41.2,
+      "distance": 40.8,
+      "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -2443,10 +3612,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_academic_north",
+      "target": "junc_ring_northeast",
+      "distance": 267.0,
+      "distance_m": 267.0,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          850.0
+        ],
+        [
+          860.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ring_north",
+      "target": "junc_academic_north",
+      "distance": 186.1,
+      "distance_m": 186.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          420.0,
+          820.0
+        ],
+        [
+          600.0,
+          850.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "mechanical_block",
       "target": "civil_block",
-      "distance": 87.4,
-      "distance_m": 87.4,
+      "distance": 86.5,
+      "distance_m": 86.5,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2465,10 +3676,10 @@
     },
     {
       "source": "mechanical_block",
-      "target": "science_lab",
-      "distance": 66.0,
-      "distance_m": 66.0,
-      "road_type": "street",
+      "target": "junc_science_gateway",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
@@ -2477,8 +3688,8 @@
           640.0
         ],
         [
-          720.0,
-          590.0
+          760.0,
+          600.0
         ]
       ],
       "district_connection": "Internal Academic District",
@@ -2487,8 +3698,8 @@
     {
       "source": "robotics_lab",
       "target": "science_lab",
-      "distance": 84.9,
-      "distance_m": 84.9,
+      "distance": 84.1,
+      "distance_m": 84.1,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2507,9 +3718,30 @@
     },
     {
       "source": "science_lab",
+      "target": "junc_science_gateway",
+      "distance": 42.1,
+      "distance_m": 42.1,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
+          590.0
+        ],
+        [
+          760.0,
+          600.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "science_lab",
       "target": "junc_engineering_east",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2528,9 +3760,30 @@
     },
     {
       "source": "civil_block",
+      "target": "junc_science_gateway",
+      "distance": 64.5,
+      "distance_m": 64.5,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          820.0,
+          580.0
+        ],
+        [
+          760.0,
+          600.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "civil_block",
       "target": "junc_engineering_east",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "distance": 64.5,
+      "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2548,10 +3801,31 @@
       "bidirectional": true
     },
     {
+      "source": "civil_block",
+      "target": "junc_ring_northeast",
+      "distance": 248.2,
+      "distance_m": 248.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          820.0,
+          580.0
+        ],
+        [
+          860.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Internal Academic District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_engineering_east",
       "target": "conference_centre",
-      "distance": 113.8,
-      "distance_m": 113.8,
+      "distance": 112.7,
+      "distance_m": 112.7,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2571,8 +3845,8 @@
     {
       "source": "junc_engineering_east",
       "target": "digital_library",
-      "distance": 116.5,
-      "distance_m": 116.5,
+      "distance": 115.4,
+      "distance_m": 115.4,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2590,10 +3864,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_engineering_east",
+      "target": "junc_east_infrastructure",
+      "distance": 272.2,
+      "distance_m": 272.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          760.0,
+          560.0
+        ],
+        [
+          1020.0,
+          500.0
+        ]
+      ],
+      "district_connection": "Academic District <-> Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "central_library",
-      "target": "digital_library",
-      "distance": 88.0,
-      "distance_m": 88.0,
+      "target": "junc_library_north",
+      "distance": 71.4,
+      "distance_m": 71.4,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2603,8 +3898,8 @@
           450.0
         ],
         [
-          680.0,
-          480.0
+          600.0,
+          520.0
         ]
       ],
       "district_connection": "Internal Knowledge and Culture District",
@@ -2613,8 +3908,8 @@
     {
       "source": "central_library",
       "target": "junc_library_square",
-      "distance": 37.1,
-      "distance_m": 37.1,
+      "distance": 36.8,
+      "distance_m": 36.8,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2634,8 +3929,8 @@
     {
       "source": "central_library",
       "target": "reading_hall",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "walkway",
       "road_width": 6.0,
       "is_walkable": true,
@@ -2653,42 +3948,42 @@
       "bidirectional": true
     },
     {
-      "source": "digital_library",
-      "target": "conference_centre",
-      "distance": 97.7,
-      "distance_m": 97.7,
+      "source": "central_library",
+      "target": "digital_library",
+      "distance": 87.1,
+      "distance_m": 87.1,
       "road_type": "avenue",
-      "road_width": 8.0,
+      "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          680.0,
-          480.0
+          600.0,
+          450.0
         ],
         [
-          770.0,
-          450.0
+          680.0,
+          480.0
         ]
       ],
       "district_connection": "Internal Knowledge and Culture District",
       "bidirectional": true
     },
     {
-      "source": "digital_library",
-      "target": "junc_culture_plaza",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "source": "junc_library_north",
+      "target": "digital_library",
+      "distance": 91.2,
+      "distance_m": 91.2,
       "road_type": "avenue",
-      "road_width": 10.0,
+      "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          680.0,
-          480.0
+          600.0,
+          520.0
         ],
         [
-          700.0,
-          420.0
+          680.0,
+          480.0
         ]
       ],
       "district_connection": "Internal Knowledge and Culture District",
@@ -2696,9 +3991,9 @@
     },
     {
       "source": "reading_hall",
-      "target": "junc_library_square",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "target": "junc_library_south",
+      "distance": 40.8,
+      "distance_m": 40.8,
       "road_type": "walkway",
       "road_width": 6.0,
       "is_walkable": true,
@@ -2708,8 +4003,8 @@
           380.0
         ],
         [
-          620.0,
-          420.0
+          600.0,
+          380.0
         ]
       ],
       "district_connection": "Internal Knowledge and Culture District",
@@ -2718,8 +4013,8 @@
     {
       "source": "reading_hall",
       "target": "seminar_hall",
-      "distance": 101.4,
-      "distance_m": 101.4,
+      "distance": 100.5,
+      "distance_m": 100.5,
       "road_type": "walkway",
       "road_width": 6.0,
       "is_walkable": true,
@@ -2737,10 +4032,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_library_south",
+      "target": "junc_library_square",
+      "distance": 45.6,
+      "distance_m": 45.6,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          380.0
+        ],
+        [
+          620.0,
+          420.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_library_south",
+      "target": "junc_central_south",
+      "distance": 130.6,
+      "distance_m": 130.6,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          600.0,
+          380.0
+        ],
+        [
+          500.0,
+          300.0
+        ]
+      ],
+      "district_connection": "Knowledge and Culture District <-> Student Life District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_library_square",
       "target": "junc_culture_plaza",
-      "distance": 82.4,
-      "distance_m": 82.4,
+      "distance": 81.6,
+      "distance_m": 81.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2760,8 +4097,8 @@
     {
       "source": "junc_library_square",
       "target": "seminar_hall",
-      "distance": 88.0,
-      "distance_m": 88.0,
+      "distance": 87.1,
+      "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2779,10 +4116,115 @@
       "bidirectional": true
     },
     {
+      "source": "digital_library",
+      "target": "junc_digital_concourse",
+      "distance": 61.2,
+      "distance_m": 61.2,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          680.0,
+          480.0
+        ],
+        [
+          740.0,
+          480.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "digital_library",
+      "target": "junc_culture_plaza",
+      "distance": 64.5,
+      "distance_m": 64.5,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          680.0,
+          480.0
+        ],
+        [
+          700.0,
+          420.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "conference_centre",
+      "target": "junc_digital_concourse",
+      "distance": 43.3,
+      "distance_m": 43.3,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          770.0,
+          450.0
+        ],
+        [
+          740.0,
+          480.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "conference_centre",
+      "target": "junc_culture_plaza",
+      "distance": 77.7,
+      "distance_m": 77.7,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          770.0,
+          450.0
+        ],
+        [
+          700.0,
+          420.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_digital_concourse",
+      "target": "junc_auditorium_east",
+      "distance": 104.0,
+      "distance_m": 104.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          740.0,
+          480.0
+        ],
+        [
+          760.0,
+          380.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_culture_plaza",
       "target": "auditorium",
-      "distance": 46.1,
-      "distance_m": 46.1,
+      "distance": 45.6,
+      "distance_m": 45.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -2801,30 +4243,9 @@
     },
     {
       "source": "junc_culture_plaza",
-      "target": "conference_centre",
-      "distance": 78.4,
-      "distance_m": 78.4,
-      "road_type": "avenue",
-      "road_width": 10.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          700.0,
-          420.0
-        ],
-        [
-          770.0,
-          450.0
-        ]
-      ],
-      "district_connection": "Internal Knowledge and Culture District",
-      "bidirectional": true
-    },
-    {
-      "source": "junc_culture_plaza",
       "target": "junc_culture_south",
-      "distance": 84.9,
-      "distance_m": 84.9,
+      "distance": 84.1,
+      "distance_m": 84.1,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2843,9 +4264,30 @@
     },
     {
       "source": "auditorium",
+      "target": "junc_auditorium_east",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          720.0,
+          380.0
+        ],
+        [
+          760.0,
+          380.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "auditorium",
       "target": "seminar_hall",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2865,8 +4307,8 @@
     {
       "source": "auditorium",
       "target": "exhibition_centre",
-      "distance": 83.0,
-      "distance_m": 83.0,
+      "distance": 82.2,
+      "distance_m": 82.2,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2885,9 +4327,30 @@
     },
     {
       "source": "seminar_hall",
+      "target": "junc_exhibition_lane",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          650.0,
+          340.0
+        ],
+        [
+          650.0,
+          300.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "seminar_hall",
       "target": "junc_culture_south",
-      "distance": 31.0,
-      "distance_m": 31.0,
+      "distance": 30.6,
+      "distance_m": 30.6,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2906,9 +4369,30 @@
     },
     {
       "source": "exhibition_centre",
+      "target": "junc_exhibition_lane",
+      "distance": 61.2,
+      "distance_m": 61.2,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          710.0,
+          300.0
+        ],
+        [
+          650.0,
+          300.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "exhibition_centre",
       "target": "junc_culture_south",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -2926,10 +4410,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_exhibition_lane",
+      "target": "bridge_culture_sports",
+      "distance": 146.0,
+      "distance_m": 146.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          650.0,
+          300.0
+        ],
+        [
+          780.0,
+          360.0
+        ]
+      ],
+      "district_connection": "Internal Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_culture_south",
       "target": "junc_central_south",
-      "distance": 189.9,
-      "distance_m": 189.9,
+      "distance": 188.1,
+      "distance_m": 188.1,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -2947,38 +4452,17 @@
       "bidirectional": true
     },
     {
-      "source": "auditorium",
+      "source": "junc_auditorium_east",
       "target": "bridge_culture_sports",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "distance": 28.8,
+      "distance_m": 28.8,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          720.0,
+          760.0,
           380.0
-        ],
-        [
-          780.0,
-          360.0
-        ]
-      ],
-      "district_connection": "Internal Knowledge and Culture District",
-      "bidirectional": true
-    },
-    {
-      "source": "exhibition_centre",
-      "target": "bridge_culture_sports",
-      "distance": 95.0,
-      "distance_m": 95.0,
-      "road_type": "avenue",
-      "road_width": 10.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          710.0,
-          300.0
         ],
         [
           780.0,
@@ -2991,8 +4475,8 @@
     {
       "source": "conference_centre",
       "target": "bridge_culture_sports",
-      "distance": 93.3,
-      "distance_m": 93.3,
+      "distance": 92.4,
+      "distance_m": 92.4,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3012,8 +4496,8 @@
     {
       "source": "bridge_culture_sports",
       "target": "junc_sports_north",
-      "distance": 84.9,
-      "distance_m": 84.9,
+      "distance": 84.1,
+      "distance_m": 84.1,
       "road_type": "bridge",
       "road_width": 14.0,
       "is_walkable": true,
@@ -3032,9 +4516,30 @@
     },
     {
       "source": "bridge_culture_sports",
+      "target": "junc_aquatics_way",
+      "distance": 57.7,
+      "distance_m": 57.7,
+      "road_type": "bridge",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          780.0,
+          360.0
+        ],
+        [
+          820.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Knowledge and Culture District <-> Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "bridge_culture_sports",
       "target": "swimming_pool",
-      "distance": 92.1,
-      "distance_m": 92.1,
+      "distance": 91.2,
+      "distance_m": 91.2,
       "road_type": "bridge",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3054,8 +4559,8 @@
     {
       "source": "bridge_culture_sports",
       "target": "roundabout_stadium",
-      "distance": 160.9,
-      "distance_m": 160.9,
+      "distance": 159.3,
+      "distance_m": 159.3,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3075,8 +4580,8 @@
     {
       "source": "junc_admin_south",
       "target": "medical_centre",
-      "distance": 143.5,
-      "distance_m": 143.5,
+      "distance": 142.1,
+      "distance_m": 142.1,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3094,10 +4599,31 @@
       "bidirectional": true
     },
     {
-      "source": "medical_centre",
+      "source": "junc_admin_south",
       "target": "junc_medical_corner",
-      "distance": 37.1,
-      "distance_m": 37.1,
+      "distance": 138.7,
+      "distance_m": 138.7,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          300.0,
+          320.0
+        ],
+        [
+          190.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Administration District <-> Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "medical_centre",
+      "target": "junc_medical_drive",
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3105,6 +4631,27 @@
         [
           170.0,
           270.0
+        ],
+        [
+          170.0,
+          220.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_medical_drive",
+      "target": "junc_medical_corner",
+      "distance": 28.8,
+      "distance_m": 28.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          170.0,
+          220.0
         ],
         [
           190.0,
@@ -3117,8 +4664,8 @@
     {
       "source": "junc_medical_corner",
       "target": "student_activity_centre",
-      "distance": 72.1,
-      "distance_m": 72.1,
+      "distance": 71.4,
+      "distance_m": 71.4,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3138,8 +4685,8 @@
     {
       "source": "junc_medical_corner",
       "target": "boys_hostel",
-      "distance": 62.7,
-      "distance_m": 62.7,
+      "distance": 62.0,
+      "distance_m": 62.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3158,9 +4705,30 @@
     },
     {
       "source": "boys_hostel",
+      "target": "junc_hostel_alpha_cross",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          200.0,
+          180.0
+        ],
+        [
+          200.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "boys_hostel",
       "target": "junc_hostel_square",
-      "distance": 31.0,
-      "distance_m": 31.0,
+      "distance": 30.6,
+      "distance_m": 30.6,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3179,9 +4747,30 @@
     },
     {
       "source": "girls_hostel",
+      "target": "junc_hostel_alpha_cross",
+      "distance": 54.9,
+      "distance_m": 54.9,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          250.0,
+          120.0
+        ],
+        [
+          200.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "girls_hostel",
       "target": "junc_hostel_square",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "distance": 64.5,
+      "distance_m": 64.5,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3201,8 +4790,8 @@
     {
       "source": "girls_hostel",
       "target": "student_parking",
-      "distance": 66.0,
-      "distance_m": 66.0,
+      "distance": 65.3,
+      "distance_m": 65.3,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3220,10 +4809,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_hostel_alpha_cross",
+      "target": "junc_gym_plaza",
+      "distance": 92.4,
+      "distance_m": 92.4,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          200.0,
+          140.0
+        ],
+        [
+          290.0,
+          150.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_hostel_square",
       "target": "student_centre",
-      "distance": 92.1,
-      "distance_m": 92.1,
+      "distance": 91.2,
+      "distance_m": 91.2,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3243,8 +4853,8 @@
     {
       "source": "junc_hostel_square",
       "target": "roundabout_student_hub",
-      "distance": 135.5,
-      "distance_m": 135.5,
+      "distance": 134.2,
+      "distance_m": 134.2,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3264,8 +4874,8 @@
     {
       "source": "student_activity_centre",
       "target": "student_centre",
-      "distance": 55.5,
-      "distance_m": 55.5,
+      "distance": 54.9,
+      "distance_m": 54.9,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3283,10 +4893,52 @@
       "bidirectional": true
     },
     {
+      "source": "student_activity_centre",
+      "target": "junc_cafeteria_square",
+      "distance": 81.6,
+      "distance_m": 81.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          260.0,
+          240.0
+        ],
+        [
+          340.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "student_centre",
+      "target": "junc_cafeteria_square",
+      "distance": 36.8,
+      "distance_m": 36.8,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          310.0,
+          220.0
+        ],
+        [
+          340.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
       "source": "student_centre",
       "target": "roundabout_student_hub",
-      "distance": 55.5,
-      "distance_m": 55.5,
+      "distance": 54.9,
+      "distance_m": 54.9,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3306,145 +4958,19 @@
     {
       "source": "student_centre",
       "target": "main_cafeteria",
-      "distance": 75.0,
-      "distance_m": 75.0,
-      "road_type": "avenue",
-      "road_width": 10.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          310.0,
-          220.0
-        ],
-        [
-          380.0,
-          240.0
-        ]
-      ],
-      "district_connection": "Internal Student Life District",
-      "bidirectional": true
-    },
-    {
-      "source": "roundabout_student_hub",
-      "target": "gymnasium",
-      "distance": 60.1,
-      "distance_m": 60.1,
-      "road_type": "avenue",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          360.0,
-          200.0
-        ],
-        [
-          330.0,
-          150.0
-        ]
-      ],
-      "district_connection": "Internal Student Life District",
-      "bidirectional": true
-    },
-    {
-      "source": "roundabout_student_hub",
-      "target": "shopping_centre",
-      "distance": 80.4,
-      "distance_m": 80.4,
-      "road_type": "avenue",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          360.0,
-          200.0
-        ],
-        [
-          410.0,
-          140.0
-        ]
-      ],
-      "district_connection": "Internal Student Life District",
-      "bidirectional": true
-    },
-    {
-      "source": "roundabout_student_hub",
-      "target": "main_cafeteria",
-      "distance": 46.1,
-      "distance_m": 46.1,
-      "road_type": "boulevard",
-      "road_width": 12.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          360.0,
-          200.0
-        ],
-        [
-          380.0,
-          240.0
-        ]
-      ],
-      "district_connection": "Internal Student Life District",
-      "bidirectional": true
-    },
-    {
-      "source": "gymnasium",
-      "target": "shopping_centre",
-      "distance": 83.0,
-      "distance_m": 83.0,
-      "road_type": "street",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          330.0,
-          150.0
-        ],
-        [
-          410.0,
-          140.0
-        ]
-      ],
-      "district_connection": "Internal Student Life District",
-      "bidirectional": true
-    },
-    {
-      "source": "gymnasium",
-      "target": "student_parking",
-      "distance": 152.1,
-      "distance_m": 152.1,
-      "road_type": "street",
-      "road_width": 8.0,
-      "is_walkable": true,
-      "road_geometry": [
-        [
-          330.0,
-          150.0
-        ],
-        [
-          200.0,
-          80.0
-        ]
-      ],
-      "district_connection": "Student Life District <-> Transport and Infrastructure District",
-      "bidirectional": true
-    },
-    {
-      "source": "shopping_centre",
-      "target": "food_court",
       "distance": 74.3,
       "distance_m": 74.3,
       "road_type": "avenue",
-      "road_width": 8.0,
+      "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          410.0,
-          140.0
+          310.0,
+          220.0
         ],
         [
-          450.0,
-          200.0
+          380.0,
+          240.0
         ]
       ],
       "district_connection": "Internal Student Life District",
@@ -3452,11 +4978,11 @@
     },
     {
       "source": "main_cafeteria",
-      "target": "food_court",
-      "distance": 83.0,
-      "distance_m": 83.0,
-      "road_type": "avenue",
-      "road_width": 10.0,
+      "target": "junc_cafeteria_square",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3464,7 +4990,28 @@
           240.0
         ],
         [
-          450.0,
+          340.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "main_cafeteria",
+      "target": "roundabout_student_hub",
+      "distance": 45.6,
+      "distance_m": 45.6,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          380.0,
+          240.0
+        ],
+        [
+          360.0,
           200.0
         ]
       ],
@@ -3474,8 +5021,8 @@
     {
       "source": "main_cafeteria",
       "target": "junc_dining_concourse",
-      "distance": 41.2,
-      "distance_m": 41.2,
+      "distance": 40.8,
+      "distance_m": 40.8,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3493,10 +5040,241 @@
       "bidirectional": true
     },
     {
+      "source": "main_cafeteria",
+      "target": "food_court",
+      "distance": 82.2,
+      "distance_m": 82.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          380.0,
+          240.0
+        ],
+        [
+          450.0,
+          200.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_student_hub",
+      "target": "gymnasium",
+      "distance": 59.5,
+      "distance_m": 59.5,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          360.0,
+          200.0
+        ],
+        [
+          330.0,
+          150.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_student_hub",
+      "target": "junc_gym_plaza",
+      "distance": 87.7,
+      "distance_m": 87.7,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          360.0,
+          200.0
+        ],
+        [
+          290.0,
+          150.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_student_hub",
+      "target": "junc_food_court_terrace",
+      "distance": 64.5,
+      "distance_m": 64.5,
+      "road_type": "boulevard",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          360.0,
+          200.0
+        ],
+        [
+          420.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_student_hub",
+      "target": "shopping_centre",
+      "distance": 79.7,
+      "distance_m": 79.7,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          360.0,
+          200.0
+        ],
+        [
+          410.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_gym_plaza",
+      "target": "gymnasium",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          290.0,
+          150.0
+        ],
+        [
+          330.0,
+          150.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "gymnasium",
+      "target": "student_parking",
+      "distance": 150.6,
+      "distance_m": 150.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          330.0,
+          150.0
+        ],
+        [
+          200.0,
+          80.0
+        ]
+      ],
+      "district_connection": "Student Life District <-> Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
+      "source": "gymnasium",
+      "target": "shopping_centre",
+      "distance": 82.2,
+      "distance_m": 82.2,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          330.0,
+          150.0
+        ],
+        [
+          410.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "shopping_centre",
+      "target": "junc_campus_mall_walk",
+      "distance": 51.0,
+      "distance_m": 51.0,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          410.0,
+          140.0
+        ],
+        [
+          460.0,
+          140.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "shopping_centre",
+      "target": "junc_food_court_terrace",
+      "distance": 42.1,
+      "distance_m": 42.1,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          410.0,
+          140.0
+        ],
+        [
+          420.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "food_court",
+      "target": "junc_food_court_terrace",
+      "distance": 36.8,
+      "distance_m": 36.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          450.0,
+          200.0
+        ],
+        [
+          420.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
       "source": "food_court",
       "target": "junc_dining_concourse",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3516,8 +5294,8 @@
     {
       "source": "junc_dining_concourse",
       "target": "junc_central_south",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "distance": 102.0,
+      "distance_m": 102.0,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3535,10 +5313,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_campus_mall_walk",
+      "target": "junc_central_south",
+      "distance": 168.2,
+      "distance_m": 168.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          460.0,
+          140.0
+        ],
+        [
+          500.0,
+          300.0
+        ]
+      ],
+      "district_connection": "Internal Student Life District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_campus_mall_walk",
+      "target": "south_gate",
+      "distance": 159.3,
+      "distance_m": 159.3,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          460.0,
+          140.0
+        ],
+        [
+          580.0,
+          40.0
+        ]
+      ],
+      "district_connection": "Student Life District <-> Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_central_south",
       "target": "south_gate",
-      "distance": 280.2,
-      "distance_m": 280.2,
+      "distance": 277.5,
+      "distance_m": 277.5,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -3556,31 +5376,31 @@
       "bidirectional": true
     },
     {
-      "source": "shopping_centre",
+      "source": "student_parking",
       "target": "south_gate",
-      "distance": 203.1,
-      "distance_m": 203.1,
+      "distance": 389.7,
+      "distance_m": 389.7,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          410.0,
-          140.0
+          200.0,
+          80.0
         ],
         [
           580.0,
           40.0
         ]
       ],
-      "district_connection": "Student Life District <-> Transport and Infrastructure District",
+      "district_connection": "Internal Transport and Infrastructure District",
       "bidirectional": true
     },
     {
       "source": "junc_central_south",
       "target": "badminton_court",
-      "distance": 332.2,
-      "distance_m": 332.2,
+      "distance": 328.9,
+      "distance_m": 328.9,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3599,11 +5419,11 @@
     },
     {
       "source": "junc_central_south",
-      "target": "basketball_court",
-      "distance": 365.0,
-      "distance_m": 365.0,
+      "target": "junc_court_nexus",
+      "distance": 352.2,
+      "distance_m": 352.2,
       "road_type": "avenue",
-      "road_width": 8.0,
+      "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
@@ -3612,17 +5432,80 @@
         ],
         [
           840.0,
-          200.0
+          240.0
         ]
       ],
       "district_connection": "Student Life District <-> Sports District",
       "bidirectional": true
     },
     {
+      "source": "junc_court_nexus",
+      "target": "badminton_court",
+      "distance": 28.8,
+      "distance_m": 28.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          840.0,
+          240.0
+        ],
+        [
+          820.0,
+          260.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_court_nexus",
+      "target": "basketball_court",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          840.0,
+          240.0
+        ],
+        [
+          840.0,
+          200.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_court_nexus",
+      "target": "junc_aquatics_way",
+      "distance": 84.1,
+      "distance_m": 84.1,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          840.0,
+          240.0
+        ],
+        [
+          820.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
       "source": "badminton_court",
       "target": "basketball_court",
-      "distance": 65.1,
-      "distance_m": 65.1,
+      "distance": 64.5,
+      "distance_m": 64.5,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3641,16 +5524,37 @@
     },
     {
       "source": "badminton_court",
-      "target": "swimming_pool",
-      "distance": 74.3,
-      "distance_m": 74.3,
-      "road_type": "avenue",
+      "target": "junc_aquatics_way",
+      "distance": 61.2,
+      "distance_m": 61.2,
+      "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
           820.0,
           260.0
+        ],
+        [
+          820.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_aquatics_way",
+      "target": "swimming_pool",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          820.0,
+          320.0
         ],
         [
           860.0,
@@ -3663,8 +5567,8 @@
     {
       "source": "swimming_pool",
       "target": "sports_complex",
-      "distance": 69.1,
-      "distance_m": 69.1,
+      "distance": 68.4,
+      "distance_m": 68.4,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3684,8 +5588,8 @@
     {
       "source": "swimming_pool",
       "target": "roundabout_stadium",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "distance": 73.6,
+      "distance_m": 73.6,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3705,8 +5609,8 @@
     {
       "source": "sports_complex",
       "target": "junc_sports_north",
-      "distance": 31.0,
-      "distance_m": 31.0,
+      "distance": 30.6,
+      "distance_m": 30.6,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3724,10 +5628,73 @@
       "bidirectional": true
     },
     {
+      "source": "sports_complex",
+      "target": "junc_stadium_north_gate",
+      "distance": 57.7,
+      "distance_m": 57.7,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          890.0,
+          380.0
+        ],
+        [
+          930.0,
+          340.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_sports_north",
+      "target": "junc_stadium_north_gate",
+      "distance": 82.2,
+      "distance_m": 82.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          860.0,
+          380.0
+        ],
+        [
+          930.0,
+          340.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_sports_north",
+      "target": "football_ground",
+      "distance": 183.9,
+      "distance_m": 183.9,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          860.0,
+          380.0
+        ],
+        [
+          1030.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
       "source": "basketball_court",
       "target": "junc_sports_south",
-      "distance": 74.3,
-      "distance_m": 74.3,
+      "distance": 73.6,
+      "distance_m": 73.6,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3746,9 +5713,30 @@
     },
     {
       "source": "junc_sports_south",
+      "target": "junc_stadium_south_gate",
+      "distance": 65.3,
+      "distance_m": 65.3,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          880.0,
+          140.0
+        ],
+        [
+          930.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_sports_south",
       "target": "cricket_ground",
-      "distance": 103.0,
-      "distance_m": 103.0,
+      "distance": 102.0,
+      "distance_m": 102.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3768,8 +5756,8 @@
     {
       "source": "junc_sports_south",
       "target": "south_gate",
-      "distance": 325.7,
-      "distance_m": 325.7,
+      "distance": 322.6,
+      "distance_m": 322.6,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3789,8 +5777,8 @@
     {
       "source": "junc_sports_south",
       "target": "roundabout_stadium",
-      "distance": 125.3,
-      "distance_m": 125.3,
+      "distance": 124.1,
+      "distance_m": 124.1,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3810,8 +5798,8 @@
     {
       "source": "roundabout_stadium",
       "target": "main_stadium",
-      "distance": 31.0,
-      "distance_m": 31.0,
+      "distance": 30.6,
+      "distance_m": 30.6,
       "road_type": "boulevard",
       "road_width": 14.0,
       "is_walkable": true,
@@ -3830,9 +5818,51 @@
     },
     {
       "source": "roundabout_stadium",
+      "target": "junc_stadium_north_gate",
+      "distance": 87.1,
+      "distance_m": 87.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          900.0,
+          260.0
+        ],
+        [
+          930.0,
+          340.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_stadium",
+      "target": "junc_stadium_south_gate",
+      "distance": 87.1,
+      "distance_m": 87.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          900.0,
+          260.0
+        ],
+        [
+          930.0,
+          180.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "roundabout_stadium",
       "target": "cricket_ground",
-      "distance": 148.5,
-      "distance_m": 148.5,
+      "distance": 147.1,
+      "distance_m": 147.1,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3850,10 +5880,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_stadium_north_gate",
+      "target": "main_stadium",
+      "distance": 81.6,
+      "distance_m": 81.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          930.0,
+          340.0
+        ],
+        [
+          930.0,
+          260.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_stadium_south_gate",
+      "target": "main_stadium",
+      "distance": 81.6,
+      "distance_m": 81.6,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          930.0,
+          180.0
+        ],
+        [
+          930.0,
+          260.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
       "source": "main_stadium",
       "target": "football_ground",
-      "distance": 120.1,
-      "distance_m": 120.1,
+      "distance": 119.0,
+      "distance_m": 119.0,
       "road_type": "boulevard",
       "road_width": 12.0,
       "is_walkable": true,
@@ -3873,8 +5945,8 @@
     {
       "source": "main_stadium",
       "target": "junc_sports_east",
-      "distance": 75.0,
-      "distance_m": 75.0,
+      "distance": 74.3,
+      "distance_m": 74.3,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3893,9 +5965,30 @@
     },
     {
       "source": "football_ground",
+      "target": "junc_football_concourse",
+      "distance": 40.8,
+      "distance_m": 40.8,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1030.0,
+          320.0
+        ],
+        [
+          990.0,
+          320.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "football_ground",
       "target": "junc_sports_east",
-      "distance": 88.0,
-      "distance_m": 88.0,
+      "distance": 87.1,
+      "distance_m": 87.1,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3913,10 +6006,52 @@
       "bidirectional": true
     },
     {
+      "source": "junc_football_concourse",
+      "target": "junc_sports_east",
+      "distance": 82.2,
+      "distance_m": 82.2,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          990.0,
+          320.0
+        ],
+        [
+          1000.0,
+          240.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_football_concourse",
+      "target": "junc_fleet_depot",
+      "distance": 143.2,
+      "distance_m": 143.2,
+      "road_type": "street",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          990.0,
+          320.0
+        ],
+        [
+          1000.0,
+          460.0
+        ]
+      ],
+      "district_connection": "Sports District <-> Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "cricket_ground",
       "target": "junc_sports_east",
-      "distance": 105.0,
-      "distance_m": 105.0,
+      "distance": 104.0,
+      "distance_m": 104.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -3934,21 +6069,21 @@
       "bidirectional": true
     },
     {
-      "source": "junc_sports_north",
-      "target": "football_ground",
-      "distance": 185.7,
-      "distance_m": 185.7,
+      "source": "cricket_ground",
+      "target": "junc_ring_southeast",
+      "distance": 91.2,
+      "distance_m": 91.2,
       "road_type": "avenue",
-      "road_width": 8.0,
+      "road_width": 10.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          860.0,
-          380.0
+          980.0,
+          140.0
         ],
         [
-          1030.0,
-          320.0
+          1060.0,
+          100.0
         ]
       ],
       "district_connection": "Internal Sports District",
@@ -3956,9 +6091,51 @@
     },
     {
       "source": "junc_sports_east",
-      "target": "maintenance_centre",
-      "distance": 232.4,
-      "distance_m": 232.4,
+      "target": "junc_ring_southeast",
+      "distance": 155.4,
+      "distance_m": 155.4,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1000.0,
+          240.0
+        ],
+        [
+          1060.0,
+          100.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_sports_south",
+      "target": "junc_ring_southeast",
+      "distance": 188.1,
+      "distance_m": 188.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          880.0,
+          140.0
+        ],
+        [
+          1060.0,
+          100.0
+        ]
+      ],
+      "district_connection": "Internal Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_sports_east",
+      "target": "junc_fleet_depot",
+      "distance": 224.4,
+      "distance_m": 224.4,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -3968,7 +6145,7 @@
           240.0
         ],
         [
-          1050.0,
+          1000.0,
           460.0
         ]
       ],
@@ -3976,31 +6153,31 @@
       "bidirectional": true
     },
     {
-      "source": "football_ground",
+      "source": "junc_fleet_depot",
       "target": "maintenance_centre",
-      "distance": 145.7,
-      "distance_m": 145.7,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
-          1030.0,
-          320.0
+          1000.0,
+          460.0
         ],
         [
           1050.0,
           460.0
         ]
       ],
-      "district_connection": "Sports District <-> Transport and Infrastructure District",
+      "district_connection": "Internal Transport and Infrastructure District",
       "bidirectional": true
     },
     {
       "source": "maintenance_centre",
       "target": "power_station",
-      "distance": 97.7,
-      "distance_m": 97.7,
+      "distance": 96.8,
+      "distance_m": 96.8,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -4020,8 +6197,8 @@
     {
       "source": "maintenance_centre",
       "target": "junc_east_infrastructure",
-      "distance": 51.5,
-      "distance_m": 51.5,
+      "distance": 51.0,
+      "distance_m": 51.0,
       "road_type": "avenue",
       "road_width": 8.0,
       "is_walkable": true,
@@ -4040,15 +6217,36 @@
     },
     {
       "source": "power_station",
-      "target": "junc_east_infrastructure",
-      "distance": 80.4,
-      "distance_m": 80.4,
-      "road_type": "avenue",
+      "target": "junc_substation_access",
+      "distance": 30.6,
+      "distance_m": 30.6,
+      "road_type": "street",
       "road_width": 8.0,
       "is_walkable": true,
       "road_geometry": [
         [
           1080.0,
+          550.0
+        ],
+        [
+          1050.0,
+          550.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_substation_access",
+      "target": "junc_east_infrastructure",
+      "distance": 59.5,
+      "distance_m": 59.5,
+      "road_type": "avenue",
+      "road_width": 8.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1050.0,
           550.0
         ],
         [
@@ -4060,10 +6258,31 @@
       "bidirectional": true
     },
     {
+      "source": "junc_substation_access",
+      "target": "junc_ring_east",
+      "distance": 136.1,
+      "distance_m": 136.1,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1050.0,
+          550.0
+        ],
+        [
+          1080.0,
+          680.0
+        ]
+      ],
+      "district_connection": "Internal Transport and Infrastructure District",
+      "bidirectional": true
+    },
+    {
       "source": "junc_east_infrastructure",
       "target": "civil_block",
-      "distance": 221.9,
-      "distance_m": 221.9,
+      "distance": 219.7,
+      "distance_m": 219.7,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -4083,8 +6302,8 @@
     {
       "source": "junc_east_infrastructure",
       "target": "conference_centre",
-      "distance": 262.6,
-      "distance_m": 262.6,
+      "distance": 260.0,
+      "distance_m": 260.0,
       "road_type": "avenue",
       "road_width": 10.0,
       "is_walkable": true,
@@ -4099,6 +6318,69 @@
         ]
       ],
       "district_connection": "Transport and Infrastructure District <-> Knowledge and Culture District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ring_east",
+      "target": "junc_ring_northeast",
+      "distance": 266.0,
+      "distance_m": 266.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1080.0,
+          680.0
+        ],
+        [
+          860.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Transport and Infrastructure District <-> Academic District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ring_east",
+      "target": "junc_ring_southeast",
+      "distance": 592.0,
+      "distance_m": 592.0,
+      "road_type": "avenue",
+      "road_width": 10.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          1080.0,
+          680.0
+        ],
+        [
+          1060.0,
+          100.0
+        ]
+      ],
+      "district_connection": "Transport and Infrastructure District <-> Sports District",
+      "bidirectional": true
+    },
+    {
+      "source": "junc_ring_northwest",
+      "target": "junc_ring_north",
+      "distance": 303.3,
+      "distance_m": 303.3,
+      "road_type": "boulevard",
+      "road_width": 12.0,
+      "is_walkable": true,
+      "road_geometry": [
+        [
+          140.0,
+          720.0
+        ],
+        [
+          420.0,
+          820.0
+        ]
+      ],
+      "district_connection": "Transport and Infrastructure District <-> Academic District",
       "bidirectional": true
     }
   ]

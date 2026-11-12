@@ -108,31 +108,36 @@ export class BuildingFactory {
       this.buildGenericBuilding(group, node);
     }
 
-    // 3D Floating Title Sprite
-    const h = (node.building_height || 20) * 0.45;
-    const labelSprite = this.createFloatingLabel(node.name, type, district);
-    labelSprite.position.set(0, h + 3.5, 0);
-    group.add(labelSprite);
+    // 3D Floating Title Sprite (Show for Landmark Buildings and Roundabouts)
+    const isRoundabout = (node.name || '').toLowerCase().includes('roundabout');
+    if (type !== 'junction' || isRoundabout) {
+      const h = isRoundabout ? 3.5 : (node.building_height || 20) * 0.45;
+      const labelSprite = this.createFloatingLabel(node.name, type, district);
+      labelSprite.position.set(0, h + 3.8, 0);
+      group.add(labelSprite);
+    }
 
-    // Base Selection Ring
-    const ringRadius = Math.max((node.building_width || 25) * 0.28, 4.0);
-    const ringGeo = new THREE.RingGeometry(ringRadius, ringRadius + 1.2, 32);
-    ringGeo.rotateX(-Math.PI / 2);
-    const ringColor =
-      type === 'start_office'
-        ? 0x22c55e
-        : type === 'destination'
-        ? 0x06b6d4
-        : 0x94a3b8;
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: ringColor,
-      transparent: true,
-      opacity: 0.4,
-      side: THREE.DoubleSide,
-    });
-    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-    ringMesh.position.y = 0.05;
-    group.add(ringMesh);
+    // Base Selection Ring (for Landmark buildings)
+    if (type !== 'junction') {
+      const ringRadius = Math.max((node.building_width || 25) * 0.28, 4.0);
+      const ringGeo = new THREE.RingGeometry(ringRadius, ringRadius + 1.2, 32);
+      ringGeo.rotateX(-Math.PI / 2);
+      const ringColor =
+        type === 'start_office'
+          ? 0x22c55e
+          : type === 'destination'
+          ? 0x06b6d4
+          : 0x94a3b8;
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: ringColor,
+        transparent: true,
+        opacity: 0.4,
+        side: THREE.DoubleSide,
+      });
+      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+      ringMesh.position.y = 0.05;
+      group.add(ringMesh);
+    }
 
     return group;
   }

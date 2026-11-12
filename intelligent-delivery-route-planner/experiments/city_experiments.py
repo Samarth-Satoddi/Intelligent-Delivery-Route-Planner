@@ -149,3 +149,4 @@ if __name__ == "__main__":
     print(f"Suboptimal GBFS scenarios: {(df['Excess Cost (%)'] > 0.0).sum()}")
     print("All A* routes matched Dijkstra optimality with 0.00m error.")
     print("=" * 80)
+

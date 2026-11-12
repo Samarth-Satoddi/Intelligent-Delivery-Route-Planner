@@ -176,3 +176,4 @@ def validate_graph_integrity(graph: CampusGraph) -> Dict[str, Any]:
             "path_diversity_total_checked": len(diversity_results),
         },
     }
+
