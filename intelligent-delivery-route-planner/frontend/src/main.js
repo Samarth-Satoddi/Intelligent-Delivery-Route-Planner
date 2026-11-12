@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 9. Initialize Session and Default Map
   await auth.initSession();
-  await plannerController.loadMap('campus_map');
+  await plannerController.loadMap('smart_city_map');
 
-  console.log('Intelligent Delivery Route Planner 3D initialized successfully.');
+  console.log('City-Scale Smart Campus Delivery Navigator 3D initialized successfully.');
 });

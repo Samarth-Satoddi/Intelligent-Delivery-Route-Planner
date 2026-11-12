@@ -58,16 +58,28 @@ class CampusGraph:
                 y=float(node["y"]),
                 node_type=node.get("type", "junction"),
                 description=node.get("description", ""),
+                district=node.get("district", "General Campus"),
+                z=float(node.get("z", 0.0)),
+                building_width=float(node.get("building_width", 25.0)),
+                building_depth=float(node.get("building_depth", 25.0)),
+                building_height=float(node.get("building_height", 20.0)),
+                navigation_category=node.get("navigation_category", node.get("type", "junction")),
             )
 
         # Add edges
         for edge in data.get("edges", []):
+            dist = float(edge.get("distance_m", edge.get("distance", 1.0)))
             graph.add_edge(
                 u=edge["source"],
                 v=edge["target"],
-                weight=float(edge["distance"]),
+                weight=dist,
                 bidirectional=edge.get("bidirectional", True),
-                path_type=edge.get("path_type", "walkway"),
+                path_type=edge.get("path_type", edge.get("road_type", "walkway")),
+                road_type=edge.get("road_type", edge.get("path_type", "walkway")),
+                road_width=float(edge.get("road_width", 8.0)),
+                is_walkable=edge.get("is_walkable", True),
+                road_geometry=edge.get("road_geometry"),
+                district_connection=edge.get("district_connection", ""),
             )
 
         return graph
@@ -81,8 +93,14 @@ class CampusGraph:
                 "name": info["name"],
                 "x": info["x"],
                 "y": info["y"],
+                "z": info.get("z", 0.0),
                 "type": info["type"],
                 "description": info.get("description", ""),
+                "district": info.get("district", "General Campus"),
+                "building_width": info.get("building_width", 25.0),
+                "building_depth": info.get("building_depth", 25.0),
+                "building_height": info.get("building_height", 20.0),
+                "navigation_category": info.get("navigation_category", info["type"]),
             })
 
         return {
@@ -106,6 +124,12 @@ class CampusGraph:
         y: float,
         node_type: str = "junction",
         description: str = "",
+        district: str = "General Campus",
+        z: float = 0.0,
+        building_width: float = 25.0,
+        building_depth: float = 25.0,
+        building_height: float = 20.0,
+        navigation_category: str = "",
     ) -> None:
         """Add a node representing a campus building or junction."""
         self.nodes[node_id] = {
@@ -113,8 +137,14 @@ class CampusGraph:
             "name": name,
             "x": float(x),
             "y": float(y),
+            "z": float(z),
             "type": node_type,
             "description": description,
+            "district": district,
+            "building_width": float(building_width),
+            "building_depth": float(building_depth),
+            "building_height": float(building_height),
+            "navigation_category": navigation_category or node_type,
         }
         if node_id not in self.adjacency:
             self.adjacency[node_id] = []
@@ -127,6 +157,11 @@ class CampusGraph:
         weight: float,
         bidirectional: bool = True,
         path_type: str = "walkway",
+        road_type: str = "street",
+        road_width: float = 8.0,
+        is_walkable: bool = True,
+        road_geometry: Optional[List[List[float]]] = None,
+        district_connection: str = "",
     ) -> None:
         """Add a weighted edge between two nodes."""
         if u not in self.nodes:
@@ -144,12 +179,24 @@ class CampusGraph:
             self.adjacency[v] = [item for item in self.adjacency[v] if item[0] != u]
             self.adjacency[v].append((u, weight))
 
+        if road_geometry is None:
+            road_geometry = [
+                [self.nodes[u]["x"], self.nodes[u]["y"]],
+                [self.nodes[v]["x"], self.nodes[v]["y"]],
+            ]
+
         self.edges_list.append({
             "source": u,
             "target": v,
             "distance": weight,
+            "distance_m": weight,
             "bidirectional": bidirectional,
             "path_type": path_type,
+            "road_type": road_type,
+            "road_width": float(road_width),
+            "is_walkable": bool(is_walkable),
+            "road_geometry": road_geometry,
+            "district_connection": district_connection,
         })
 
     def get_neighbors(self, node_id: str) -> List[Tuple[str, float]]:
@@ -175,6 +222,20 @@ class CampusGraph:
     def get_node_type(self, node_id: str) -> str:
         """Return node type ('start_office', 'destination', 'junction', etc.)."""
         return self.nodes.get(node_id, {}).get("type", "junction")
+
+    def get_node_district(self, node_id: str) -> str:
+        """Return district name for a node."""
+        return self.nodes.get(node_id, {}).get("district", "General Campus")
+
+    def get_districts(self) -> List[str]:
+        """Return unique list of all districts represented in the graph."""
+        if "districts" in self.metadata and self.metadata["districts"]:
+            return list(self.metadata["districts"])
+        districts = set()
+        for info in self.nodes.values():
+            if "district" in info:
+                districts.add(info["district"])
+        return sorted(list(districts))
 
     def get_start_node(self) -> str:
         """Return the default starting node ID (typically 'central_office')."""

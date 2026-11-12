@@ -1,5 +1,6 @@
 /**
- * Benchmark Laboratory Controller: Runs automated experiments across all 3 map topologies.
+ * Benchmark Laboratory Controller: Runs automated experiments across all city
+ * districts and legacy campus benchmarks with CSV export.
  */
 import { api } from '../api/client.js';
 
@@ -8,28 +9,57 @@ export class BenchmarkController {
     this.tableBody = document.getElementById('benchmarkTableBody');
     this.btnRun = document.getElementById('btnRerunBenchmarks');
     this.btnExport = document.getElementById('btnExportBenchmarks');
+    this.tabCity = document.getElementById('tabBenchCity');
+    this.tabStandard = document.getElementById('tabBenchStandard');
+
     this.benchmarkData = [];
+    this.currentMode = 'city'; // 'city' or 'standard'
 
     this.bindEvents();
   }
 
   bindEvents() {
-    this.btnRun.addEventListener('click', () => this.runBenchmarks());
-    this.btnExport.addEventListener('click', () => this.exportCSV());
+    if (this.btnRun) {
+      this.btnRun.addEventListener('click', () => this.runBenchmarks());
+    }
+    if (this.btnExport) {
+      this.btnExport.addEventListener('click', () => this.exportCSV());
+    }
+
+    if (this.tabCity && this.tabStandard) {
+      this.tabCity.addEventListener('click', () => {
+        this.tabCity.classList.add('active');
+        this.tabStandard.classList.remove('active');
+        this.currentMode = 'city';
+        this.runBenchmarks();
+      });
+
+      this.tabStandard.addEventListener('click', () => {
+        this.tabStandard.classList.add('active');
+        this.tabCity.classList.remove('active');
+        this.currentMode = 'standard';
+        this.runBenchmarks();
+      });
+    }
   }
 
   async runBenchmarks() {
-    this.btnRun.innerText = 'Running Experimental Benchmarks...';
-    this.btnRun.disabled = true;
+    if (!this.tableBody) return;
+
+    if (this.btnRun) {
+      this.btnRun.innerText = 'Executing Benchmarks...';
+      this.btnRun.disabled = true;
+    }
 
     this.tableBody.innerHTML = `
       <tr><td colspan="10" style="text-align:center; padding:30px; color:var(--text-muted);">
-        Executing classical AI search algorithms across all campus configurations...
+        Executing classical AI search algorithms across ${this.currentMode === 'city' ? 'all 6 smart city districts (32 experiments)' : 'standard demonstration maps'}...
       </td></tr>
     `;
 
     try {
-      this.benchmarkData = await api.getBenchmarks();
+      const modeParam = this.currentMode === 'city' ? 'smart_city_map' : 'standard';
+      this.benchmarkData = await fetch(`/api/benchmarks?map_id=${modeParam}`).then((r) => r.json());
       this.renderTable();
     } catch (err) {
       this.tableBody.innerHTML = `
@@ -38,29 +68,37 @@ export class BenchmarkController {
         </td></tr>
       `;
     } finally {
-      this.btnRun.innerText = '⚡ Re-run Full Benchmark Suite';
-      this.btnRun.disabled = false;
+      if (this.btnRun) {
+        this.btnRun.innerText = '⚡ Re-run Full Suite';
+        this.btnRun.disabled = false;
+      }
     }
   }
 
   renderTable() {
+    if (!this.tableBody) return;
     this.tableBody.innerHTML = '';
 
     this.benchmarkData.forEach((row) => {
       const tr = document.createElement('tr');
-      const isOptimal = row['Excess Cost (%)'] === 0;
+      const excess = row['Excess Cost (%)'] || 0;
+      const isOptimal = excess === 0;
+
+      const colMap = row['Scenario'] || row['Test Map'] || 'Experiment';
+      const colStart = row['Origin'] || row['Starting Node'] || '';
+      const colGoal = row['Destination'] || row['Goal Node'] || '';
 
       tr.innerHTML = `
-        <td><b>${row['Test Map']}</b></td>
-        <td>${row['Starting Node']}</td>
-        <td>${row['Goal Node']}</td>
+        <td><b>${colMap}</b></td>
+        <td>${colStart}</td>
+        <td>${colGoal}</td>
         <td class="monospace" style="color:var(--orange-gbfs);">${row['GBFS Cost (m)']}m</td>
         <td class="monospace" style="color:var(--cyan-glow); font-weight:700;">${row['A* Cost (m)']}m</td>
         <td class="monospace">${row['Dijkstra Cost (m)']}m</td>
-        <td class="monospace">${row['GBFS Expanded Nodes']}</td>
-        <td class="monospace">${row['A* Expanded Nodes']}</td>
+        <td class="monospace">${row['GBFS Expanded'] || row['GBFS Expanded Nodes']}</td>
+        <td class="monospace">${row['A* Expanded'] || row['A* Expanded Nodes']}</td>
         <td class="monospace" style="color:${isOptimal ? '#22c55e' : '#ef4444'}; font-weight:700;">
-          ${row['Excess Cost (%)']}%
+          ${excess}%
         </td>
         <td>
           <span class="role-tag ${isOptimal ? 'user' : 'admin'}">
@@ -82,7 +120,7 @@ export class BenchmarkController {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'campus_delivery_benchmarks.csv';
+    a.download = `smart_city_${this.currentMode}_benchmarks.csv`;
     a.click();
   }
 }

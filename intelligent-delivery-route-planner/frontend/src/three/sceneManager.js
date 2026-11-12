@@ -168,6 +168,21 @@ export class SceneManager {
     this.targetCamPos = wp.clone().add(new THREE.Vector3(50, 65, 80));
   }
 
+  focusOnDistrict(districtName) {
+    let count = 0;
+    const center = new THREE.Vector3(0, 0, 0);
+    this.campusBuilder.nodeMap.forEach((entry) => {
+      if (entry.node?.district === districtName) {
+        center.add(entry.worldPos);
+        count++;
+      }
+    });
+    if (count === 0) return;
+    center.divideScalar(count);
+    this.targetLookAt = center.clone();
+    this.targetCamPos = center.clone().add(new THREE.Vector3(80, 110, 120));
+  }
+
   setCameraPreset(type) {
     switch (type) {
       case 'isometric':

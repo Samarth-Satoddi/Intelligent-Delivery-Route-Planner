@@ -61,10 +61,16 @@ export class NavManager {
       }
     });
 
-    // Camera presets
+    // Camera presets and District Quick Jumps
     this.camBtns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
-        this.sceneManager.setCameraPreset(e.target.dataset.preset);
+        const preset = e.currentTarget.dataset.preset;
+        const district = e.currentTarget.dataset.district;
+        if (preset) {
+          this.sceneManager.setCameraPreset(preset);
+        } else if (district) {
+          this.sceneManager.focusOnDistrict(district);
+        }
       });
     });
 

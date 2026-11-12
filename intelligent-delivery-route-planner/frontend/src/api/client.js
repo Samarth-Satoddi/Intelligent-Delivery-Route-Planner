@@ -37,9 +37,11 @@ async function request(endpoint, options = {}) {
 }
 
 export const api = {
-  // Campus Maps
+  // Campus Maps & City Intelligence
   getMaps: () => request('/api/maps'),
   getMapData: (mapId) => request(`/api/map/${mapId}`),
+  getStatistics: (mapId) => request(`/api/graph/${mapId}/statistics`),
+  getDistricts: (mapId) => request(`/api/districts/${mapId}`),
   getHeuristics: (mapId, goalNode) =>
     request(`/api/heuristics?map_id=${encodeURIComponent(mapId)}&goal_node=${encodeURIComponent(goalNode)}`),
 

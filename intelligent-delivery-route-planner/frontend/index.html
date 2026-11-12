@@ -42,6 +42,7 @@
 
     <div class="header-right">
       <select id="mapSelect" class="map-selector">
+        <option value="smart_city_map" selected>🏙️ Smart Campus City (51 Landmarks, 6 Districts)</option>
         <option value="campus_map">1. Normal Campus Map (15 Nodes)</option>
         <option value="alternative_paths_map">2. Alternative Detour Map</option>
         <option value="misleading_map">3. Misleading Heuristic Trap Map</option>
@@ -59,6 +60,25 @@
     <div class="dock-header">
       <span class="dock-title">Autonomous Dispatch</span>
       <span style="font-size: 0.75rem; color: var(--cyan-glow); font-weight: 600;">FastAPI AI Core</span>
+    </div>
+
+    <!-- District Filter & Search -->
+    <div class="input-group">
+      <label class="input-label" for="districtFilterSelect">District Filter</label>
+      <select id="districtFilterSelect" class="select-custom">
+        <option value="ALL">🌐 All Districts (51 Locations)</option>
+        <option value="Administration District">🏛️ Administration District</option>
+        <option value="Academic District">🔬 Academic District</option>
+        <option value="Knowledge and Culture District">📚 Knowledge & Culture</option>
+        <option value="Student Life District">☕ Student Life District</option>
+        <option value="Sports District">⚽ Sports District</option>
+        <option value="Transport and Infrastructure District">🚌 Transport & Infrastructure</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label" for="buildingSearchInput">Quick Facility Search</label>
+      <input type="text" id="buildingSearchInput" class="select-custom" placeholder="🔍 Search facility or location...">
     </div>
 
     <!-- Start Location Selection -->
@@ -112,6 +132,15 @@
       </div>
     </div>
 
+    <!-- Multiple Alternative Routes (Yen's Algorithm) -->
+    <div id="alternativeRoutesCard" style="display: none; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 12px; margin-top: 10px;">
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--cyan-glow); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+        <span>🔀 MULTIPLE ROUTE OPTIONS</span>
+        <span style="font-size: 0.65rem; color: var(--text-dim);">Yen's Algorithm</span>
+      </div>
+      <div id="alternativeRoutesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+    </div>
+
     <!-- 3D Autonomous Courier Robot Transport Controls -->
     <div class="robot-transport" id="robotTransport" style="display: none;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -139,11 +168,17 @@
   </aside>
 
   <!-- Camera HUD Preset Dock (Bottom Right) -->
-  <div class="camera-dock">
+  <div class="camera-dock" style="flex-wrap: wrap; max-width: 520px;">
     <button class="cam-btn" data-preset="isometric">📐 Isometric</button>
     <button class="cam-btn" data-preset="topdown">🗺️ Top-Down</button>
     <button class="cam-btn" data-preset="front">👁️ Front</button>
     <button class="cam-btn" data-preset="reset">↺ Cinematic</button>
+    <button class="cam-btn" data-district="Administration District">🏛️ Admin</button>
+    <button class="cam-btn" data-district="Academic District">🔬 Academic</button>
+    <button class="cam-btn" data-district="Knowledge and Culture District">📚 Culture</button>
+    <button class="cam-btn" data-district="Student Life District">☕ Student</button>
+    <button class="cam-btn" data-district="Sports District">⚽ Sports</button>
+    <button class="cam-btn" data-district="Transport and Infrastructure District">🚌 Transit</button>
   </div>
 
   <!-- Building Inspection Tooltip (Hover / Click) -->
@@ -217,12 +252,13 @@
         <h3 style="font-size: 1.15rem; color:#fff;">🧪 Automated Experimental Laboratory</h3>
         <button class="close-btn">&times;</button>
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <p style="font-size:0.85rem; color:var(--text-muted);">
-          Rigorous benchmarking across Normal Campus Map, Alternative Detour Map, and the Section 8 Misleading Heuristic Trap Map.
-        </p>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div class="algo-tabs" style="grid-template-columns: auto auto; gap:8px;">
+          <button class="algo-tab active" id="tabBenchCity">🏙️ Smart City (32 Scenarios)</button>
+          <button class="algo-tab" id="tabBenchStandard">📋 Standard Maps</button>
+        </div>
         <div style="display:flex; gap:8px;">
-          <button class="btn-primary" id="btnRerunBenchmarks" style="padding:6px 14px; font-size:0.8rem;">⚡ Re-run All Benchmarks</button>
+          <button class="btn-primary" id="btnRerunBenchmarks" style="padding:6px 14px; font-size:0.8rem;">⚡ Re-run Full Suite</button>
           <button class="transport-btn" id="btnExportBenchmarks">📥 Export CSV</button>
         </div>
       </div>

@@ -26,7 +26,10 @@ from core.graph import CampusGraph
 from algorithms.greedy import greedy_best_first_search
 from algorithms.astar import astar_search
 from algorithms.dijkstra import dijkstra_search
+from algorithms.yen_ksp import yen_k_shortest_paths
+from core.graph_validator import validate_graph_integrity
 from experiments.run_experiments import run_benchmark_experiments, compare_algorithms
+from experiments.city_experiments import run_city_benchmark_experiments
 from utils.export import search_results_to_dict
 
 from database.connection import Base, engine, get_db
@@ -57,6 +60,12 @@ app.include_router(auth_router)
 
 DATA_DIR = PROJECT_ROOT / "data"
 MAP_REGISTRY = {
+    "smart_city_map": {
+        "id": "smart_city_map",
+        "name": "Smart Campus City (51 Landmarks, 6 Districts)",
+        "path": DATA_DIR / "smart_city_map.json",
+        "description": "Large-scale smart campus city across 6 districts with 51 named buildings and 28 junctions.",
+    },
     "campus_map": {
         "id": "campus_map",
         "name": "1. Normal Demonstration Campus Map",
@@ -91,7 +100,7 @@ def get_graph(map_id: str) -> CampusGraph:
 
 
 class RouteRequest(BaseModel):
-    map_id: str = "campus_map"
+    map_id: str = "smart_city_map"
     start_node: str
     goal_node: str
     algorithm: str = "both"  # "gbfs", "astar", "both", "dijkstra"
@@ -185,6 +194,11 @@ def compute_route(
         response["dijkstra"] = search_results_to_dict(dijk_res)
         response["dijkstra"]["search_trace"] = dijk_res.trace_as_dicts()
 
+    # Always provide Dijkstra reference and Yen's K-Shortest Alternative Routes
+    dijk_res = dijkstra_search(graph, req.start_node, req.goal_node)
+    response["dijkstra"] = search_results_to_dict(dijk_res)
+    response["alternative_routes"] = yen_k_shortest_paths(graph, req.start_node, req.goal_node, K=3)
+
     # Comparative analytics
     gbfs_cost = gbfs_res.total_cost if (gbfs_res and gbfs_res.success) else None
     astar_cost = astar_res.total_cost if (astar_res and astar_res.success) else None
@@ -223,10 +237,49 @@ def compute_route(
 
 
 @app.get("/api/benchmarks")
-def get_benchmarks() -> List[Dict[str, Any]]:
-    """Execute complete benchmark suite across all maps and return comparative records."""
-    df = run_benchmark_experiments(DATA_DIR)
-    return df.to_dict(orient="records")
+def get_benchmarks(map_id: Optional[str] = Query("all")) -> List[Dict[str, Any]]:
+    """Execute complete benchmark suite and return comparative records."""
+    if map_id == "smart_city_map":
+        df = run_city_benchmark_experiments(DATA_DIR / "smart_city_map.json")
+        return df.to_dict(orient="records")
+    
+    # Original benchmarks
+    df_std = run_benchmark_experiments(DATA_DIR)
+    if map_id == "standard":
+        return df_std.to_dict(orient="records")
+
+    # "all": return comprehensive records
+    try:
+        df_city = run_city_benchmark_experiments(DATA_DIR / "smart_city_map.json")
+        return df_city.to_dict(orient="records") + df_std.to_dict(orient="records")
+    except Exception:
+        return df_std.to_dict(orient="records")
+
+
+@app.get("/api/graph/{map_id}/statistics")
+def get_graph_statistics(map_id: str) -> Dict[str, Any]:
+    """Return topological and geometric validation report for the specified map."""
+    graph = get_graph(map_id)
+    return validate_graph_integrity(graph)
+
+
+@app.get("/api/districts/{map_id}")
+def get_districts(map_id: str) -> Dict[str, Any]:
+    """Return districts and their categorized nodes."""
+    graph = get_graph(map_id)
+    districts: Dict[str, List[Dict[str, Any]]] = {}
+    for nid, info in graph.nodes.items():
+        d = info.get("district", "General Campus")
+        if d not in districts:
+            districts[d] = []
+        districts[d].append({
+            "id": nid,
+            "name": info["name"],
+            "type": info["type"],
+            "coordinates": {"x": info["x"], "y": info["y"], "z": info.get("z", 0.0)},
+            "description": info.get("description", ""),
+        })
+    return {"map_id": map_id, "districts": districts}
 
 
 # --- Administrative Endpoints (Protected by require_admin) ---

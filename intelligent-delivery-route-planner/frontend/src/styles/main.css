@@ -500,3 +500,55 @@ tr:hover td {
 .monospace {
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* Multiple Alternative Route Option Cards (Yen's K-Shortest Paths) */
+.alt-route-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.alt-route-card:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+.alt-route-card.active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+}
+
+.alt-route-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alt-route-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.alt-route-metrics {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.alt-route-districts {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

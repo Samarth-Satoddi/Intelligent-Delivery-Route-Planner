@@ -1,5 +1,6 @@
 /**
- * Campus Builder: constructs roads, buildings, trees, and ground planes based on graph data.
+ * City-Scale Campus Builder: constructs dynamic road ribbons, district zones,
+ * instanced foliage, street lights, and 3D buildings.
  */
 import * as THREE from 'three';
 import { BuildingFactory } from './buildingFactory.js';
@@ -17,10 +18,10 @@ export class CampusBuilder {
     this.scene.add(this.buildingGroup);
     this.scene.add(this.envGroup);
 
-    // Coordinate conversion settings
-    this.scale = 0.55;
-    this.centerX = 350;
-    this.centerY = 280;
+    // Coordinate conversion defaults
+    this.scale = 0.38;
+    this.centerX = 550;
+    this.centerY = 440;
   }
 
   clear() {
@@ -44,18 +45,35 @@ export class CampusBuilder {
     const nodes = graphData.nodes || [];
     const edges = graphData.edges || [];
 
-    // Calculate center offset dynamically
+    // Calculate dynamic center and scale from graph bounds
     if (nodes.length > 0) {
-      const avgX = nodes.reduce((sum, n) => sum + n.x, 0) / nodes.length;
-      const avgY = nodes.reduce((sum, n) => sum + n.y, 0) / nodes.length;
-      this.centerX = avgX;
-      this.centerY = avgY;
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      nodes.forEach((n) => {
+        if (n.x < minX) minX = n.x;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.y > maxY) maxY = n.y;
+      });
+
+      this.centerX = (minX + maxX) / 2;
+      this.centerY = (minY + maxY) / 2;
+
+      const spanX = maxX - minX;
+      const spanY = maxY - minY;
+      const maxSpan = Math.max(spanX, spanY, 300);
+
+      // Fit city scale smoothly into 3D view
+      if (maxSpan > 600) {
+        this.scale = 420.0 / maxSpan; // City scale (~0.38)
+      } else {
+        this.scale = 0.55; // Classic campus scale
+      }
     }
 
-    // 1. Build Ground and Plazas
-    this.buildGroundPlate();
+    // 1. Build Base Ground Plate & Zoned District Plates
+    this.buildGroundPlates(nodes);
 
-    // 2. Build Roads between Connected Nodes
+    // 2. Build 3D Road Network with Real Widths & Types
     this.buildRoadNetwork(nodes, edges);
 
     // 3. Build 3D Buildings & Junctions
@@ -71,13 +89,16 @@ export class CampusBuilder {
       });
     });
 
-    // 4. Scatter Campus Trees
-    this.scatterTrees(nodes);
+    // 4. Instanced Foliage & Trees (High performance, 1 draw call)
+    this.buildInstancedTrees(nodes);
+
+    // 5. Instanced Street Lamps along Road Arterials
+    this.buildInstancedStreetLamps(nodes, edges);
   }
 
-  buildGroundPlate() {
-    // Vast campus lawn ground plane
-    const groundGeo = new THREE.PlaneGeometry(800, 800);
+  buildGroundPlates(nodes) {
+    // Vast city terrain base
+    const groundGeo = new THREE.PlaneGeometry(1400, 1400);
     groundGeo.rotateX(-Math.PI / 2);
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0x090d16,
@@ -86,25 +107,58 @@ export class CampusBuilder {
     });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.receiveShadow = true;
-    ground.position.y = -0.05;
+    ground.position.y = -0.1;
     this.envGroup.add(ground);
 
-    // Inner paved district plate
-    const districtGeo = new THREE.PlaneGeometry(420, 360);
-    districtGeo.rotateX(-Math.PI / 2);
-    const districtMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      roughness: 0.8,
-      metalness: 0.2,
-    });
-    const district = new THREE.Mesh(districtGeo, districtMat);
-    district.receiveShadow = true;
-    district.position.y = 0.01;
-    this.envGroup.add(district);
+    // District color tint ground polygons
+    const districtColors = {
+      'Administration District': 0x0f172a,
+      'Academic District': 0x0e2a38,
+      'Knowledge and Culture District': 0x171836,
+      'Student Life District': 0x241b18,
+      'Sports District': 0x0e261d,
+      'Transport and Infrastructure District': 0x1c1917,
+    };
 
-    // Subtle grid overlay
-    const grid = new THREE.GridHelper(500, 50, 0x1e293b, 0x111827);
-    grid.position.y = 0.02;
+    // Calculate district bounding polygons
+    const districtNodes = {};
+    nodes.forEach((n) => {
+      const d = n.district || 'General Campus';
+      if (!districtNodes[d]) districtNodes[d] = [];
+      districtNodes[d].push(this.graphToWorld(n.x, n.y));
+    });
+
+    Object.entries(districtNodes).forEach(([district, pts]) => {
+      if (pts.length < 3) return;
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      pts.forEach((p) => {
+        if (p.x < minX) minX = p.x;
+        if (p.x > maxX) maxX = p.x;
+        if (p.z < minZ) minZ = p.z;
+        if (p.z > maxZ) maxZ = p.z;
+      });
+
+      const width = (maxX - minX) + 30;
+      const depth = (maxZ - minZ) + 30;
+      const centerX = (minX + maxX) / 2;
+      const centerZ = (minZ + maxZ) / 2;
+
+      const plateGeo = new THREE.PlaneGeometry(width, depth);
+      plateGeo.rotateX(-Math.PI / 2);
+      const plateMat = new THREE.MeshStandardMaterial({
+        color: districtColors[district] || 0x111827,
+        roughness: 0.85,
+        metalness: 0.15,
+      });
+      const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.position.set(centerX, 0.02, centerZ);
+      plate.receiveShadow = true;
+      this.envGroup.add(plate);
+    });
+
+    // Subtle modern grid overlay
+    const grid = new THREE.GridHelper(900, 90, 0x1e293b, 0x0f172a);
+    grid.position.y = 0.03;
     this.envGroup.add(grid);
   }
 
@@ -116,15 +170,23 @@ export class CampusBuilder {
 
     const roadMat = new THREE.MeshStandardMaterial({
       color: 0x1e293b,
-      roughness: 0.7,
-      metalness: 0.2,
+      roughness: 0.65,
+      metalness: 0.25,
+    });
+
+    const bridgeMat = new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.4,
+      metalness: 0.6,
     });
 
     const curbMat = new THREE.MeshStandardMaterial({
       color: 0x334155,
       roughness: 0.5,
-      metalness: 0.4,
+      metalness: 0.3,
     });
+
+    const dividerMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
 
     edges.forEach((edge) => {
       const p1 = nodeCoords.get(edge.source);
@@ -137,21 +199,42 @@ export class CampusBuilder {
       const dir = new THREE.Vector3().subVectors(v2, v1);
       const length = dir.length();
       const angle = Math.atan2(dir.x, dir.z);
-
-      // Paved Road Segment
-      const roadGeo = new THREE.PlaneGeometry(4.5, length);
-      roadGeo.rotateX(-Math.PI / 2);
-      const roadMesh = new THREE.Mesh(roadGeo, roadMat);
-      roadMesh.receiveShadow = true;
-
       const mid = new THREE.Vector3().addVectors(v1, v2).multiplyScalar(0.5);
+
+      // Width scaling according to road type
+      const rtype = edge.road_type || edge.path_type || 'street';
+      let rwidth = 3.8;
+      if (rtype === 'boulevard') rwidth = 6.8;
+      else if (rtype === 'avenue') rwidth = 5.2;
+      else if (rtype === 'bridge') rwidth = 6.0;
+      else if (rtype === 'walkway') rwidth = 2.4;
+
+      // Paved Road Ribbon
+      const roadGeo = new THREE.PlaneGeometry(rwidth, length);
+      roadGeo.rotateX(-Math.PI / 2);
+      const isBridge = rtype === 'bridge';
+      const roadMesh = new THREE.Mesh(roadGeo, isBridge ? bridgeMat : roadMat);
+      roadMesh.receiveShadow = true;
       roadMesh.position.copy(mid);
       roadMesh.rotation.y = angle;
+      if (isBridge) roadMesh.position.y = 0.12;
       this.roadGroup.add(roadMesh);
 
-      // Road curbs
-      [-2.4, 2.4].forEach((offset) => {
-        const curbGeo = new THREE.BoxGeometry(0.3, 0.2, length);
+      // Central divider marking for wide Boulevards
+      if (rtype === 'boulevard') {
+        const divGeo = new THREE.PlaneGeometry(0.25, length * 0.95);
+        divGeo.rotateX(-Math.PI / 2);
+        const divMesh = new THREE.Mesh(divGeo, dividerMat);
+        divMesh.position.copy(mid);
+        divMesh.position.y = 0.07;
+        divMesh.rotation.y = angle;
+        this.roadGroup.add(divMesh);
+      }
+
+      // Curbs on road edges
+      const halfW = rwidth / 2;
+      [-halfW, halfW].forEach((offset) => {
+        const curbGeo = new THREE.BoxGeometry(0.25, 0.2, length);
         const curb = new THREE.Mesh(curbGeo, curbMat);
         curb.position.copy(mid);
         curb.rotation.y = angle;
@@ -163,30 +246,108 @@ export class CampusBuilder {
     });
   }
 
-  scatterTrees(nodes) {
-    const treePositions = [];
-    const minDistanceToBuilding = 15;
+  buildInstancedTrees(nodes) {
+    const treeCount = 200;
+    const trunkGeo = new THREE.CylinderGeometry(0.2, 0.35, 2.5, 6);
+    const foliageGeo = new THREE.DodecahedronGeometry(1.6, 1);
 
-    // Generate random tree positions away from buildings
-    for (let i = 0; i < 45; i++) {
-      const rx = (Math.random() - 0.5) * 360;
-      const rz = (Math.random() - 0.5) * 300;
+    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x451a03, roughness: 0.9 });
+    const foliageMat = new THREE.MeshStandardMaterial({
+      color: 0x059669,
+      roughness: 0.8,
+      flatShading: true,
+    });
 
+    const trunkInst = new THREE.InstancedMesh(trunkGeo, trunkMat, treeCount);
+    const foliageInst = new THREE.InstancedMesh(foliageGeo, foliageMat, treeCount);
+    trunkInst.castShadow = true;
+    foliageInst.castShadow = true;
+
+    const dummy = new THREE.Object3D();
+    let idx = 0;
+
+    for (let i = 0; i < treeCount; i++) {
+      const rx = (Math.random() - 0.5) * 500;
+      const rz = (Math.random() - 0.5) * 440;
+
+      // Keep trees at comfortable distance from building centers
       let tooClose = false;
       for (const node of nodes) {
         const wp = this.graphToWorld(node.x, node.y);
-        const dist = Math.hypot(rx - wp.x, rz - wp.z);
-        if (dist < minDistanceToBuilding) {
+        if (Math.hypot(rx - wp.x, rz - wp.z) < 14.0) {
           tooClose = true;
           break;
         }
       }
 
-      if (!tooClose) {
-        const tree = this.factory.createTree(rx, rz, 0.8 + Math.random() * 0.5);
-        this.envGroup.add(tree);
+      if (!tooClose && idx < treeCount) {
+        const scale = 0.8 + Math.random() * 0.5;
+
+        dummy.position.set(rx, 1.25 * scale, rz);
+        dummy.scale.set(scale, scale, scale);
+        dummy.updateMatrix();
+        trunkInst.setMatrixAt(idx, dummy.matrix);
+
+        dummy.position.set(rx, (2.5 + 1.2) * scale, rz);
+        dummy.updateMatrix();
+        foliageInst.setMatrixAt(idx, dummy.matrix);
+
+        idx++;
       }
     }
+
+    trunkInst.count = idx;
+    foliageInst.count = idx;
+    trunkInst.instanceMatrix.needsUpdate = true;
+    foliageInst.instanceMatrix.needsUpdate = true;
+
+    this.envGroup.add(trunkInst);
+    this.envGroup.add(foliageInst);
+  }
+
+  buildInstancedStreetLamps(nodes, edges) {
+    const lampCount = 120;
+    const postGeo = new THREE.CylinderGeometry(0.08, 0.12, 4.0, 6);
+    const headGeo = new THREE.SphereGeometry(0.35, 8, 8);
+
+    const postMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8, roughness: 0.3 });
+    const headMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+
+    const postInst = new THREE.InstancedMesh(postGeo, postMat, lampCount);
+    const headInst = new THREE.InstancedMesh(headGeo, headMat, lampCount);
+    postInst.castShadow = true;
+
+    const dummy = new THREE.Object3D();
+    let idx = 0;
+
+    const sampleEdges = edges.filter((e, i) => i % 2 === 0).slice(0, lampCount);
+    sampleEdges.forEach((edge) => {
+      const n1 = this.nodeMap.get(edge.source);
+      const n2 = this.nodeMap.get(edge.target);
+      if (!n1 || !n2 || idx >= lampCount) return;
+
+      const mid = new THREE.Vector3().addVectors(n1.worldPos, n2.worldPos).multiplyScalar(0.5);
+      const offset = new THREE.Vector3(2.4, 0, 0);
+
+      dummy.position.set(mid.x + offset.x, 2.0, mid.z + offset.z);
+      dummy.scale.set(1, 1, 1);
+      dummy.updateMatrix();
+      postInst.setMatrixAt(idx, dummy.matrix);
+
+      dummy.position.set(mid.x + offset.x, 4.1, mid.z + offset.z);
+      dummy.updateMatrix();
+      headInst.setMatrixAt(idx, dummy.matrix);
+
+      idx++;
+    });
+
+    postInst.count = idx;
+    headInst.count = idx;
+    postInst.instanceMatrix.needsUpdate = true;
+    headInst.instanceMatrix.needsUpdate = true;
+
+    this.envGroup.add(postInst);
+    this.envGroup.add(headInst);
   }
 
   getNodeWorldPos(nodeId) {
