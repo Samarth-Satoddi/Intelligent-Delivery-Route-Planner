@@ -41,15 +41,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       inspectName.innerText = nodeData.name || nodeData.id;
       inspectType.innerText = (nodeData.type || 'NODE').toUpperCase();
       inspectDesc.innerText = nodeData.description || 'Campus building / junction';
-      inspectCoords.innerText = `(${nodeData.coordinates.x}, ${nodeData.coordinates.y})`;
+      const nx = nodeData.coordinates?.x ?? nodeData.x ?? 0;
+      const ny = nodeData.coordinates?.y ?? nodeData.y ?? 0;
+      inspectCoords.innerText = `(${Number(nx).toFixed(1)}, ${Number(ny).toFixed(1)})`;
 
       // Calculate straight-line Euclidean heuristic to current goal
       const goalId = plannerController.goalSelect?.value;
       if (goalId && plannerController.currentGraph?.nodes) {
         const goalNode = plannerController.currentGraph.nodes.find((n) => n.id === goalId);
         if (goalNode) {
-          const dx = nodeData.coordinates.x - goalNode.coordinates.x;
-          const dy = nodeData.coordinates.y - goalNode.coordinates.y;
+          const gx = goalNode.coordinates?.x ?? goalNode.x ?? 0;
+          const gy = goalNode.coordinates?.y ?? goalNode.y ?? 0;
+          const dx = nx - gx;
+          const dy = ny - gy;
           const h = Math.sqrt(dx * dx + dy * dy);
           inspectHeuristic.innerText = `${h.toFixed(1)} m`;
         } else {
@@ -65,8 +69,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const origClick = sceneManager.onNodeClick;
   sceneManager.onNodeClick = (nodeData) => {
     if (origClick) origClick(nodeData);
-    if (plannerController.goalSelect) {
+    if (plannerController.goalSelect && nodeData?.id) {
       plannerController.goalSelect.value = nodeData.id;
+      plannerController.goalSelect.dispatchEvent(new Event('change'));
     }
   };
 

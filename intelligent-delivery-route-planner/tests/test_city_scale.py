@@ -103,3 +103,77 @@ def test_edge_vehicle_navigation_properties(city_graph):
         assert "vehicle_accessible" in edge
         assert edge["distance"] > 0
 
+
+def test_route_api_five_stage_payload_integrity(city_graph):
+    """Test data integrity required by the 5-stage interactive workflow."""
+    gbfs_res = greedy_best_first_search(city_graph, "central_office", "central_library")
+    astar_res = astar_search(city_graph, "central_office", "central_library")
+    dijkstra_res = dijkstra_search(city_graph, "central_office", "central_library")
+    alternatives = yen_k_shortest_paths(city_graph, "central_office", "central_library", K=5)
+
+    # Stage 2: Authentic Search Traces
+    assert len(astar_res.search_trace) > 0, "A* must produce search trace"
+    assert len(gbfs_res.search_trace) > 0, "GBFS must produce search trace"
+    for step in astar_res.search_trace:
+        assert step.node is not None
+        assert step.g >= 0.0
+        assert step.h >= 0.0
+        assert step.f >= 0.0
+        assert step.action in ("expand", "goal_reached")
+        assert step.frontier_size >= 0
+        d = step.to_dict()
+        assert "Node ID" in d and "g(n) [Cost so far]" in d
+
+    # Stage 3: Optimality comparison & KSP alternatives
+    assert astar_res.total_cost == dijkstra_res.total_cost
+    assert len(alternatives) == 5, f"Expected 5 alternative routes, got {len(alternatives)}"
+
+    # Stage 4 & 5: Road sequence and coordinates for vehicle movement
+    for alt in alternatives:
+        assert len(alt["path"]) >= 2
+        assert alt["total_distance_m"] > 0
+        for node_id in alt["path"]:
+            coords = city_graph.get_node_coords(node_id)
+            assert coords is not None
+            assert len(coords) == 2
+
+
+def test_acceptance_scenario_central_office_to_central_library(city_graph):
+    """Verify exact acceptance scenario: Central Office to Central Library via Route 2."""
+    alternatives = yen_k_shortest_paths(city_graph, "central_office", "central_library", K=5)
+    assert len(alternatives) >= 2
+
+    # Route 1: Shortest path (A* optimal)
+    route_1 = alternatives[0]
+    assert abs(route_1["total_distance_m"] - 307.5) < 1.0
+
+    # Route 2: Alternative route via Admissions Centre and Roundabout
+    route_2 = alternatives[1]
+    assert route_2["path"] == [
+        "central_office",
+        "admissions_centre",
+        "roundabout_central",
+        "central_library",
+    ]
+    assert abs(route_2["total_distance_m"] - 317.8) < 1.0
+    assert route_2["hops"] == 3
+
+
+def test_suboptimal_vs_optimal_scenarios(city_graph):
+    """Verify scenarios demonstrating A* optimality and GBFS suboptimality."""
+    # Scenario 1: Central Office -> Computer Lab (GBFS takes greedy detour)
+    gbfs_lab = greedy_best_first_search(city_graph, "central_office", "computer_lab")
+    astar_lab = astar_search(city_graph, "central_office", "computer_lab")
+    assert astar_lab.success and gbfs_lab.success
+    assert gbfs_lab.total_cost > astar_lab.total_cost, (
+        f"Expected GBFS cost ({gbfs_lab.total_cost}) > A* cost ({astar_lab.total_cost})"
+    )
+    excess_pct = ((gbfs_lab.total_cost - astar_lab.total_cost) / astar_lab.total_cost) * 100
+    assert excess_pct > 5.0, f"Expected excess cost > 5%, got {excess_pct:.2f}%"
+
+    # Scenario 2: Central Office -> Main Cafeteria (A* optimal)
+    astar_cafe = astar_search(city_graph, "central_office", "main_cafeteria")
+    dijk_cafe = dijkstra_search(city_graph, "central_office", "main_cafeteria")
+    assert astar_cafe.total_cost == dijk_cafe.total_cost
+
+

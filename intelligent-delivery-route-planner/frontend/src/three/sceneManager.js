@@ -1,5 +1,6 @@
 /**
- * 3D Scene Manager: Orchestrates Three.js rendering, lighting, camera controls, raycasting, and sub-systems.
+ * 3D Scene Manager: Orchestrates Three.js rendering, lighting, camera controls, raycasting,
+ * cinematic camera-follow mode, and visual sub-systems.
  */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -52,14 +53,22 @@ export class SceneManager {
     this.onNodeClick = null;
     this.onNodeHover = null;
 
-    // 5. Camera Animation State
+    // 5. Camera Animation & Tracking State
     this.targetCamPos = null;
     this.targetLookAt = null;
+    this.isCameraFollowing = false;
 
     // Listeners
     window.addEventListener('resize', this.onResize.bind(this));
     this.renderer.domElement.addEventListener('mousemove', this.onMouseMove.bind(this));
     this.renderer.domElement.addEventListener('click', this.onClick.bind(this));
+    this.controls.addEventListener('start', () => {
+      // If user drags orbit controls while following, gracefully release follow
+      if (this.isCameraFollowing) {
+        this.isCameraFollowing = false;
+        if (this.onCameraFollowDisabled) this.onCameraFollowDisabled();
+      }
+    });
 
     // Animation Loop
     this.clock = new THREE.Clock();
@@ -72,12 +81,12 @@ export class SceneManager {
 
   setupLighting() {
     // Ambient Sky Light
-    const hemiLight = new THREE.HemisphereLight(0x38bdf8, 0x090d16, 0.6);
+    const hemiLight = new THREE.HemisphereLight(0x38bdf8, 0x090d16, 0.65);
     hemiLight.position.set(0, 100, 0);
     this.scene.add(hemiLight);
 
     // Directional Sunlight with Shadows
-    const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+    const sun = new THREE.DirectionalLight(0xffffff, 1.45);
     sun.position.set(120, 200, 100);
     sun.castShadow = true;
     sun.shadow.mapSize.width = 2048;
@@ -93,14 +102,14 @@ export class SceneManager {
     this.scene.add(sun);
 
     // Secondary fill light
-    const fillLight = new THREE.DirectionalLight(0x06b6d4, 0.4);
+    const fillLight = new THREE.DirectionalLight(0x06b6d4, 0.45);
     fillLight.position.set(-150, 80, -120);
     this.scene.add(fillLight);
   }
 
   loadGraph(graphData) {
     this.campusBuilder.buildCampus(graphData);
-    this.routeRenderer.clear();
+    this.routeRenderer.clearAll();
     this.courierRobot.reset();
   }
 
@@ -108,8 +117,28 @@ export class SceneManager {
     this.routeRenderer.renderRoutes(options);
   }
 
+  renderOriginDestinationGuide(startNodeId, goalNodeId) {
+    this.routeRenderer.renderOriginDestinationGuide(startNodeId, goalNodeId);
+  }
+
+  clearOriginDestinationGuide() {
+    this.routeRenderer.clearOriginDestinationGuide();
+  }
+
+  renderSearchTraceStep(step, visitedNodeIds, frontierNodeIds, algo) {
+    this.routeRenderer.renderSearchTraceStep(step, visitedNodeIds, frontierNodeIds, algo);
+  }
+
+  clearSearchTrace() {
+    this.routeRenderer.clearSearchTrace();
+  }
+
   setCourierRoute(nodeIds) {
     this.courierRobot.setRoute(nodeIds);
+  }
+
+  setCameraFollow(enabled) {
+    this.isCameraFollowing = enabled;
   }
 
   onResize() {
@@ -184,6 +213,7 @@ export class SceneManager {
   }
 
   setCameraPreset(type) {
+    this.isCameraFollowing = false;
     switch (type) {
       case 'isometric':
         this.targetCamPos = new THREE.Vector3(160, 220, 260);
@@ -204,6 +234,7 @@ export class SceneManager {
   }
 
   cinematicFlyIn() {
+    this.isCameraFollowing = false;
     this.camera.position.set(300, 420, 400);
     this.controls.target.set(0, 0, 0);
     this.targetCamPos = new THREE.Vector3(160, 220, 260);
@@ -214,17 +245,31 @@ export class SceneManager {
     requestAnimationFrame(this.animate);
     const delta = this.clock.getDelta();
 
-    // Smooth Camera Interpolation
-    if (this.targetCamPos) {
-      this.camera.position.lerp(this.targetCamPos, 0.05);
-      if (this.camera.position.distanceTo(this.targetCamPos) < 0.5) {
-        this.targetCamPos = null;
+    // Cinematic Camera Follow Vehicle Mode
+    if (this.isCameraFollowing && this.courierRobot.mesh.visible) {
+      const robotPos = this.courierRobot.mesh.position;
+      const heading = this.courierRobot.mesh.rotation.y;
+      const behindOffset = new THREE.Vector3(
+        -Math.sin(heading) * 36,
+        22,
+        -Math.cos(heading) * 36
+      );
+      const targetCam = robotPos.clone().add(behindOffset);
+      this.camera.position.lerp(targetCam, 0.08);
+      this.controls.target.lerp(robotPos, 0.08);
+    } else {
+      // Smooth Camera Fly-to Interpolation
+      if (this.targetCamPos) {
+        this.camera.position.lerp(this.targetCamPos, 0.05);
+        if (this.camera.position.distanceTo(this.targetCamPos) < 0.5) {
+          this.targetCamPos = null;
+        }
       }
-    }
-    if (this.targetLookAt) {
-      this.controls.target.lerp(this.targetLookAt, 0.05);
-      if (this.controls.target.distanceTo(this.targetLookAt) < 0.2) {
-        this.targetLookAt = null;
+      if (this.targetLookAt) {
+        this.controls.target.lerp(this.targetLookAt, 0.05);
+        if (this.controls.target.distanceTo(this.targetLookAt) < 0.2) {
+          this.targetLookAt = null;
+        }
       }
     }
 

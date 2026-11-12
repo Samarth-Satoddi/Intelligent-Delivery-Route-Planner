@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Intelligent Delivery Route Planner — 3D Campus Navigation</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
-  <script type="module" crossorigin src="./assets/index-GHyZZ5fI.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Cv7BCIZ1.css">
+  <script type="module" crossorigin src="./assets/index-mcq_9-DT.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DMLtV78H.css">
 </head>
 <body>
 
@@ -63,101 +63,248 @@
       <span style="font-size: 0.75rem; color: var(--cyan-glow); font-weight: 600;">FastAPI AI Core</span>
     </div>
 
-    <!-- District Filter & Search -->
-    <div class="input-group">
-      <label class="input-label" for="districtFilterSelect">District Filter</label>
-      <select id="districtFilterSelect" class="select-custom">
-        <option value="ALL">🌐 All Districts (51 Locations)</option>
-        <option value="Administration District">🏛️ Administration District</option>
-        <option value="Academic District">🔬 Academic District</option>
-        <option value="Knowledge and Culture District">📚 Knowledge & Culture</option>
-        <option value="Student Life District">☕ Student Life District</option>
-        <option value="Sports District">⚽ Sports District</option>
-        <option value="Transport and Infrastructure District">🚌 Transport & Infrastructure</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label class="input-label" for="buildingSearchInput">Quick Facility Search</label>
-      <input type="text" id="buildingSearchInput" class="select-custom" placeholder="🔍 Search facility or location...">
-    </div>
-
-    <!-- Start Location Selection -->
-    <div class="input-group">
-      <label class="input-label" for="startSelect">Start Location (Dispatch Hub)</label>
-      <select id="startSelect" class="select-custom"></select>
-    </div>
-
-    <!-- Goal Destination Selection -->
-    <div class="input-group">
-      <label class="input-label" for="goalSelect">Delivery Destination</label>
-      <select id="goalSelect" class="select-custom"></select>
-    </div>
-
-    <!-- Algorithm Selection -->
-    <div class="input-group">
-      <label class="input-label">Informed Search Algorithm</label>
-      <div class="algo-tabs">
-        <button class="algo-tab active" data-algo="both">⚖️ Both</button>
-        <button class="algo-tab" data-algo="astar">⭐ A* Search</button>
-        <button class="algo-tab" data-algo="gbfs">🚀 GBFS</button>
+    <!-- 5-Stage Navigation Workflow Stepper -->
+    <div class="stage-stepper" id="workflowStepper">
+      <div class="step-item active" data-stage="1" id="stepIndicator1" title="Stage 1: Location Selection">
+        <span class="step-num">1</span><span class="step-label">Select</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-stage="2" id="stepIndicator2" title="Stage 2: Real AI Search Calculation">
+        <span class="step-num">2</span><span class="step-label">AI Trace</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-stage="3" id="stepIndicator3" title="Stage 3: Available Routes Comparison">
+        <span class="step-num">3</span><span class="step-label">Compare</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-stage="4" id="stepIndicator4" title="Stage 4: Road Selection & Confirmation">
+        <span class="step-num">4</span><span class="step-label">Choose</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-stage="5" id="stepIndicator5" title="Stage 5: Live Vehicle Movement">
+        <span class="step-num">5</span><span class="step-label">Navigate</span>
       </div>
     </div>
 
-    <!-- Calculate Button -->
-    <button class="btn-primary" id="btnCalculateRoute">
-      <span>⚡ Calculate 3D Delivery Route</span>
-    </button>
+    <!-- STAGE 1: LOCATION SELECTION -->
+    <div class="stage-panel" id="stage1Panel">
+      <div class="stage-badge">📍 Stage 1: Location Selection</div>
 
-    <!-- Route Metrics Scorecard -->
-    <div class="metrics-card" id="plannerMetrics" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">ALGORITHM RESULTS</span>
-        <span id="optimalityBadge" class="role-tag user">OPTIMAL</span>
+      <!-- District Filter & Search -->
+      <div class="input-group">
+        <label class="input-label" for="districtFilterSelect">District Filter</label>
+        <select id="districtFilterSelect" class="select-custom">
+          <option value="ALL">🌐 All Districts (51 Locations)</option>
+          <option value="Administration District">🏛️ Administration District</option>
+          <option value="Academic District">🔬 Academic District</option>
+          <option value="Knowledge and Culture District">📚 Knowledge & Culture</option>
+          <option value="Student Life District">☕ Student Life District</option>
+          <option value="Sports District">⚽ Sports District</option>
+          <option value="Transport and Infrastructure District">🚌 Transport & Infrastructure</option>
+        </select>
       </div>
-      <div class="metric-row">
-        <span style="color: var(--orange-gbfs);">GBFS Cost f=h:</span>
-        <span class="metric-val" id="metricGbfsCost">-- m</span>
+
+      <div class="input-group">
+        <label class="input-label" for="buildingSearchInput">Quick Facility Search</label>
+        <input type="text" id="buildingSearchInput" class="select-custom" placeholder="🔍 Search facility or location...">
       </div>
-      <div class="metric-row">
-        <span style="color: var(--cyan-glow);">A* Cost f=g+h:</span>
-        <span class="metric-val" id="metricAstarCost">-- m</span>
+
+      <!-- Start Location Selection -->
+      <div class="input-group">
+        <label class="input-label" for="startSelect">Start Location (Dispatch Hub)</label>
+        <select id="startSelect" class="select-custom"></select>
       </div>
-      <div class="metric-row">
-        <span style="color: var(--text-muted);">Cost Delta:</span>
-        <span class="metric-val" id="metricDiff">--</span>
+
+      <!-- Goal Destination Selection -->
+      <div class="input-group">
+        <label class="input-label" for="goalSelect">Delivery Destination</label>
+        <select id="goalSelect" class="select-custom"></select>
       </div>
-      <div class="metric-row">
-        <span style="color: var(--text-muted);">Exploration:</span>
-        <span class="metric-val" id="metricExpansions">--</span>
+
+      <!-- Algorithm Selection -->
+      <div class="input-group">
+        <label class="input-label">Informed Search Algorithm</label>
+        <div class="algo-tabs">
+          <button class="algo-tab active" data-algo="both">⚖️ Both</button>
+          <button class="algo-tab" data-algo="astar">⭐ A* Search</button>
+          <button class="algo-tab" data-algo="gbfs">🚀 GBFS</button>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <button class="btn-primary" id="btnCalculateRoute" style="margin-top:4px;">
+        <span>⚡ Calculate AI Routes</span>
+      </button>
+    </div>
+
+    <!-- STAGE 2: AI SEARCH CALCULATION & TRACE VISUALIZATION -->
+    <div class="stage-panel" id="stage2Panel" style="display: none;">
+      <div class="stage-badge">🔍 Stage 2: AI Search Calculation Replay</div>
+      <div style="font-size:0.72rem; color:var(--text-muted); line-height:1.4;">
+        Replaying authentic Python search state-space exploration. Observe node expansions, frontier evaluations, and heuristic evaluations.
+      </div>
+
+      <!-- Algorithm Tabs for Trace -->
+      <div class="algo-tabs" id="traceAlgoTabs">
+        <button class="algo-tab active" data-trace-algo="astar">⭐ A* Search</button>
+        <button class="algo-tab" data-trace-algo="gbfs">🚀 GBFS Search</button>
+      </div>
+
+      <!-- Live Node Inspection Box -->
+      <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:10px; font-size:0.73rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span style="color:var(--text-dim);">Expanding Node:</span>
+          <b id="traceCurrentNode" style="color:#ffffff;">--</b>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <span style="color:var(--text-dim);">Evaluation:</span>
+          <span style="color:var(--cyan-glow); font-family:'JetBrains Mono',monospace;">
+            g=<b id="traceGVal">--</b> + h=<b id="traceHVal">--</b> ➔ f=<b id="traceFVal">--</b>
+          </span>
+        </div>
+        <div style="display:flex; justify-content:space-between; color:var(--text-dim); font-size:0.68rem;">
+          <span>Expanded: <b id="traceExpandedCount" style="color:#fff;">0</b></span>
+          <span>Frontier Size: <b id="traceFrontierCount" style="color:#facc15;">0</b></span>
+        </div>
+      </div>
+
+      <!-- Trace Playback Controls -->
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem;">
+        <span style="color:var(--text-dim);" id="traceStepCounter">Step <b id="traceStepNum">0</b> / <b id="traceTotalSteps">0</b></span>
+        <select id="traceSpeedSelect" style="background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:0.7rem; border-radius:4px; padding:2px 6px;">
+          <option value="1">1x Speed</option>
+          <option value="2" selected>2x Speed</option>
+          <option value="5">5x Speed</option>
+          <option value="10">10x Fast</option>
+        </select>
+      </div>
+
+      <div class="transport-controls" style="display:grid; grid-template-columns:auto 1fr 1fr auto auto; gap:6px;">
+        <button class="transport-btn" id="btnTracePrev" title="Previous Step">⏮</button>
+        <button class="transport-btn" id="btnTracePlay" style="font-weight:600;">▶ Play</button>
+        <button class="transport-btn" id="btnTracePause">⏸ Pause</button>
+        <button class="transport-btn" id="btnTraceNext" title="Next Step">⏭</button>
+        <button class="transport-btn" id="btnTraceReset">↺ Reset</button>
+      </div>
+
+      <!-- Mini Trace Ledger Table -->
+      <div style="max-height: 140px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px;">
+        <table style="width:100%; font-size:0.68rem; border-collapse:collapse;">
+          <thead>
+            <tr style="background:#0f172a; color:var(--text-muted); position:sticky; top:0;">
+              <th style="padding:4px 6px; text-align:left;">#</th>
+              <th style="padding:4px 6px; text-align:left;">Node</th>
+              <th style="padding:4px 6px; text-align:right;">g</th>
+              <th style="padding:4px 6px; text-align:right;">h</th>
+              <th style="padding:4px 6px; text-align:right;">f</th>
+            </tr>
+          </thead>
+          <tbody id="traceMiniTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Proceed Button -->
+      <button class="btn-primary" id="btnProceedToStage3" style="margin-top:6px;">
+        <span>Proceed to Route Comparison ➔</span>
+      </button>
+    </div>
+
+    <!-- STAGE 3: AVAILABLE ROUTES COMPARISON -->
+    <div class="stage-panel" id="stage3Panel" style="display: none;">
+      <div class="stage-badge">⚖️ Stage 3: Available Routes Comparison</div>
+
+      <!-- Algorithm Scorecard -->
+      <div class="metrics-card" id="plannerMetrics">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">ALGORITHM RESULTS</span>
+          <span id="optimalityBadge" class="role-tag user">OPTIMAL</span>
+        </div>
+        <div class="metric-row">
+          <span style="color: var(--orange-gbfs);">GBFS Cost f=h:</span>
+          <span class="metric-val" id="metricGbfsCost">-- m</span>
+        </div>
+        <div class="metric-row">
+          <span style="color: var(--cyan-glow);">A* Cost f=g+h:</span>
+          <span class="metric-val" id="metricAstarCost">-- m</span>
+        </div>
+        <div class="metric-row">
+          <span style="color: var(--text-muted);">Cost Delta:</span>
+          <span class="metric-val" id="metricDiff">--</span>
+        </div>
+        <div class="metric-row">
+          <span style="color: var(--text-muted);">Exploration:</span>
+          <span class="metric-val" id="metricExpansions">--</span>
+        </div>
+      </div>
+
+      <!-- 3D Route Display Visibility Toggle -->
+      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:6px 10px;">
+        <span style="font-size:0.72rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">3D View Mode</span>
+        <select id="routeDisplayModeSelect" class="select-custom" style="padding:3px 6px; font-size:0.72rem; border-radius:4px; background:#0f172a;">
+          <option value="all" selected>All Compared Routes</option>
+          <option value="selected">Selected Route Only</option>
+        </select>
+      </div>
+
+      <!-- Multiple Alternative Routes (Yen's Algorithm) -->
+      <div id="alternativeRoutesCard">
+        <div style="font-size: 0.75rem; font-weight: 700; color: var(--cyan-glow); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+          <span>🔀 AVAILABLE ROUTES (YEN'S K-SHORTEST)</span>
+          <span style="font-size: 0.65rem; color: var(--text-dim);">Click to Select</span>
+        </div>
+        <div id="alternativeRoutesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+      </div>
+
+      <button class="transport-btn" id="btnBackToStage1" style="padding:8px 12px; margin-top:4px;">
+        ⬅ Back to Location Selection
+      </button>
+    </div>
+
+    <!-- STAGE 4: USER ROUTE SELECTION & CONFIRMATION -->
+    <div class="stage-panel" id="stage4Panel" style="display: none;">
+      <div class="stage-badge">🔀 Stage 4: Confirm Selected Road</div>
+
+      <div style="background:rgba(15,23,42,0.9); border:1px solid var(--cyan-glow); border-radius:10px; padding:12px; box-shadow:0 0 16px rgba(6,182,212,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <b id="selectedRouteTitle" style="color:#ffffff; font-size:0.85rem;">Route 1 (Optimal A* / Dijkstra)</b>
+          <span class="role-tag user" id="selectedRouteDist">-- m</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-muted); margin-bottom:8px;">
+          <span>⏱️ Est. Walk: <b id="selectedRouteTime" style="color:#fff;">-- mins</b></span>
+          <span>📍 Turn Legs: <b id="selectedRouteLegs" style="color:#fff;">--</b></span>
+        </div>
+        <div style="font-size:0.7rem; color:var(--text-dim); margin-bottom:6px;">
+          <b>🛣️ Full Road Traversal Sequence:</b>
+        </div>
+        <div id="selectedRouteSequence" style="font-size:0.7rem; color:#94a3b8; font-family:'JetBrains Mono',monospace; line-height:1.45; max-height:80px; overflow-y:auto; background:rgba(0,0,0,0.35); padding:6px 8px; border-radius:6px;">
+          --
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+        <button class="btn-primary" id="btnConfirmRoute" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <span>✅ CONFIRM SELECTED ROUTE</span>
+        </button>
+        <button class="transport-btn" id="btnBackToStage3" style="padding:8px 12px;">
+          ⬅ Back to Route Comparison
+        </button>
       </div>
     </div>
 
-    <!-- 3D Route Display Visibility Toggle -->
-    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px; margin-top:8px;">
-      <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase;">3D Route View</span>
-      <select id="routeDisplayModeSelect" class="select-custom" style="padding:4px 8px; font-size:0.75rem; border-radius:6px; background:#0f172a;">
-        <option value="all" selected>All Compared Routes</option>
-        <option value="selected">Selected Route Only</option>
-      </select>
-    </div>
+    <!-- STAGE 5: LIVE 3D VEHICLE MOVEMENT & TELEMETRY -->
+    <div class="stage-panel" id="stage5Panel" style="display: none;">
+      <div class="stage-badge">🚚 Stage 5: Live Vehicle Movement</div>
 
-    <!-- Multiple Alternative Routes (Yen's Algorithm) -->
-    <div id="alternativeRoutesCard" style="display: none; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 12px; margin-top: 10px;">
-      <div style="font-size: 0.75rem; font-weight: 700; color: var(--cyan-glow); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-        <span>🔀 MULTIPLE ROUTE OPTIONS</span>
-        <span style="font-size: 0.65rem; color: var(--text-dim);">Yen's K-Shortest Paths</span>
-      </div>
-      <div id="alternativeRoutesList" style="display: flex; flex-direction: column; gap: 8px;"></div>
-    </div>
+      <!-- Start Delivery Button -->
+      <button class="btn-primary" id="btnStartDeliveryAction" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); font-size:0.9rem; padding:12px;">
+        <span>🚀 START VEHICLE DELIVERY</span>
+      </button>
 
-    <!-- 3D Autonomous Courier Robot Transport Controls -->
-    <div class="robot-transport" id="robotTransport" style="display: none; flex-direction:column; gap:10px;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 0.78rem; font-weight: 700; color: #38bdf8; display:flex; align-items:center; gap:6px;">
-          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
-          3D COURIER VEHICLE TELEMETRY
-        </span>
+      <!-- Vehicle Controls Header & Speed -->
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="transport-btn" id="btnToggleCamFollow" style="padding:4px 8px; font-size:0.72rem;">
+          🎥 Follow Camera: OFF
+        </button>
         <select id="robotSpeed" style="background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:0.72rem; border-radius:6px; padding:3px 8px;">
           <option value="0.5">0.5x Speed</option>
           <option value="1.0">1.0x Speed</option>
@@ -175,19 +322,34 @@
         <div><span style="color:var(--text-dim);">Speed:</span> <b id="robotSpeedVal" style="color:#34d399;">24 km/h</b></div>
       </div>
 
+      <!-- Journey Progress Bar -->
       <div class="progress-bar-container">
         <div class="progress-fill" id="robotProgressFill"></div>
       </div>
       <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim);" id="robotProgressText">
-        Ready for autonomous dispatch
+        Press 'Start Delivery' to dispatch vehicle
       </div>
 
+      <!-- Transport Buttons -->
       <div class="transport-controls" style="display:grid; grid-template-columns:auto 1fr 1fr auto auto; gap:6px;">
         <button class="transport-btn" id="btnRobotPrev" title="Step to Previous Junction" style="padding:8px 10px;">⏮</button>
         <button class="transport-btn" id="btnRobotPlay" style="padding:8px 10px; font-weight:600;">▶ Play</button>
         <button class="transport-btn" id="btnRobotPause" style="padding:8px 10px;">⏸ Pause</button>
         <button class="transport-btn" id="btnRobotNext" title="Step to Next Junction" style="padding:8px 10px;">⏭</button>
         <button class="transport-btn" id="btnRobotReset" style="padding:8px 10px;">↺ Reset</button>
+      </div>
+
+      <!-- Delivery Completed Celebration Summary Card (Hidden Until Finished) -->
+      <div id="deliveryCompletedCard" style="display:none; background:rgba(16,185,129,0.12); border:1px solid #10b981; border-radius:10px; padding:12px; margin-top:6px;">
+        <div style="font-size:0.85rem; font-weight:700; color:#34d399; margin-bottom:4px;">
+          🎉 Delivery Successfully Completed!
+        </div>
+        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:8px;" id="completedSummaryText">
+          All materials safely arrived at destination.
+        </div>
+        <button class="btn-primary" id="btnPlanAnotherDelivery" style="padding:8px 12px; font-size:0.78rem;">
+          🔄 Plan Another Delivery
+        </button>
       </div>
     </div>
   </aside>
