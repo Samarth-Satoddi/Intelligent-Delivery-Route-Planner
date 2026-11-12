@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Delivery Route Planner — 3D Campus Navigation</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
+  <script type="module" crossorigin src="./assets/index-q9pkmail.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Btf8pDfP.css">
+</head>
+<body>
+
+  <!-- Three.js 3D WebGL Canvas Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Top Application Navigation Header -->
+  <header>
+    <div class="brand-section">
+      <div class="brand-logo">🚚</div>
+      <div>
+        <div class="brand-title">CAMPUS NAVIGATOR 3D</div>
+        <div class="brand-subtitle">Intelligent Delivery Route Planner</div>
+      </div>
+    </div>
+
+    <nav class="nav-pills">
+      <button class="nav-pill active" data-view="planner">
+        <span>🗺️</span> <span>Route Planner</span>
+      </button>
+      <button class="nav-pill" data-view="explorer">
+        <span>🌐</span> <span>3D Explorer</span>
+      </button>
+      <button class="nav-pill" data-view="comparison">
+        <span>⚖️</span> <span>Algorithm Comparison</span>
+      </button>
+      <button class="nav-pill" data-view="trace">
+        <span>🔍</span> <span>Search Trace</span>
+      </button>
+      <button class="nav-pill" data-view="benchmarks">
+        <span>🧪</span> <span>Benchmark Lab</span>
+      </button>
+    </nav>
+
+    <div class="header-right">
+      <select id="mapSelect" class="map-selector">
+        <option value="campus_map">1. Normal Campus Map (15 Nodes)</option>
+        <option value="alternative_paths_map">2. Alternative Detour Map</option>
+        <option value="misleading_map">3. Misleading Heuristic Trap Map</option>
+      </select>
+
+      <div class="user-badge" id="userBadge">
+        <span id="userNameSpan">Sign In / Register</span>
+        <span id="userRoleTag" class="role-tag user" style="display: none;">USER</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Route Planner Dock -->
+  <aside class="floating-dock" id="floatingDock">
+    <div class="dock-header">
+      <span class="dock-title">Autonomous Dispatch</span>
+      <span style="font-size: 0.75rem; color: var(--cyan-glow); font-weight: 600;">FastAPI AI Core</span>
+    </div>
+
+    <!-- Start Location Selection -->
+    <div class="input-group">
+      <label class="input-label" for="startSelect">Start Location (Dispatch Hub)</label>
+      <select id="startSelect" class="select-custom"></select>
+    </div>
+
+    <!-- Goal Destination Selection -->
+    <div class="input-group">
+      <label class="input-label" for="goalSelect">Delivery Destination</label>
+      <select id="goalSelect" class="select-custom"></select>
+    </div>
+
+    <!-- Algorithm Selection -->
+    <div class="input-group">
+      <label class="input-label">Informed Search Algorithm</label>
+      <div class="algo-tabs">
+        <button class="algo-tab active" data-algo="both">⚖️ Both</button>
+        <button class="algo-tab" data-algo="astar">⭐ A* Search</button>
+        <button class="algo-tab" data-algo="gbfs">🚀 GBFS</button>
+      </div>
+    </div>
+
+    <!-- Calculate Button -->
+    <button class="btn-primary" id="btnCalculateRoute">
+      <span>⚡ Calculate 3D Delivery Route</span>
+    </button>
+
+    <!-- Route Metrics Scorecard -->
+    <div class="metrics-card" id="plannerMetrics" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">ALGORITHM RESULTS</span>
+        <span id="optimalityBadge" class="role-tag user">OPTIMAL</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--orange-gbfs);">GBFS Cost f=h:</span>
+        <span class="metric-val" id="metricGbfsCost">-- m</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--cyan-glow);">A* Cost f=g+h:</span>
+        <span class="metric-val" id="metricAstarCost">-- m</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--text-muted);">Cost Delta:</span>
+        <span class="metric-val" id="metricDiff">--</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--text-muted);">Exploration:</span>
+        <span class="metric-val" id="metricExpansions">--</span>
+      </div>
+    </div>
+
+    <!-- 3D Autonomous Courier Robot Transport Controls -->
+    <div class="robot-transport" id="robotTransport" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: #38bdf8;">3D DELIVERY ROBOT SIMULATION</span>
+        <select id="robotSpeed" style="background:#0f172a; border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:0.7rem; border-radius:4px; padding:2px 4px;">
+          <option value="1.0">1x Speed</option>
+          <option value="2.0" selected>2x Speed</option>
+          <option value="4.0">4x Speed</option>
+        </select>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-fill" id="robotProgressFill"></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim);" id="robotProgressText">
+        Ready for autonomous dispatch
+      </div>
+
+      <div class="transport-controls">
+        <button class="transport-btn" id="btnRobotPlay">▶ Start Delivery</button>
+        <button class="transport-btn" id="btnRobotPause">⏸ Pause</button>
+        <button class="transport-btn" id="btnRobotReset">↺ Reset</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Camera HUD Preset Dock (Bottom Right) -->
+  <div class="camera-dock">
+    <button class="cam-btn" data-preset="isometric">📐 Isometric</button>
+    <button class="cam-btn" data-preset="topdown">🗺️ Top-Down</button>
+    <button class="cam-btn" data-preset="front">👁️ Front</button>
+    <button class="cam-btn" data-preset="reset">↺ Cinematic</button>
+  </div>
+
+  <!-- Building Inspection Tooltip (Hover / Click) -->
+  <div id="buildingInspectionCard" style="display:none; position:absolute; bottom:24px; left:24px; width:340px; background:var(--bg-card); backdrop-filter:var(--glass-blur); border:1px solid var(--border-card); border-radius:14px; padding:16px; z-index:15; box-shadow:var(--shadow-elevated);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h4 id="inspectName" style="color:#ffffff; font-size:0.95rem;">Building Name</h4>
+      <span id="inspectType" class="role-tag user">DESTINATION</span>
+    </div>
+    <p id="inspectDesc" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">Description</p>
+    <div style="font-size:0.75rem; color:var(--text-dim); border-top:1px solid rgba(255,255,255,0.08); padding-top:8px;">
+      <div>Coordinates: <b id="inspectCoords" style="color:#fff;">(0, 0)</b></div>
+      <div>Heuristic h(n) to Goal: <b id="inspectHeuristic" style="color:var(--cyan-glow);">-- m</b></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Algorithm Comparison -->
+  <div class="modal-overlay" id="modalComparison">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">⚖️ Side-by-Side Algorithm Performance</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div id="comparisonContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Search Trace Explorer -->
+  <div class="modal-overlay" id="modalTrace">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">🔍 Step-by-Step Priority Queue Trace</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <select id="traceAlgoSelect" class="select-custom" style="padding:6px 12px; font-size:0.8rem;">
+            <option value="astar">A* Search Trace (f = g + h)</option>
+            <option value="gbfs">Greedy Best-First Search Trace (f = h)</option>
+          </select>
+          <button class="btn-primary" style="padding:6px 14px; font-size:0.75rem;" id="btnExportTrace">📥 Download CSV</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="transport-btn" id="btnTracePrev">◀ Prev Step</button>
+          <span id="traceStepCounter" style="font-size:0.85rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace;">Step: -- / --</span>
+          <button class="transport-btn" id="btnTraceNext">Next Step ▶</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Node ID</th>
+              <th>Location Name</th>
+              <th>Parent</th>
+              <th>g(n) [Distance]</th>
+              <th>h(n) [Heuristic]</th>
+              <th>f(n) [Evaluation]</th>
+            </tr>
+          </thead>
+          <tbody id="traceTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Benchmark Laboratory -->
+  <div class="modal-overlay" id="modalBenchmarks">
+    <div class="modal-card" style="max-width: 1050px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">🧪 Automated Experimental Laboratory</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <p style="font-size:0.85rem; color:var(--text-muted);">
+          Rigorous benchmarking across Normal Campus Map, Alternative Detour Map, and the Section 8 Misleading Heuristic Trap Map.
+        </p>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-primary" id="btnRerunBenchmarks" style="padding:6px 14px; font-size:0.8rem;">⚡ Re-run All Benchmarks</button>
+          <button class="transport-btn" id="btnExportBenchmarks">📥 Export CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Test Map</th>
+              <th>Start</th>
+              <th>Goal</th>
+              <th>GBFS Cost</th>
+              <th>A* Cost</th>
+              <th>Dijkstra</th>
+              <th>GBFS Exp.</th>
+              <th>A* Exp.</th>
+              <th>Excess %</th>
+              <th>Optimality</th>
+            </tr>
+          </thead>
+          <tbody id="benchmarkTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Section 8 Trap Spotlight -->
+      <div style="background:rgba(249,115,22,0.08); border:1px solid var(--orange-gbfs); border-radius:10px; padding:16px;">
+        <h4 style="color:var(--orange-gbfs); font-size:0.9rem; margin-bottom:6px;">Section 8: The Misleading Heuristic Experiment Explained</h4>
+        <p style="font-size:0.82rem; color:#e2e8f0; line-height:1.6;">
+          In <code>misleading_map.json</code>, Node A has straight-line distance <code>h(A) = 1.0m</code> to Goal G, while Node B has <code>h(B) = 2.83m</code>.<br>
+          <b>Greedy Best-First Search</b> greedily expands A because <code>1.0 &lt; 2.83</code>, committing to the 100m edge with total cost <b>101.0m</b>.<br>
+          <b>A* Search</b> evaluates <code>f(G via A) = 1 + 100 = 101.0m</code>, halts, pops B (<code>f=2 + 2.83 = 4.83m &lt; 101m</code>), and finds the optimal path <code>S ➔ B ➔ G</code> with total cost <b>5.0m</b> (demonstrating a <b>+1920.0% excess cost</b> in Greedy search).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Authentication (Login / Register) -->
+  <div class="modal-overlay" id="modalAuth">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 id="authModalTitle" style="font-size: 1.15rem; color:#fff;">Account Access</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="algo-tabs" style="grid-template-columns: 1fr 1fr;">
+        <button class="algo-tab active" id="tabAuthLogin">Sign In</button>
+        <button class="algo-tab" id="tabAuthRegister">Create Account</button>
+      </div>
+
+      <div id="authAlert" style="display:none; padding:10px; border-radius:8px; font-size:0.8rem; background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#fca5a5;"></div>
+
+      <!-- Login Form -->
+      <form id="formLogin" style="display:flex; flex-direction:column; gap:14px;">
+        <div class="input-group">
+          <label class="input-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="select-custom" required placeholder="user@campus.edu">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="select-custom" required placeholder="••••••••">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text-muted);">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="loginRememberMe"> Remember Session
+          </label>
+          <span style="color:var(--cyan-glow); cursor:pointer;" id="linkForgotPassword">Forgot Password?</span>
+        </div>
+        <button type="submit" class="btn-primary">Sign In to Campus Platform</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="formRegister" style="display:none; flex-direction:column; gap:14px;">
+        <div class="input-group">
+          <label class="input-label" for="regFullName">Full Name</label>
+          <input type="text" id="regFullName" class="select-custom" required placeholder="e.g. Alex Morgan">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="regEmail">University Email</label>
+          <input type="email" id="regEmail" class="select-custom" required placeholder="student@campus.edu">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="regPassword">Password (Min 8 chars)</label>
+          <input type="password" id="regPassword" class="select-custom" required minlength="8" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary">Create User Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: User Profile & History -->
+  <div class="modal-overlay" id="modalProfile">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">User Profile & Dispatch History</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; background:rgba(15,23,42,0.8); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">FULL NAME</div>
+          <div id="profileName" style="font-size:1rem; font-weight:700; color:#fff;">--</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">EMAIL</div>
+          <div id="profileEmail" style="font-size:0.9rem; color:#e2e8f0;">--</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">ASSIGNED ROLE</div>
+          <span id="profileRole" class="role-tag user">USER</span>
+        </div>
+        <div style="display:flex; align-items:flex-end;">
+          <button id="btnLogout" class="transport-btn" style="border-color:#ef4444; color:#ef4444;">Sign Out</button>
+        </div>
+      </div>
+
+      <h4 style="font-size:0.9rem; color:#fff; margin-top:8px;">Recent Route Calculations</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Map</th>
+              <th>Route</th>
+              <th>Algorithm</th>
+              <th>Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="profileHistoryBody">
+            <tr><td colspan="5" style="text-align:center; color:var(--text-dim);">Loading route history...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

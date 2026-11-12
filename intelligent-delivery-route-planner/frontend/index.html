@@ -3,1172 +3,362 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intelligent Delivery Route Planner — GBFS vs A*</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b0f19;
-      --card-bg: #151d30;
-      --card-border: #24324f;
-      --card-hover: #1c2742;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --gbfs: #f97316;
-      --gbfs-glow: rgba(249, 115, 22, 0.25);
-      --astar: #06b6d4;
-      --astar-glow: rgba(6, 182, 212, 0.25);
-      --start-node: #22c55e;
-      --goal-node: #ef4444;
-      --dest-node: #f59e0b;
-      --junction-node: #64748b;
-      --accent: #38bdf8;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Top Navigation */
-    header {
-      background: rgba(21, 29, 48, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--card-border);
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand-icon {
-      font-size: 1.8rem;
-    }
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #f8fafc, #94a3b8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .brand-subtitle {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-    .nav-tabs {
-      display: flex;
-      gap: 8px;
-    }
-    .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .tab-btn:hover {
-      background: var(--card-hover);
-      color: var(--text);
-    }
-    .tab-btn.active {
-      background: #1e293b;
-      border-color: var(--accent);
-      color: #38bdf8;
-    }
-    .status-badge {
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid #22c55e;
-      color: #22c55e;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    /* Main Container */
-    main {
-      flex: 1;
-      padding: 24px 28px;
-      max-width: 1600px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    /* Grid Layout for Planner */
-    .planner-grid {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 24px;
-    }
-
-    /* Panel Cards */
-    .panel-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    /* Form Inputs */
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    select, input, button {
-      font-family: inherit;
-    }
-    select {
-      background: #0f172a;
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    select:focus {
-      border-color: var(--accent);
-    }
-
-    /* Action Buttons */
-    .btn-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-    .btn {
-      padding: 11px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      border: 1px solid transparent;
-    }
-    .btn-gbfs {
-      background: rgba(249, 115, 22, 0.15);
-      border-color: var(--gbfs);
-      color: #f97316;
-    }
-    .btn-gbfs:hover {
-      background: var(--gbfs);
-      color: #fff;
-    }
-    .btn-astar {
-      background: rgba(6, 182, 212, 0.15);
-      border-color: var(--astar);
-      color: #06b6d4;
-    }
-    .btn-astar:hover {
-      background: var(--astar);
-      color: #fff;
-    }
-    .btn-both {
-      background: linear-gradient(135deg, #0284c7, #2563eb);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
-    .btn-both:hover {
-      background: linear-gradient(135deg, #0369a1, #1d4ed8);
-    }
-
-    /* Map View Container */
-    .map-container {
-      background: #0d1322;
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 580px;
-    }
-    .map-header {
-      padding: 12px 18px;
-      background: rgba(21, 29, 48, 0.7);
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-    }
-    .map-legend {
-      display: flex;
-      gap: 14px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .legend-color {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    #svgCanvas {
-      width: 100%;
-      height: 100%;
-      flex: 1;
-      cursor: crosshair;
-    }
-
-    /* Metric Cards Grid */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .scorecard {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 16px;
-    }
-    .scorecard.gbfs { border-top: 3px solid var(--gbfs); }
-    .scorecard.astar { border-top: 3px solid var(--astar); }
-
-    .score-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-    .score-cost {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #f8fafc;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .score-details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin: 10px 0;
-      padding: 10px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .score-route {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      font-family: 'JetBrains Mono', monospace;
-      word-break: break-all;
-    }
-
-    /* Comparison Banner */
-    .comparison-banner {
-      margin-top: 16px;
-      padding: 16px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .comparison-banner.suboptimal {
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid #ef4444;
-      color: #fca5a5;
-    }
-    .comparison-banner.optimal {
-      background: rgba(34, 197, 94, 0.12);
-      border: 1px solid #22c55e;
-      color: #86efac;
-    }
-
-    /* Tables */
-    .table-container {
-      overflow-x: auto;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      text-align: left;
-    }
-    th {
-      background: #0f172a;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--card-border);
-    }
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: #e2e8f0;
-    }
-    tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .monospace {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Step Stepper */
-    .stepper-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    /* Tooltip */
-    #tooltip {
-      position: absolute;
-      display: none;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--card-border);
-      color: #f8fafc;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      pointer-events: none;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      line-height: 1.4;
-    }
-
-    /* Tab views */
-    .tab-view {
-      display: none;
-    }
-    .tab-view.active {
-      display: block;
-    }
-  </style>
+  <title>Intelligent Delivery Route Planner — 3D Campus Navigation</title>
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Three.js 3D WebGL Canvas Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Top Application Navigation Header -->
   <header>
-    <div class="brand-group">
-      <span class="brand-icon">🚚</span>
+    <div class="brand-section">
+      <div class="brand-logo">🚚</div>
       <div>
-        <div class="brand-title">INTELLIGENT DELIVERY ROUTE PLANNER</div>
-        <div class="brand-subtitle">AI Campus Navigation: Greedy Best-First Search vs A* Search</div>
+        <div class="brand-title">CAMPUS NAVIGATOR 3D</div>
+        <div class="brand-subtitle">Intelligent Delivery Route Planner</div>
       </div>
     </div>
 
-    <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('planner')">🗺️ Route Planner</button>
-      <button class="tab-btn" onclick="switchTab('trace')">🔍 Search Trace</button>
-      <button class="tab-btn" onclick="switchTab('benchmarks')">🧪 Benchmark Experiments</button>
-      <button class="tab-btn" onclick="switchTab('theory')">📖 Complexity & Proofs</button>
+    <nav class="nav-pills">
+      <button class="nav-pill active" data-view="planner">
+        <span>🗺️</span> <span>Route Planner</span>
+      </button>
+      <button class="nav-pill" data-view="explorer">
+        <span>🌐</span> <span>3D Explorer</span>
+      </button>
+      <button class="nav-pill" data-view="comparison">
+        <span>⚖️</span> <span>Algorithm Comparison</span>
+      </button>
+      <button class="nav-pill" data-view="trace">
+        <span>🔍</span> <span>Search Trace</span>
+      </button>
+      <button class="nav-pill" data-view="benchmarks">
+        <span>🧪</span> <span>Benchmark Lab</span>
+      </button>
     </nav>
 
-    <div class="status-badge" id="backendStatus">
-      <div class="status-dot"></div>
-      <span>Backend API Connected</span>
+    <div class="header-right">
+      <select id="mapSelect" class="map-selector">
+        <option value="campus_map">1. Normal Campus Map (15 Nodes)</option>
+        <option value="alternative_paths_map">2. Alternative Detour Map</option>
+        <option value="misleading_map">3. Misleading Heuristic Trap Map</option>
+      </select>
+
+      <div class="user-badge" id="userBadge">
+        <span id="userNameSpan">Sign In / Register</span>
+        <span id="userRoleTag" class="role-tag user" style="display: none;">USER</span>
+      </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
+  <!-- Floating Route Planner Dock -->
+  <aside class="floating-dock" id="floatingDock">
+    <div class="dock-header">
+      <span class="dock-title">Autonomous Dispatch</span>
+      <span style="font-size: 0.75rem; color: var(--cyan-glow); font-weight: 600;">FastAPI AI Core</span>
+    </div>
 
-    <!-- TAB 1: ROUTE PLANNER -->
-    <div id="tab-planner" class="tab-view active">
-      <div class="planner-grid">
+    <!-- Start Location Selection -->
+    <div class="input-group">
+      <label class="input-label" for="startSelect">Start Location (Dispatch Hub)</label>
+      <select id="startSelect" class="select-custom"></select>
+    </div>
 
-        <!-- Left Control Panel -->
-        <div class="panel-card">
-          <div class="card-title">
-            <span>Dispatch Configuration</span>
-            <span style="font-size: 0.75rem; color: var(--accent);">Connected to API</span>
-          </div>
+    <!-- Goal Destination Selection -->
+    <div class="input-group">
+      <label class="input-label" for="goalSelect">Delivery Destination</label>
+      <select id="goalSelect" class="select-custom"></select>
+    </div>
 
-          <div class="form-group">
-            <label for="mapSelect">Campus Topology Dataset</label>
-            <select id="mapSelect" onchange="onMapChange()">
-              <option value="campus_map">1. Normal Campus Map (15 Locations)</option>
-              <option value="alternative_paths_map">2. Alternative & Detour Map</option>
-              <option value="misleading_map">3. Misleading Heuristic Trap Map</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="startSelect">Start Location (Dispatch)</label>
-            <select id="startSelect"></select>
-          </div>
-
-          <div class="form-group">
-            <label for="goalSelect">Delivery Destination</label>
-            <select id="goalSelect"></select>
-          </div>
-
-          <div class="btn-row">
-            <button class="btn btn-both" onclick="planRoute('both')">
-              <span>⚖️ Run Both Algorithms</span>
-            </button>
-            <button class="btn btn-astar" onclick="planRoute('astar')">
-              <span>⭐ Run A* Search (Optimal)</span>
-            </button>
-            <button class="btn btn-gbfs" onclick="planRoute('gbfs')">
-              <span>🚀 Run Greedy Best-First Search</span>
-            </button>
-            <button class="btn" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155;" onclick="animateDelivery()">
-              <span>▶️ Animate Delivery Traversal</span>
-            </button>
-          </div>
-
-          <div id="quickInfo" style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; margin-top: 10px;">
-            Select a target campus destination and run both algorithms to experimentally compare path optimality and expanded nodes.
-          </div>
-        </div>
-
-        <!-- Right Interactive SVG Map -->
-        <div class="map-container">
-          <div class="map-header">
-            <span id="mapTitle" style="font-weight: 700;">Loading Campus Map...</span>
-            <div class="map-legend">
-              <div class="legend-item"><div class="legend-color" style="background: var(--start-node);"></div> Start</div>
-              <div class="legend-item"><div class="legend-color" style="background: var(--goal-node);"></div> Destination</div>
-              <div class="legend-item"><div class="legend-color" style="background: var(--gbfs);"></div> GBFS Path</div>
-              <div class="legend-item"><div class="legend-color" style="background: var(--astar);"></div> A* Path</div>
-            </div>
-          </div>
-          <svg id="svgCanvas"></svg>
-        </div>
-
-      </div>
-
-      <!-- Route Results Scorecards -->
-      <div id="resultsSection" style="display: none; margin-top: 24px;">
-        <div class="metrics-grid">
-          <!-- GBFS Card -->
-          <div class="scorecard gbfs" id="gbfsCard">
-            <div class="score-title">
-              <span style="color: var(--gbfs);">Greedy Best-First Search (GBFS)</span>
-              <span class="monospace" style="color: var(--text-dim);">f(n) = h(n)</span>
-            </div>
-            <div class="score-cost" id="gbfsCost">-- m</div>
-            <div class="score-details">
-              <div>Expanded Nodes: <b id="gbfsExpanded">--</b></div>
-              <div>Generated Nodes: <b id="gbfsGenerated">--</b></div>
-              <div>Execution Time: <b id="gbfsTime">-- ms</b></div>
-              <div>Route Length: <b id="gbfsSteps">-- hops</b></div>
-            </div>
-            <div class="score-route" id="gbfsRoute">--</div>
-          </div>
-
-          <!-- A* Card -->
-          <div class="scorecard astar" id="astarCard">
-            <div class="score-title">
-              <span style="color: var(--astar);">A* Search Algorithm</span>
-              <span class="monospace" style="color: var(--text-dim);">f(n) = g(n) + h(n)</span>
-            </div>
-            <div class="score-cost" id="astarCost">-- m</div>
-            <div class="score-details">
-              <div>Expanded Nodes: <b id="astarExpanded">--</b></div>
-              <div>Generated Nodes: <b id="astarGenerated">--</b></div>
-              <div>Execution Time: <b id="astarTime">-- ms</b></div>
-              <div>Route Length: <b id="astarSteps">-- hops</b></div>
-            </div>
-            <div class="score-route" id="astarRoute">--</div>
-          </div>
-        </div>
-
-        <div id="comparisonBanner" class="comparison-banner"></div>
+    <!-- Algorithm Selection -->
+    <div class="input-group">
+      <label class="input-label">Informed Search Algorithm</label>
+      <div class="algo-tabs">
+        <button class="algo-tab active" data-algo="both">⚖️ Both</button>
+        <button class="algo-tab" data-algo="astar">⭐ A* Search</button>
+        <button class="algo-tab" data-algo="gbfs">🚀 GBFS</button>
       </div>
     </div>
 
-    <!-- TAB 2: SEARCH TRACE -->
-    <div id="tab-trace" class="tab-view">
-      <div class="panel-card">
-        <div class="card-title">
-          <span>Search Expansion Ledger</span>
-          <div style="display: flex; gap: 10px;">
-            <select id="traceAlgoSelect" onchange="renderTraceTable()" style="padding: 4px 8px; font-size: 0.8rem;">
-              <option value="astar">A* Search Trace</option>
-              <option value="gbfs">Greedy Best-First Search Trace</option>
-            </select>
-            <button class="btn" style="background:#0284c7; color:#fff; padding: 4px 12px; font-size: 0.8rem;" onclick="downloadTraceCSV()">
-              📥 Export Trace CSV
-            </button>
-          </div>
-        </div>
+    <!-- Calculate Button -->
+    <button class="btn-primary" id="btnCalculateRoute">
+      <span>⚡ Calculate 3D Delivery Route</span>
+    </button>
 
-        <div class="stepper-controls">
-          <button class="btn" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:6px 14px;" onclick="prevTraceStep()">◀ Prev Step</button>
-          <button class="btn" style="background:#1e293b; color:#cbd5e1; border:1px solid #334155; padding:6px 14px;" onclick="nextTraceStep()">Next Step ▶</button>
-          <span id="stepCounter" style="font-size:0.85rem; color:var(--text-muted);">Step: -- / --</span>
-        </div>
-
-        <div class="table-container">
-          <table id="traceTable">
-            <thead>
-              <tr>
-                <th>Step</th>
-                <th>Node ID</th>
-                <th>Location Name</th>
-                <th>Parent Node</th>
-                <th>g(n) [Cost so Far]</th>
-                <th>h(n) [Euclidean Heuristic]</th>
-                <th>f(n) [Evaluation]</th>
-                <th>Frontier Size</th>
-              </tr>
-            </thead>
-            <tbody id="traceTableBody">
-              <tr><td colspan="8" style="text-align:center; color:var(--text-dim);">No search trace loaded. Run a search query in Route Planner first.</td></tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- Route Metrics Scorecard -->
+    <div class="metrics-card" id="plannerMetrics" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">ALGORITHM RESULTS</span>
+        <span id="optimalityBadge" class="role-tag user">OPTIMAL</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--orange-gbfs);">GBFS Cost f=h:</span>
+        <span class="metric-val" id="metricGbfsCost">-- m</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--cyan-glow);">A* Cost f=g+h:</span>
+        <span class="metric-val" id="metricAstarCost">-- m</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--text-muted);">Cost Delta:</span>
+        <span class="metric-val" id="metricDiff">--</span>
+      </div>
+      <div class="metric-row">
+        <span style="color: var(--text-muted);">Exploration:</span>
+        <span class="metric-val" id="metricExpansions">--</span>
       </div>
     </div>
 
-    <!-- TAB 3: BENCHMARKS -->
-    <div id="tab-benchmarks" class="tab-view">
-      <div class="panel-card">
-        <div class="card-title">
-          <span>Automated Experimental Benchmarks Across All Maps</span>
-          <button class="btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); color:#fff; padding: 6px 14px;" onclick="fetchBenchmarks()">
-            ⚡ Re-run Full Benchmark Suite
-          </button>
-        </div>
+    <!-- 3D Autonomous Courier Robot Transport Controls -->
+    <div class="robot-transport" id="robotTransport" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: #38bdf8;">3D DELIVERY ROBOT SIMULATION</span>
+        <select id="robotSpeed" style="background:#0f172a; border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:0.7rem; border-radius:4px; padding:2px 4px;">
+          <option value="1.0">1x Speed</option>
+          <option value="2.0" selected>2x Speed</option>
+          <option value="4.0">4x Speed</option>
+        </select>
+      </div>
 
-        <p style="font-size: 0.85rem; color: var(--text-muted);">
-          Systematically runs GBFS and A* across Normal Campus Map, Alternative Detours Map, and Misleading Heuristic Map.
-          All results are computed directly by the backend search engine and validated against Dijkstra.
-        </p>
+      <div class="progress-bar-container">
+        <div class="progress-fill" id="robotProgressFill"></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim);" id="robotProgressText">
+        Ready for autonomous dispatch
+      </div>
 
-        <div class="table-container" style="margin-top: 14px;">
-          <table id="benchmarkTable">
-            <thead>
-              <tr>
-                <th>Map Topology</th>
-                <th>Start</th>
-                <th>Destination</th>
-                <th>GBFS Route</th>
-                <th>GBFS Cost (m)</th>
-                <th>A* Route</th>
-                <th>A* Cost (m)</th>
-                <th>Dijkstra (m)</th>
-                <th>GBFS Exp.</th>
-                <th>A* Exp.</th>
-                <th>Excess Cost (%)</th>
-                <th>Optimality</th>
-              </tr>
-            </thead>
-            <tbody id="benchmarkBody">
-              <tr><td colspan="12" style="text-align:center; color:var(--text-dim);">Click 'Re-run Full Benchmark Suite' to load live data.</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="transport-controls">
+        <button class="transport-btn" id="btnRobotPlay">▶ Start Delivery</button>
+        <button class="transport-btn" id="btnRobotPause">⏸ Pause</button>
+        <button class="transport-btn" id="btnRobotReset">↺ Reset</button>
       </div>
     </div>
+  </aside>
 
-    <!-- TAB 4: THEORY & PROOFS -->
-    <div id="tab-theory" class="tab-view">
-      <div class="panel-card" style="line-height: 1.6;">
-        <h2 style="font-size: 1.3rem; margin-bottom: 12px; color: #38bdf8;">Formal State-Space Search & Complexity Analysis</h2>
+  <!-- Camera HUD Preset Dock (Bottom Right) -->
+  <div class="camera-dock">
+    <button class="cam-btn" data-preset="isometric">📐 Isometric</button>
+    <button class="cam-btn" data-preset="topdown">🗺️ Top-Down</button>
+    <button class="cam-btn" data-preset="front">👁️ Front</button>
+    <button class="cam-btn" data-preset="reset">↺ Cinematic</button>
+  </div>
 
-        <h3 style="font-size: 1rem; color: #e2e8f0; margin-top: 14px;">1. Evaluation Functions</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">
-          - <b>Greedy Best-First Search:</b> <code>f(n) = h(n)</code> expands the node that appears closest to the goal based on the Euclidean heuristic. It discards the cost incurred so far, creating vulnerability to costly detours.<br>
-          - <b>A* Search:</b> <code>f(n) = g(n) + h(n)</code> combines exact historical path distance <code>g(n)</code> with estimated remaining cost <code>h(n)</code>.
+  <!-- Building Inspection Tooltip (Hover / Click) -->
+  <div id="buildingInspectionCard" style="display:none; position:absolute; bottom:24px; left:24px; width:340px; background:var(--bg-card); backdrop-filter:var(--glass-blur); border:1px solid var(--border-card); border-radius:14px; padding:16px; z-index:15; box-shadow:var(--shadow-elevated);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h4 id="inspectName" style="color:#ffffff; font-size:0.95rem;">Building Name</h4>
+      <span id="inspectType" class="role-tag user">DESTINATION</span>
+    </div>
+    <p id="inspectDesc" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">Description</p>
+    <div style="font-size:0.75rem; color:var(--text-dim); border-top:1px solid rgba(255,255,255,0.08); padding-top:8px;">
+      <div>Coordinates: <b id="inspectCoords" style="color:#fff;">(0, 0)</b></div>
+      <div>Heuristic h(n) to Goal: <b id="inspectHeuristic" style="color:var(--cyan-glow);">-- m</b></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Algorithm Comparison -->
+  <div class="modal-overlay" id="modalComparison">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">⚖️ Side-by-Side Algorithm Performance</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div id="comparisonContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Search Trace Explorer -->
+  <div class="modal-overlay" id="modalTrace">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">🔍 Step-by-Step Priority Queue Trace</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <select id="traceAlgoSelect" class="select-custom" style="padding:6px 12px; font-size:0.8rem;">
+            <option value="astar">A* Search Trace (f = g + h)</option>
+            <option value="gbfs">Greedy Best-First Search Trace (f = h)</option>
+          </select>
+          <button class="btn-primary" style="padding:6px 14px; font-size:0.75rem;" id="btnExportTrace">📥 Download CSV</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="transport-btn" id="btnTracePrev">◀ Prev Step</button>
+          <span id="traceStepCounter" style="font-size:0.85rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace;">Step: -- / --</span>
+          <button class="transport-btn" id="btnTraceNext">Next Step ▶</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Node ID</th>
+              <th>Location Name</th>
+              <th>Parent</th>
+              <th>g(n) [Distance]</th>
+              <th>h(n) [Heuristic]</th>
+              <th>f(n) [Evaluation]</th>
+            </tr>
+          </thead>
+          <tbody id="traceTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Benchmark Laboratory -->
+  <div class="modal-overlay" id="modalBenchmarks">
+    <div class="modal-card" style="max-width: 1050px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">🧪 Automated Experimental Laboratory</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <p style="font-size:0.85rem; color:var(--text-muted);">
+          Rigorous benchmarking across Normal Campus Map, Alternative Detour Map, and the Section 8 Misleading Heuristic Trap Map.
         </p>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-primary" id="btnRerunBenchmarks" style="padding:6px 14px; font-size:0.8rem;">⚡ Re-run All Benchmarks</button>
+          <button class="transport-btn" id="btnExportBenchmarks">📥 Export CSV</button>
+        </div>
+      </div>
 
-        <h3 style="font-size: 1rem; color: #e2e8f0; margin-top: 14px;">2. Heuristic Admissibility Proof</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">
-          The Euclidean distance heuristic is computed as <code>h(n) = sqrt((x_n - x_goal)^2 + (y_n - y_goal)^2)</code>.<br>
-          - In 2D Euclidean space, the straight-line segment represents the minimal possible continuous distance between two coordinates.<br>
-          - In our campus graph datasets, every edge weight satisfies <code>w(u, v) >= EuclideanDistance(u, v)</code>.<br>
-          - By the triangle inequality, for any path from node <code>n</code> to goal <code>g</code>, <code>sum w(e) >= EuclideanDistance(n, g) = h(n)</code>.<br>
-          Therefore, <code>h(n) <= h*(n)</code> everywhere, satisfying strict <b>admissibility</b> and <b>monotonic consistency</b>.
-        </p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Test Map</th>
+              <th>Start</th>
+              <th>Goal</th>
+              <th>GBFS Cost</th>
+              <th>A* Cost</th>
+              <th>Dijkstra</th>
+              <th>GBFS Exp.</th>
+              <th>A* Exp.</th>
+              <th>Excess %</th>
+              <th>Optimality</th>
+            </tr>
+          </thead>
+          <tbody id="benchmarkTableBody"></tbody>
+        </table>
+      </div>
 
-        <h3 style="font-size: 1rem; color: #e2e8f0; margin-top: 14px;">3. The Section 8 Misleading Trap</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">
-          In <code>misleading_map.json</code>, node <code>A = (1, 0)</code> has <code>h(A) = 1.0</code> to goal <code>G = (2, 0)</code>, while node <code>B = (0, 2)</code> has <code>h(B) = 2.83</code>.<br>
-          - <b>Greedy</b> is blinded by <code>1.0 < 2.83</code> and expands <code>A</code>, committing to the 100m edge with total cost <b>101.0m</b>.<br>
-          - <b>A*</b> evaluates <code>f(G via A) = 1 + 100 + 0 = 101.0</code>, pauses, and pops <code>B</code> from the priority queue because <code>f(B) = 2 + 2.83 = 4.83 < 101.0</code>, discovering the true optimal path <code>S -> B -> G</code> with total cost <b>5.0m</b>!
+      <!-- Section 8 Trap Spotlight -->
+      <div style="background:rgba(249,115,22,0.08); border:1px solid var(--orange-gbfs); border-radius:10px; padding:16px;">
+        <h4 style="color:var(--orange-gbfs); font-size:0.9rem; margin-bottom:6px;">Section 8: The Misleading Heuristic Experiment Explained</h4>
+        <p style="font-size:0.82rem; color:#e2e8f0; line-height:1.6;">
+          In <code>misleading_map.json</code>, Node A has straight-line distance <code>h(A) = 1.0m</code> to Goal G, while Node B has <code>h(B) = 2.83m</code>.<br>
+          <b>Greedy Best-First Search</b> greedily expands A because <code>1.0 &lt; 2.83</code>, committing to the 100m edge with total cost <b>101.0m</b>.<br>
+          <b>A* Search</b> evaluates <code>f(G via A) = 1 + 100 = 101.0m</code>, halts, pops B (<code>f=2 + 2.83 = 4.83m &lt; 101m</code>), and finds the optimal path <code>S ➔ B ➔ G</code> with total cost <b>5.0m</b> (demonstrating a <b>+1920.0% excess cost</b> in Greedy search).
         </p>
       </div>
     </div>
+  </div>
+
+  <!-- MODAL: Authentication (Login / Register) -->
+  <div class="modal-overlay" id="modalAuth">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 id="authModalTitle" style="font-size: 1.15rem; color:#fff;">Account Access</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="algo-tabs" style="grid-template-columns: 1fr 1fr;">
+        <button class="algo-tab active" id="tabAuthLogin">Sign In</button>
+        <button class="algo-tab" id="tabAuthRegister">Create Account</button>
+      </div>
+
+      <div id="authAlert" style="display:none; padding:10px; border-radius:8px; font-size:0.8rem; background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#fca5a5;"></div>
+
+      <!-- Login Form -->
+      <form id="formLogin" style="display:flex; flex-direction:column; gap:14px;">
+        <div class="input-group">
+          <label class="input-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="select-custom" required placeholder="user@campus.edu">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="select-custom" required placeholder="••••••••">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text-muted);">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="loginRememberMe"> Remember Session
+          </label>
+          <span style="color:var(--cyan-glow); cursor:pointer;" id="linkForgotPassword">Forgot Password?</span>
+        </div>
+        <button type="submit" class="btn-primary">Sign In to Campus Platform</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="formRegister" style="display:none; flex-direction:column; gap:14px;">
+        <div class="input-group">
+          <label class="input-label" for="regFullName">Full Name</label>
+          <input type="text" id="regFullName" class="select-custom" required placeholder="e.g. Alex Morgan">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="regEmail">University Email</label>
+          <input type="email" id="regEmail" class="select-custom" required placeholder="student@campus.edu">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="regPassword">Password (Min 8 chars)</label>
+          <input type="password" id="regPassword" class="select-custom" required minlength="8" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary">Create User Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: User Profile & History -->
+  <div class="modal-overlay" id="modalProfile">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; color:#fff;">User Profile & Dispatch History</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; background:rgba(15,23,42,0.8); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.08);">
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">FULL NAME</div>
+          <div id="profileName" style="font-size:1rem; font-weight:700; color:#fff;">--</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">EMAIL</div>
+          <div id="profileEmail" style="font-size:0.9rem; color:#e2e8f0;">--</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem; color:var(--text-dim);">ASSIGNED ROLE</div>
+          <span id="profileRole" class="role-tag user">USER</span>
+        </div>
+        <div style="display:flex; align-items:flex-end;">
+          <button id="btnLogout" class="transport-btn" style="border-color:#ef4444; color:#ef4444;">Sign Out</button>
+        </div>
+      </div>
+
+      <h4 style="font-size:0.9rem; color:#fff; margin-top:8px;">Recent Route Calculations</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Map</th>
+              <th>Route</th>
+              <th>Algorithm</th>
+              <th>Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="profileHistoryBody">
+            <tr><td colspan="5" style="text-align:center; color:var(--text-dim);">Loading route history...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-  </main>
-
-  <div id="tooltip"></div>
-
-  <script>
-    // Global State
-    let currentGraph = null;
-    let currentMapId = "campus_map";
-    let lastSearchResult = null;
-    let currentTraceIndex = 0;
-    let animFrame = null;
-
-    const svg = document.getElementById("svgCanvas");
-    const tooltip = document.getElementById("tooltip");
-
-    // Initialize
-    window.addEventListener("DOMContentLoaded", () => {
-      fetchMap(currentMapId);
-    });
-
-    // Tab Switching
-    function switchTab(tabId) {
-      document.querySelectorAll(".nav-tabs .tab-btn").forEach(btn => btn.classList.remove("active"));
-      document.querySelectorAll(".tab-view").forEach(view => view.classList.remove("active"));
-
-      document.getElementById(`tab-${tabId}`).classList.add("active");
-      event.target.classList.add("active");
-
-      if (tabId === "benchmarks") {
-        fetchBenchmarks();
-      }
-    }
-
-    // Fetch and render map dataset
-    async function fetchMap(mapId) {
-      currentMapId = mapId;
-      try {
-        const res = await fetch(`/api/map/${mapId}`);
-        currentGraph = await res.json();
-        document.getElementById("mapTitle").innerText = currentGraph.metadata.name || "Campus Map";
-        populateDropdowns();
-        renderGraph();
-      } catch (err) {
-        console.error("Failed to load map:", err);
-      }
-    }
-
-    function onMapChange() {
-      const select = document.getElementById("mapSelect");
-      document.getElementById("resultsSection").style.display = "none";
-      lastSearchResult = null;
-      fetchMap(select.value);
-    }
-
-    function populateDropdowns() {
-      const startSel = document.getElementById("startSelect");
-      const goalSel = document.getElementById("goalSelect");
-
-      startSel.innerHTML = "";
-      goalSel.innerHTML = "";
-
-      const defaultStart = currentGraph.metadata.default_start || currentGraph.nodes[0]?.id;
-      const defaultDests = currentGraph.metadata.default_destinations || [];
-
-      currentGraph.nodes.forEach(node => {
-        const optStart = document.createElement("option");
-        optStart.value = node.id;
-        optStart.innerText = `${node.name} (${node.id})`;
-        if (node.id === defaultStart) optStart.selected = true;
-        startSel.appendChild(optStart);
-
-        const optGoal = document.createElement("option");
-        optGoal.value = node.id;
-        optGoal.innerText = `${node.name} (${node.id})`;
-        if (defaultDests.includes(node.id)) optGoal.selected = true;
-        goalSel.appendChild(optGoal);
-      });
-
-      // Default goal selection fallback
-      if (defaultDests.length > 0) {
-        goalSel.value = defaultDests[0];
-      }
-    }
-
-    // SVG Graph Rendering
-    function renderGraph(highlightPaths = {}) {
-      if (!currentGraph || !currentGraph.nodes) return;
-
-      const nodes = currentGraph.nodes;
-      const edges = currentGraph.edges;
-
-      // Compute bounding box
-      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-      nodes.forEach(n => {
-        if (n.x < minX) minX = n.x;
-        if (n.x > maxX) maxX = n.x;
-        if (n.y < minY) minY = n.y;
-        if (n.y > maxY) maxY = n.y;
-      });
-
-      const pad = 60;
-      const width = (maxX - minX) || 100;
-      const height = (maxY - minY) || 100;
-
-      const viewBox = `${minX - pad} ${minY - pad} ${width + pad * 2} ${height + pad * 2}`;
-      svg.setAttribute("viewBox", viewBox);
-      svg.innerHTML = "";
-
-      // Invert Y coordinate visually for intuitive Cartesian orientation
-      const nodePos = {};
-      nodes.forEach(n => {
-        // Map Y inverted so higher Y is higher visually
-        nodePos[n.id] = { x: n.x, y: (maxY + minY) - n.y };
-      });
-
-      // 1. Draw Edges
-      edges.forEach(e => {
-        const p1 = nodePos[e.source];
-        const p2 = nodePos[e.target];
-        if (!p1 || !p2) return;
-
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", p1.x);
-        line.setAttribute("y1", p1.y);
-        line.setAttribute("x2", p2.x);
-        line.setAttribute("y2", p2.y);
-        line.setAttribute("stroke", "#334155");
-        line.setAttribute("stroke-width", "3");
-        line.setAttribute("stroke-linecap", "round");
-        svg.appendChild(line);
-
-        // Distance text
-        const midX = (p1.x + p2.x) / 2;
-        const midY = (p1.y + p2.y) / 2;
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("x", midX);
-        text.setAttribute("y", midY - 4);
-        text.setAttribute("fill", "#64748b");
-        text.setAttribute("font-size", "10");
-        text.setAttribute("text-anchor", "middle");
-        text.setAttribute("font-family", "monospace");
-        text.textContent = `${e.distance}m`;
-        svg.appendChild(text);
-      });
-
-      // 2. Draw Highlighted Routes
-      if (highlightPaths.gbfs && highlightPaths.gbfs.length > 1) {
-        drawPath(highlightPaths.gbfs, nodePos, "var(--gbfs)", "6", "solid", -2);
-      }
-      if (highlightPaths.astar && highlightPaths.astar.length > 1) {
-        drawPath(highlightPaths.astar, nodePos, "var(--astar)", "6", "8,5", 2);
-      }
-
-      // 3. Draw Nodes
-      const startId = document.getElementById("startSelect").value;
-      const goalId = document.getElementById("goalSelect").value;
-
-      nodes.forEach(n => {
-        const pos = nodePos[n.id];
-        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
-        g.style.cursor = "pointer";
-
-        // Circle marker
-        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        let fill = "#64748b";
-        let r = 8;
-
-        if (n.id === startId) {
-          fill = "var(--start-node)";
-          r = 13;
-        } else if (n.id === goalId) {
-          fill = "var(--goal-node)";
-          r = 13;
-        } else if (n.type === "destination" || n.type === "office") {
-          fill = "var(--dest-node)";
-          r = 10;
-        }
-
-        circle.setAttribute("r", r);
-        circle.setAttribute("fill", fill);
-        circle.setAttribute("stroke", "#ffffff");
-        circle.setAttribute("stroke-width", "2");
-        g.appendChild(circle);
-
-        // Node Label
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("y", -14);
-        text.setAttribute("fill", "#f8fafc");
-        text.setAttribute("font-size", "11");
-        text.setAttribute("font-weight", "600");
-        text.setAttribute("text-anchor", "middle");
-        text.textContent = n.name;
-        g.appendChild(text);
-
-        // Tooltip listeners
-        g.addEventListener("mouseenter", (evt) => showTooltip(evt, n));
-        g.addEventListener("mouseleave", hideTooltip);
-
-        svg.appendChild(g);
-      });
-    }
-
-    function drawPath(pathNodes, nodePos, color, width, dash = "solid", offset = 0) {
-      for (let i = 0; i < pathNodes.length - 1; i++) {
-        const p1 = nodePos[pathNodes[i]];
-        const p2 = nodePos[pathNodes[i + 1]];
-        if (!p1 || !p2) continue;
-
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", p1.x + offset);
-        line.setAttribute("y1", p1.y + offset);
-        line.setAttribute("x2", p2.x + offset);
-        line.setAttribute("y2", p2.y + offset);
-        line.setAttribute("stroke", color);
-        line.setAttribute("stroke-width", width);
-        line.setAttribute("stroke-linecap", "round");
-        if (dash !== "solid") {
-          line.setAttribute("stroke-dasharray", dash);
-        }
-        svg.appendChild(line);
-      }
-    }
-
-    // Tooltip Helpers
-    function showTooltip(evt, node) {
-      const goalId = document.getElementById("goalSelect").value;
-      const dx = node.x - (currentGraph.nodes.find(n => n.id === goalId)?.x || 0);
-      const dy = node.y - (currentGraph.nodes.find(n => n.id === goalId)?.y || 0);
-      const hVal = Math.hypot(dx, dy).toFixed(1);
-
-      tooltip.innerHTML = `
-        <b>${node.name}</b> (${node.id})<br>
-        <b>Type:</b> ${node.type}<br>
-        <b>Coordinates:</b> (${node.x}, ${node.y})<br>
-        <b>Heuristic h(n) to Goal:</b> ${hVal} m<br>
-        <i>${node.description || ''}</i>
-      `;
-      tooltip.style.display = "block";
-      tooltip.style.left = `${evt.pageX + 14}px`;
-      tooltip.style.top = `${evt.pageY - 20}px`;
-    }
-
-    function hideTooltip() {
-      tooltip.style.display = "none";
-    }
-
-    // Route Planning API Call
-    async function planRoute(algorithm) {
-      const start = document.getElementById("startSelect").value;
-      const goal = document.getElementById("goalSelect").value;
-
-      try {
-        const res = await fetch("/api/route", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            map_id: currentMapId,
-            start_node: start,
-            goal_node: goal,
-            algorithm: algorithm,
-          })
-        });
-
-        const data = await res.json();
-        lastSearchResult = data;
-        displayResults(data);
-
-        // Highlight routes on SVG
-        const highlights = {};
-        if (data.gbfs) highlights.gbfs = data.gbfs.path;
-        if (data.astar) highlights.astar = data.astar.path;
-        renderGraph(highlights);
-
-        // Prepopulate search trace table
-        renderTraceTable();
-      } catch (err) {
-        console.error("Route planning error:", err);
-      }
-    }
-
-    function displayResults(data) {
-      const section = document.getElementById("resultsSection");
-      section.style.display = "block";
-
-      const gbfsCard = document.getElementById("gbfsCard");
-      const astarCard = document.getElementById("astarCard");
-
-      if (data.gbfs) {
-        gbfsCard.style.opacity = "1";
-        document.getElementById("gbfsCost").innerText = `${data.gbfs.total_cost.toFixed(1)} m`;
-        document.getElementById("gbfsExpanded").innerText = data.gbfs.expanded_nodes_count;
-        document.getElementById("gbfsGenerated").innerText = data.gbfs.generated_nodes_count;
-        document.getElementById("gbfsTime").innerText = `${data.gbfs.execution_time_ms.toFixed(3)} ms`;
-        document.getElementById("gbfsSteps").innerText = `${data.gbfs.path.length} hops`;
-        document.getElementById("gbfsRoute").innerText = data.gbfs.path_names.join(" ➔ ");
-      } else {
-        gbfsCard.style.opacity = "0.3";
-      }
-
-      if (data.astar) {
-        astarCard.style.opacity = "1";
-        document.getElementById("astarCost").innerText = `${data.astar.total_cost.toFixed(1)} m`;
-        document.getElementById("astarExpanded").innerText = data.astar.expanded_nodes_count;
-        document.getElementById("astarGenerated").innerText = data.astar.generated_nodes_count;
-        document.getElementById("astarTime").innerText = `${data.astar.execution_time_ms.toFixed(3)} ms`;
-        document.getElementById("astarSteps").innerText = `${data.astar.path.length} hops`;
-        document.getElementById("astarRoute").innerText = data.astar.path_names.join(" ➔ ");
-      } else {
-        astarCard.style.opacity = "0.3";
-      }
-
-      // Comparison Banner
-      const banner = document.getElementById("comparisonBanner");
-      if (data.comparison) {
-        const c = data.comparison;
-        if (c.is_gbfs_optimal) {
-          banner.className = "comparison-banner optimal";
-          banner.innerHTML = `
-            <div>
-              <b>Both Algorithms Found Optimal Route (${c.astar_cost}m)</b><br>
-              <span style="font-size:0.8rem;">GBFS expanded ${data.gbfs.expanded_nodes_count} nodes vs A* expanding ${data.astar.expanded_nodes_count} nodes.</span>
-            </div>
-            <span style="font-weight:700;">0.0% Excess Distance</span>
-          `;
-        } else {
-          banner.className = "comparison-banner suboptimal";
-          banner.innerHTML = `
-            <div>
-              <b>Suboptimal Greedy Route Detected (+${c.excess_cost_percent}% Excess Cost)</b><br>
-              <span style="font-size:0.8rem;">GBFS selected a detour that is ${c.cost_difference}m longer than A* optimal path.</span>
-            </div>
-            <span style="font-weight:700;">+${c.excess_cost_percent}% Suboptimal</span>
-          `;
-        }
-      } else {
-        banner.style.display = "none";
-      }
-    }
-
-    // Search Trace Table
-    function renderTraceTable() {
-      if (!lastSearchResult) return;
-      const algo = document.getElementById("traceAlgoSelect").value;
-      const res = lastSearchResult[algo];
-      const tbody = document.getElementById("traceTableBody");
-
-      if (!res || !res.search_trace || res.search_trace.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--text-dim);">No trace for selected algorithm.</td></tr>`;
-        return;
-      }
-
-      currentTraceIndex = res.search_trace.length - 1;
-      updateTraceStepView(res.search_trace);
-    }
-
-    function updateTraceStepView(trace) {
-      const tbody = document.getElementById("traceTableBody");
-      tbody.innerHTML = "";
-
-      trace.forEach((step, idx) => {
-        const tr = document.createElement("tr");
-        if (idx === currentTraceIndex) tr.style.background = "rgba(56, 189, 248, 0.15)";
-
-        tr.innerHTML = `
-          <td class="monospace">${step.Step}</td>
-          <td class="monospace">${step["Node ID"]}</td>
-          <td><b>${step["Node Name"]}</b></td>
-          <td class="monospace">${step.Parent}</td>
-          <td class="monospace">${step["g(n) [Cost so far]"]}</td>
-          <td class="monospace">${step["h(n) [Heuristic to Goal]"]}</td>
-          <td class="monospace"><b>${step["f(n) [Evaluation Function]"]}</b></td>
-          <td class="monospace">${step["Frontier Size"]}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      document.getElementById("stepCounter").innerText = `Step: ${currentTraceIndex + 1} / ${trace.length}`;
-    }
-
-    function nextTraceStep() {
-      if (!lastSearchResult) return;
-      const algo = document.getElementById("traceAlgoSelect").value;
-      const trace = lastSearchResult[algo]?.search_trace;
-      if (trace && currentTraceIndex < trace.length - 1) {
-        currentTraceIndex++;
-        updateTraceStepView(trace);
-      }
-    }
-
-    function prevTraceStep() {
-      if (!lastSearchResult) return;
-      const algo = document.getElementById("traceAlgoSelect").value;
-      const trace = lastSearchResult[algo]?.search_trace;
-      if (trace && currentTraceIndex > 0) {
-        currentTraceIndex--;
-        updateTraceStepView(trace);
-      }
-    }
-
-    function downloadTraceCSV() {
-      if (!lastSearchResult) return;
-      const algo = document.getElementById("traceAlgoSelect").value;
-      const trace = lastSearchResult[algo]?.search_trace;
-      if (!trace) return;
-
-      const headers = Object.keys(trace[0]).join(",");
-      const rows = trace.map(r => Object.values(r).map(v => `"${v}"`).join(",")).join("\n");
-      const csv = `${headers}\n${rows}`;
-
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${algo}_search_trace.csv`;
-      a.click();
-    }
-
-    // Benchmark Suite Fetch
-    async function fetchBenchmarks() {
-      const tbody = document.getElementById("benchmarkBody");
-      tbody.innerHTML = `<tr><td colspan="12" style="text-align:center;">Executing benchmark suite across all maps...</td></tr>`;
-
-      try {
-        const res = await fetch("/api/benchmarks");
-        const data = await res.json();
-        tbody.innerHTML = "";
-
-        data.forEach(row => {
-          const tr = document.createElement("tr");
-          const isOptimal = row["Excess Cost (%)"] === 0;
-
-          tr.innerHTML = `
-            <td><b>${row["Test Map"]}</b></td>
-            <td>${row["Starting Node"]}</td>
-            <td>${row["Goal Node"]}</td>
-            <td class="monospace" style="font-size:0.75rem;">${row["GBFS Route"]}</td>
-            <td class="monospace">${row["GBFS Cost (m)"]}</td>
-            <td class="monospace" style="font-size:0.75rem;">${row["A* Route"]}</td>
-            <td class="monospace"><b>${row["A* Cost (m)"]}</b></td>
-            <td class="monospace">${row["Dijkstra Cost (m)"]}</td>
-            <td class="monospace">${row["GBFS Expanded Nodes"]}</td>
-            <td class="monospace">${row["A* Expanded Nodes"]}</td>
-            <td class="monospace" style="color: ${isOptimal ? '#22c55e' : '#ef4444'};"><b>${row["Excess Cost (%)"]}%</b></td>
-            <td><span class="${isOptimal ? 'status-badge' : 'status-badge'}" style="${isOptimal ? '' : 'border-color:#ef4444; color:#ef4444; background:rgba(239,68,68,0.1);'}">${row["Optimality"]}</span></td>
-          `;
-          tbody.appendChild(tr);
-        });
-      } catch (err) {
-        console.error("Benchmark error:", err);
-        tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; color:#ef4444;">Failed to execute benchmarks.</td></tr>`;
-      }
-    }
-
-    // Animation Simulation
-    function animateDelivery() {
-      if (!lastSearchResult) {
-        alert("Please run a search first to generate a route.");
-        return;
-      }
-      const targetPath = lastSearchResult.astar?.path || lastSearchResult.gbfs?.path;
-      if (!targetPath || targetPath.length < 2) return;
-
-      // Delivery marker
-      let marker = document.getElementById("deliveryMarker");
-      if (!marker) {
-        marker = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        marker.setAttribute("id", "deliveryMarker");
-        marker.setAttribute("r", "10");
-        marker.setAttribute("fill", "#38bdf8");
-        marker.setAttribute("stroke", "#ffffff");
-        marker.setAttribute("stroke-width", "2");
-        svg.appendChild(marker);
-      }
-
-      // Collect points
-      const maxY = Math.max(...currentGraph.nodes.map(n => n.y));
-      const minY = Math.min(...currentGraph.nodes.map(n => n.y));
-      const points = targetPath.map(id => {
-        const n = currentGraph.nodes.find(node => node.id === id);
-        return { x: n.x, y: (maxY + minY) - n.y };
-      });
-
-      let seg = 0;
-      let t = 0;
-      const speed = 0.02;
-
-      function step() {
-        if (seg >= points.length - 1) return;
-
-        const p1 = points[seg];
-        const p2 = points[seg + 1];
-
-        const cx = p1.x + (p2.x - p1.x) * t;
-        const cy = p1.y + (p2.y - p1.y) * t;
-
-        marker.setAttribute("cx", cx);
-        marker.setAttribute("cy", cy);
-
-        t += speed;
-        if (t >= 1) {
-          t = 0;
-          seg++;
-        }
-        animFrame = requestAnimationFrame(step);
-      }
-
-      if (animFrame) cancelAnimationFrame(animFrame);
-      step();
-    }
-  </script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>
-
